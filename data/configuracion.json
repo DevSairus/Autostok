@@ -1,0 +1,22 @@
+{
+    "general": {
+        "nombreNegocio": "Autostok",
+        "telefonoWhatsappVehiculos": "+573505351780",
+        "telefonoWhatsappServicios": "+573505351781",
+        "correoNegocio": "contacto@autostok.com",
+        "direccion": "Bogotá, Colombia"
+    },
+    "pagos": {
+        "urlPagos": ""
+    },
+    "horarios": {
+        "horarioSemana": "9:00 AM - 5:00 PM",
+        "horarioSabado": "9:00 AM - 1:00 PM"
+    },
+    "nosotros": {
+        "descripcionNosotros": "Somos una empresa dedicada a ofrecer los mejores vehículos y servicios automotrices, con más de 10 años de experiencia en el mercado.",
+        "anosExperiencia": "10",
+        "clientesSatisfechos": "500",
+        "vehiculosVendidos": "1000"
+    }
+}

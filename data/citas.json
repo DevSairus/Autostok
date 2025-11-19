@@ -1,0 +1,17 @@
+{
+    "citas": [
+        {
+            "id": 1763542123,
+            "servicio_id": "2",
+            "servicio_nombre": "Alineaci\u00f3n y Balanceo",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-11-19",
+            "hora": "15:00",
+            "notas": "",
+            "estado": "completada",
+            "fecha_solicitud": "2025-11-19 09:48:43"
+        }
+    ]
+}

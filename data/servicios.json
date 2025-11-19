@@ -1,0 +1,59 @@
+{
+    "servicios": [
+        {
+            "id": 1,
+            "nombre": "Cambio de Aceite Premium",
+            "categoria": "Mantenimiento",
+            "precio": 150000,
+            "duracion": "45 minutos",
+            "descripcion_corta": "Cambio de aceite sintético de alta calidad con filtro premium",
+            "descripcion": "Servicio completo de cambio de aceite sintético de la más alta calidad. Incluye inspección de niveles, revisión de frenos y presión de llantas. Utilizamos únicamente aceites certificados y filtros originales.",
+            "caracteristicas": [
+                "Aceite sintético premium",
+                "Filtro de aceite original",
+                "Inspección de 21 puntos",
+                "Revisión de frenos",
+                "Verificación de presión de llantas",
+                "Lavado exterior básico incluido"
+            ],
+            "imagen": "https:\/\/images.unsplash.com\/photo-1487754180451-c456f719a1fc?w=800"
+        },
+        {
+            "id": 2,
+            "nombre": "Alineación y Balanceo",
+            "categoria": "Mantenimiento",
+            "precio": 80000,
+            "duracion": "1 hora",
+            "descripcion_corta": "Alineación computarizada y balanceo de 4 llantas",
+            "descripcion": "Servicio de alineación con tecnología láser de última generación. Garantiza el desgaste uniforme de las llantas y una conducción suave y segura.",
+            "caracteristicas": [
+                "Alineación láser computarizada",
+                "Balanceo de 4 llantas",
+                "Ajuste de geometría",
+                "Inspección de suspensión",
+                "Reporte impreso de alineación"
+            ],
+            "imagen": "https:\/\/images.unsplash.com\/photo-1625047509168-a7026f36de04?w=800"
+        },
+        {
+            "id": 3,
+            "nombre": "Lavado Completo Detallado",
+            "categoria": "Lavado",
+            "precio": 120000,
+            "duracion": "2 horas",
+            "descripcion_corta": "Lavado interior y exterior con tratamiento de pintura",
+            "descripcion": "Servicio de lavado profesional completo. Incluye lavado exterior con cera, aspirado y limpieza profunda interior, limpieza de motor, brillado de llantas y vidrios.",
+            "caracteristicas": [
+                "Lavado exterior con espuma activa",
+                "Encerado y pulido",
+                "Aspirado completo interior",
+                "Limpieza de tapicería",
+                "Limpieza de motor",
+                "Brillado de llantas y neumáticos",
+                "Limpieza de vidrios interior\/exterior",
+                "Aromatización"
+            ],
+            "imagen": "https:\/\/images.unsplash.com\/photo-1601362840469-51e4d8d58785?w=800"
+        }
+    ]
+}

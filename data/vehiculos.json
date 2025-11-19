@@ -1,0 +1,54 @@
+{
+    "vehiculos": [
+        {
+            "id": 1,
+            "marca": "Toyota",
+            "modelo": "Corolla",
+            "anio": 2023,
+            "precio": 85000000,
+            "kilometraje": 15000,
+            "tipo": "sedan",
+            "transmision": "Automática",
+            "combustible": "Gasolina",
+            "color": "Blanco",
+            "descripcion": "Vehículo en excelente estado, único dueño, todos los mantenimientos al día. Incluye garantía extendida y aire acondicionado.",
+            "imagenes": [
+                "https:\/\/images.unsplash.com\/photo-1621007947382-bb3c3994e3fb?w=800",
+                "https:\/\/images.unsplash.com\/photo-1605559424843-9e4c228bf1c2?w=800"
+            ]
+        },
+        {
+            "id": 2,
+            "marca": "Mazda",
+            "modelo": "CX-5",
+            "anio": 2022,
+            "precio": 120000000,
+            "kilometraje": 25000,
+            "tipo": "suv",
+            "transmision": "Automática",
+            "combustible": "Gasolina",
+            "color": "Rojo",
+            "descripcion": "SUV espaciosa y confortable, perfecta para la familia. Sistema de navegación, cámara de reversa, sensores de parqueo.",
+            "imagenes": [
+                "https:\/\/images.unsplash.com\/photo-1519641471654-76ce0107ad1b?w=800",
+                "https:\/\/images.unsplash.com\/photo-1552519507-da3b142c6e3d?w=800"
+            ]
+        },
+        {
+            "id": 3,
+            "marca": "Chevrolet",
+            "modelo": "Silverado",
+            "anio": 2021,
+            "precio": 140000000,
+            "kilometraje": 35000,
+            "tipo": "pickup",
+            "transmision": "Manual",
+            "combustible": "Diesel",
+            "color": "Negro",
+            "descripcion": "Pickup robusta ideal para trabajo pesado. Doble cabina, capacidad de carga 1 tonelada, tracción 4x4.",
+            "imagenes": [
+                "https:\/\/images.unsplash.com\/photo-1533473359331-0135ef1b58bf?w=800"
+            ]
+        }
+    ]
+}

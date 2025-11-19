@@ -1,0 +1,58 @@
+{
+    "citas": [
+        {
+            "id": 1763540740,
+            "servicio_id": "3",
+            "servicio_nombre": "Lavado Completo Detallado",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-11-20",
+            "hora": "10:00",
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2025-11-19 09:25:40"
+        },
+        {
+            "id": 1763540877,
+            "servicio_id": "3",
+            "servicio_nombre": "Lavado Completo Detallado",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-11-20",
+            "hora": "14:00",
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2025-11-19 09:27:57"
+        },
+        {
+            "id": 1763540978,
+            "servicio_id": "3",
+            "servicio_nombre": "Lavado Completo Detallado",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-11-20",
+            "hora": "15:00",
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2025-11-19 09:29:38"
+        },
+        null,
+        null,
+        {
+            "id": 1763541308,
+            "servicio_id": "3",
+            "servicio_nombre": "Lavado Completo Detallado",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-11-19",
+            "hora": "11:00",
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2025-11-19 09:35:08"
+        }
+    ]
+}

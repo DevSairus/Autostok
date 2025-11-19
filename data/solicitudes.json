@@ -1,0 +1,16 @@
+{
+    "solicitudes": [
+        {
+            "id": 1763541907,
+            "tipo": "vehiculo",
+            "vehiculo_id": 2,
+            "vehiculo_nombre": "Mazda CX-5 2022",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "mensaje": "",
+            "estado": "completada",
+            "fecha_solicitud": "2025-11-19 09:45:07"
+        }
+    ]
+}
