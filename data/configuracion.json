@@ -3,8 +3,32 @@
         "nombreNegocio": "Autostok",
         "telefonoWhatsappVehiculos": "+573505351780",
         "telefonoWhatsappServicios": "+573505351781",
+        "telefonoWhatsappAlmacen": "+573505351782",
         "correoNegocio": "contacto@autostok.com",
+        "correoCallCenter": "callcenter@autostok.com",
         "direccion": "Bogotá, Colombia"
+    },
+    "sucursales": {
+        "sucursal1": {
+            "nombre": "Autostok Norte",
+            "direccion": "Calle 123 #45-67, Bogotá",
+            "telefono": "+573501234567",
+            "whatsapp": "+573501234567",
+            "correo": "norte@autostok.com",
+            "horarioSemana": "8:00 AM - 6:00 PM",
+            "horarioSabado": "9:00 AM - 2:00 PM",
+            "mapa": ""
+        },
+        "sucursal2": {
+            "nombre": "Autostok Sur",
+            "direccion": "Carrera 78 #90-12, Bogotá",
+            "telefono": "+573509876543",
+            "whatsapp": "+573509876543",
+            "correo": "sur@autostok.com",
+            "horarioSemana": "8:00 AM - 6:00 PM",
+            "horarioSabado": "9:00 AM - 2:00 PM",
+            "mapa": ""
+        }
     },
     "pagos": {
         "urlPagos": ""

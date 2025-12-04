@@ -2,6 +2,9 @@
 session_start();
 header('Content-Type: application/json');
 
+// Incluir sistema de logs
+require_once 'logs.php';
+
 // Verificar autenticación para métodos protegidos
 $method = $_SERVER['REQUEST_METHOD'];
 if (in_array($method, ['PUT', 'DELETE']) && (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true)) {
@@ -55,8 +58,15 @@ switch ($method) {
         
         $data['citas'][] = $cita;
         
-        if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT))) {
-            // Aquí podrías enviar correos de notificación
+        if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+            // Guardar log
+            guardarLog('cita', 'crear', [
+                'cita_id' => $cita['id'],
+                'servicio' => $cita['servicio_nombre'],
+                'cliente' => $cita['nombre'],
+                'fecha' => $cita['fecha']
+            ], 'Sistema');
+            
             echo json_encode(['success' => true, 'message' => 'Cita solicitada', 'id' => $cita['id']]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Error al guardar']);
@@ -72,9 +82,15 @@ switch ($method) {
         }
         
         $found = false;
+        $estadoAnterior = null;
+        $citaActual = null;
+        
         foreach ($data['citas'] as $key => $cita) {
             if ($cita['id'] == $input['id']) {
-                // Actualizar solo el estado
+                $estadoAnterior = $cita['estado'] ?? 'pendiente';
+                $citaActual = $cita;
+                
+                // Actualizar solo el estado o toda la cita
                 if (isset($input['estado'])) {
                     $data['citas'][$key]['estado'] = $input['estado'];
                 } else {
@@ -86,7 +102,23 @@ switch ($method) {
         }
         
         if ($found) {
-            if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT))) {
+            if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+                // Guardar log de cambio de estado
+                if (isset($input['estado'])) {
+                    guardarLog('cita', 'cambio_estado', [
+                        'cita_id' => $input['id'],
+                        'cliente' => $citaActual['nombre'] ?? 'Desconocido',
+                        'servicio' => $citaActual['servicio_nombre'] ?? 'N/A',
+                        'estado_anterior' => $estadoAnterior,
+                        'estado_nuevo' => $input['estado']
+                    ], $_SESSION['admin_username'] ?? 'Admin');
+                } else {
+                    guardarLog('cita', 'actualizar', [
+                        'cita_id' => $input['id'],
+                        'cambios' => array_keys($input)
+                    ], $_SESSION['admin_username'] ?? 'Admin');
+                }
+                
                 echo json_encode(['success' => true, 'message' => 'Cita actualizada']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Error al guardar']);
@@ -104,13 +136,32 @@ switch ($method) {
             exit;
         }
         
+        // Buscar la cita antes de eliminar para el log
+        $citaEliminada = null;
+        foreach ($data['citas'] as $cita) {
+            if ($cita['id'] == $input['id']) {
+                $citaEliminada = $cita;
+                break;
+            }
+        }
+        
         $newCitas = array_filter($data['citas'], function($c) use ($input) {
             return $c['id'] != $input['id'];
         });
         
         $data['citas'] = array_values($newCitas);
         
-        if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT))) {
+        if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+            // Guardar log de eliminación
+            if ($citaEliminada) {
+                guardarLog('cita', 'eliminar', [
+                    'cita_id' => $input['id'],
+                    'cliente' => $citaEliminada['nombre'] ?? 'Desconocido',
+                    'servicio' => $citaEliminada['servicio_nombre'] ?? 'N/A',
+                    'fecha' => $citaEliminada['fecha'] ?? 'N/A'
+                ], $_SESSION['admin_username'] ?? 'Admin');
+            }
+            
             echo json_encode(['success' => true, 'message' => 'Cita eliminada']);
         } else {
             echo json_encode(['success' => false, 'message' => 'Error al eliminar']);

@@ -1,0 +1,95 @@
+{
+    "logs": [
+        {
+            "id": "1764871817_7064",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1763541907,
+                "cliente": "Sergio Aguirre",
+                "tipo": "vehiculo",
+                "referencia": "Mazda CX-5 2022",
+                "estado_anterior": "completada",
+                "estado_nuevo": "contactada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 19:10:17",
+            "ip": "::1"
+        },
+        {
+            "id": "1764876654_9963",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1763542123,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "estado_anterior": "completada",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 20:30:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1764876682_9628",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1763542123,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "pendiente"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 20:31:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1764877125_9713",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1764877054,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 20:38:45",
+            "ip": "::1"
+        },
+        {
+            "id": "1764877128_4028",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1764877058,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 20:38:48",
+            "ip": "::1"
+        },
+        {
+            "id": "1764878456_2885",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1763542123,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-04 21:00:56",
+            "ip": "::1"
+        }
+    ]
+}

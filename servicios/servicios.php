@@ -1,5 +1,5 @@
 <?php
-// Cargar servicios desde JSON - Ruta corregida
+// Cargar servicios desde JSON
 $serviciosData = file_exists('../data/servicios.json') 
   ? json_decode(file_get_contents('../data/servicios.json'), true) 
   : ['servicios' => []];
@@ -11,7 +11,7 @@ $productosData = file_exists('../data/productos.json')
   : ['productos' => []];
 $productos = $productosData['productos'] ?? [];
 
-// Agrupar por categorías
+// Agrupar servicios por categorías
 $categorias = [];
 foreach ($servicios as $servicio) {
   $cat = $servicio['categoria'] ?? 'Otros';
@@ -20,6 +20,9 @@ foreach ($servicios as $servicio) {
   }
   $categorias[$cat][] = $servicio;
 }
+
+// Obtener categorías de productos
+$categoriasProductos = array_unique(array_column($productos, 'categoria'));
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +30,118 @@ foreach ($servicios as $servicio) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Servicios y Repuestos - Autostok</title>
-  <link rel="stylesheet" href="../css/servicios.css">
+  <link rel="stylesheet" href="css/servicios.css">
+  <style>
+    .vista-selector {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 20px 0 40px;
+      padding: 0 20px;
+    }
+    
+    .vista-btn {
+      padding: 15px 40px;
+      background: rgba(255,215,0,0.1);
+      color: #fff;
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .vista-btn:hover {
+      background: rgba(255,215,0,0.2);
+      border-color: #FFD700;
+      transform: translateY(-2px);
+    }
+    
+    .vista-btn.active {
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      border-color: #FFD700;
+      box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+    }
+    
+    .sucursal-selector {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background: rgba(255,215,0,0.05);
+      border-radius: 15px;
+      border: 1px solid rgba(255,215,0,0.2);
+      text-align: center;
+    }
+    
+    .sucursal-selector label {
+      display: block;
+      color: #FFD700;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .sucursal-selector select {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .sucursal-selector select:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.2);
+    }
+    
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .stock {
+      font-size: 0.9rem;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-weight: 600;
+    }
+    
+    .stock-disponible {
+      background: rgba(0,255,0,0.1);
+      color: #0f0;
+      border: 1px solid rgba(0,255,0,0.3);
+    }
+    
+    .stock-bajo {
+      background: rgba(255,165,0,0.1);
+      color: #FFA500;
+      border: 1px solid rgba(255,165,0,0.3);
+    }
+    
+    .stock-agotado {
+      background: rgba(255,0,0,0.1);
+      color: #f00;
+      border: 1px solid rgba(255,0,0,0.3);
+    }
+    
+    .no-resultados {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 1.2rem;
+    }
+  </style>
+  <link rel=icon href="../favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -45,53 +159,67 @@ foreach ($servicios as $servicio) {
   <main>
     <!-- Selector de Vista -->
     <div class="vista-selector">
-      <button class="vista-btn active" onclick="cambiarVista('servicios')">
+      <button class="vista-btn active" id="btnVistaServicios" onclick="cambiarVista('servicios')">
         🔧 Servicios de Taller
       </button>
-      <button class="vista-btn" onclick="cambiarVista('repuestos')">
+      <button class="vista-btn" id="btnVistaRepuestos" onclick="cambiarVista('repuestos')">
         🛒 Tienda de Repuestos
       </button>
     </div>
-    <div class="hero-section">
-      <h1 class="titulo-principal">Nuestros Servicios</h1>
-      <p class="subtitulo-principal">Calidad y profesionalismo en cada detalle</p>
-    </div>
 
-    <!-- Filtro de categorías -->
-    <section class="categorias-tabs">
-      <button class="tab-btn active" onclick="filtrarCategoria('todas')">Todas</button>
-      <?php foreach (array_keys($categorias) as $cat): ?>
-        <button class="tab-btn" onclick="filtrarCategoria('<?php echo htmlspecialchars($cat); ?>')">
-          <?php echo htmlspecialchars($cat); ?>
-        </button>
-      <?php endforeach; ?>
-    </section>
+    <!-- SECCIÓN DE SERVICIOS -->
+    <section id="serviciosView">
+      <div class="hero-section">
+        <h1 class="titulo-principal">Nuestros Servicios</h1>
+        <p class="subtitulo-principal">Calidad y profesionalismo en cada detalle</p>
+      </div>
 
-    <!-- Servicios Grid -->
-    <section class="servicios-container">
-      <?php foreach ($servicios as $servicio): ?>
-        <div class="servicio-card" data-categoria="<?php echo htmlspecialchars($servicio['categoria'] ?? 'Otros'); ?>">
-          <div class="card-imagen">
-            <img src="<?php echo htmlspecialchars($servicio['imagen'] ?? 'https://via.placeholder.com/400x300?text=Sin+Imagen'); ?>" 
-                 alt="<?php echo htmlspecialchars($servicio['nombre']); ?>"
-                 onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen'">
-            <div class="card-badge"><?php echo htmlspecialchars($servicio['categoria'] ?? 'Servicio'); ?></div>
-          </div>
-          <div class="card-content">
-            <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
-            <p class="descripcion"><?php echo htmlspecialchars($servicio['descripcion_corta'] ?? ''); ?></p>
-            <div class="precio-duracion">
-              <span class="precio">$<?php echo number_format($servicio['precio']); ?></span>
-              <?php if (!empty($servicio['duracion'])): ?>
-                <span class="duracion">⏱️ <?php echo htmlspecialchars($servicio['duracion']); ?></span>
-              <?php endif; ?>
+      <!-- Selector de Sucursal para Servicios -->
+      <div class="sucursal-selector">
+        <label for="sucursalServicio">📍 Selecciona tu sucursal:</label>
+        <select id="sucursalServicio">
+          <option value="">Seleccionar sucursal</option>
+          <option value="sucursal1">Sucursal Norte</option>
+          <option value="sucursal2">Sucursal Sur</option>
+        </select>
+      </div>
+
+      <!-- Filtro de categorías -->
+      <section class="categorias-tabs">
+        <button class="tab-btn active" onclick="filtrarCategoria('todas')">Todas</button>
+        <?php foreach (array_keys($categorias) as $cat): ?>
+          <button class="tab-btn" onclick="filtrarCategoria('<?php echo htmlspecialchars($cat); ?>')">
+            <?php echo htmlspecialchars($cat); ?>
+          </button>
+        <?php endforeach; ?>
+      </section>
+
+      <!-- Servicios Grid -->
+      <section class="servicios-container">
+        <?php foreach ($servicios as $servicio): ?>
+          <div class="servicio-card" data-categoria="<?php echo htmlspecialchars($servicio['categoria'] ?? 'Otros'); ?>">
+            <div class="card-imagen">
+              <img src="<?php echo htmlspecialchars($servicio['imagen'] ?? 'https://via.placeholder.com/400x300?text=Sin+Imagen'); ?>" 
+                   alt="<?php echo htmlspecialchars($servicio['nombre']); ?>"
+                   onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen'">
+              <div class="card-badge"><?php echo htmlspecialchars($servicio['categoria'] ?? 'Servicio'); ?></div>
             </div>
-            <button class="btn-ver-mas" onclick="abrirModalServicio(<?php echo $servicio['id']; ?>); event.stopPropagation();">
-              Ver detalles
-            </button>
+            <div class="card-content">
+              <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
+              <p class="descripcion"><?php echo htmlspecialchars($servicio['descripcion_corta'] ?? ''); ?></p>
+              <div class="precio-duracion">
+                <span class="precio">$<?php echo number_format($servicio['precio']); ?></span>
+                <?php if (!empty($servicio['duracion'])): ?>
+                  <span class="duracion">⏱️ <?php echo htmlspecialchars($servicio['duracion']); ?></span>
+                <?php endif; ?>
+              </div>
+              <button class="btn-ver-mas" onclick="abrirModalServicio(<?php echo $servicio['id']; ?>); event.stopPropagation();">
+                Ver detalles
+              </button>
+            </div>
           </div>
-        </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </section>
     </section>
 
     <!-- SECCIÓN DE REPUESTOS -->
@@ -106,6 +234,9 @@ foreach ($servicios as $servicio) {
           <input type="text" id="buscarProducto" placeholder="🔍 Buscar repuesto...">
           <select id="categoriaProducto">
             <option value="">Todas las categorías</option>
+            <?php foreach ($categoriasProductos as $cat): ?>
+              <option value="<?php echo htmlspecialchars($cat); ?>"><?php echo htmlspecialchars($cat); ?></option>
+            <?php endforeach; ?>
           </select>
           <button id="limpiarFiltrosProductos" class="btn-limpiar">Limpiar</button>
         </div>
@@ -218,7 +349,7 @@ foreach ($servicios as $servicio) {
             <input type="text" id="nombreProductoSol" placeholder="Nombre completo" required>
             <input type="tel" id="telefonoProductoSol" placeholder="Teléfono" required>
             <input type="email" id="correoProductoSol" placeholder="Correo electrónico" required>
-            <input type="number" id="cantidadProducto" placeholder="Cantidad" min="1" required>
+            <input type="number" id="cantidadProducto" placeholder="Cantidad" min="1" required value="1">
             <textarea id="notasProducto" placeholder="Notas adicionales (opcional)" rows="3"></textarea>
             <button type="submit" class="btn-solicitar">Solicitar Cotización</button>
           </form>
@@ -235,13 +366,16 @@ foreach ($servicios as $servicio) {
     💳 Realizar Pago
   </button>
 
+  <?php include '../footer.php'; ?>
+
   <script>
     const servicios = <?php echo json_encode($servicios); ?>;
+    const productos = <?php echo json_encode($productos); ?>;
     let servicioActual = null;
-
-    // Cargar configuración
+    let productoActual = null;
     let configSitio = {};
     
+    // Cargar configuración
     async function cargarConfiguracion() {
       try {
         const response = await fetch('../data/configuracion.json');
@@ -256,10 +390,165 @@ foreach ($servicios as $servicio) {
 
     function abrirPagoPSE() {
       const urlPSE = configSitio.pagos?.urlPagos || 'https://www.psepagos.co/PSEHostingUI/ShowTicketOffice.aspx?ID=2979';
-      console.log('Abriendo PSE:', urlPSE);
       window.open(urlPSE, '_blank');
     }
 
+    // Cambiar entre vistas
+    function cambiarVista(vista) {
+      const serviciosView = document.getElementById('serviciosView');
+      const repuestosView = document.getElementById('repuestosView');
+      const btnServicios = document.getElementById('btnVistaServicios');
+      const btnRepuestos = document.getElementById('btnVistaRepuestos');
+      
+      if (vista === 'servicios') {
+        serviciosView.style.display = 'block';
+        repuestosView.style.display = 'none';
+        btnServicios.classList.add('active');
+        btnRepuestos.classList.remove('active');
+      } else {
+        serviciosView.style.display = 'none';
+        repuestosView.style.display = 'block';
+        btnServicios.classList.remove('active');
+        btnRepuestos.classList.add('active');
+        mostrarProductos(productos);
+      }
+    }
+
+    // Mostrar productos
+    function mostrarProductos(productosArray) {
+      const container = document.getElementById('productosContainer');
+      
+      if (!productosArray || productosArray.length === 0) {
+        container.innerHTML = '<p class="no-resultados">No se encontraron productos</p>';
+        return;
+      }
+      
+      const cards = productosArray.map(producto => {
+        const stockClass = producto.stock > 10 ? 'stock-disponible' : producto.stock > 0 ? 'stock-bajo' : 'stock-agotado';
+        const stockText = producto.stock > 0 ? `${producto.stock} disponibles` : 'Agotado';
+        
+        return `
+          <div class="servicio-card" onclick="abrirModalProducto(${producto.id})">
+            <div class="card-imagen">
+              <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen'">
+              <div class="card-badge">${producto.categoria}</div>
+            </div>
+            <div class="card-content">
+              <h3>${producto.nombre}</h3>
+              <p class="descripcion">${producto.descripcion || ''}</p>
+              <div class="precio-duracion">
+                <span class="precio">$${Number(producto.precio).toLocaleString('es-CO')}</span>
+                <span class="stock ${stockClass}">${stockText}</span>
+              </div>
+              <button class="btn-ver-mas" onclick="event.stopPropagation(); abrirModalProducto(${producto.id})">
+                Ver detalles
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      container.innerHTML = cards;
+    }
+
+    // Filtrar productos
+    function filtrarProductos() {
+      const buscar = document.getElementById('buscarProducto').value.toLowerCase();
+      const categoria = document.getElementById('categoriaProducto').value;
+      
+      const filtrados = productos.filter(p => {
+        const coincideBusqueda = !buscar || 
+          p.nombre.toLowerCase().includes(buscar) || 
+          (p.descripcion && p.descripcion.toLowerCase().includes(buscar)) ||
+          (p.marca && p.marca.toLowerCase().includes(buscar));
+        const coincideCategoria = !categoria || p.categoria === categoria;
+        
+        return coincideBusqueda && coincideCategoria;
+      });
+      
+      mostrarProductos(filtrados);
+    }
+
+    document.getElementById('buscarProducto')?.addEventListener('input', filtrarProductos);
+    document.getElementById('categoriaProducto')?.addEventListener('change', filtrarProductos);
+    document.getElementById('limpiarFiltrosProductos')?.addEventListener('click', () => {
+      document.getElementById('buscarProducto').value = '';
+      document.getElementById('categoriaProducto').value = '';
+      mostrarProductos(productos);
+    });
+
+    // Abrir modal de producto
+    function abrirModalProducto(id) {
+      productoActual = productos.find(p => p.id == id);
+      if (!productoActual) return;
+      
+      document.getElementById('imagenProducto').src = productoActual.imagen || 'https://via.placeholder.com/800x400?text=Sin+Imagen';
+      document.getElementById('nombreProducto').textContent = productoActual.nombre;
+      document.getElementById('categoriaProductoBadge').textContent = productoActual.categoria;
+      document.getElementById('descripcionProducto').textContent = productoActual.descripcion || 'Sin descripción';
+      document.getElementById('precioProducto').textContent = `$${Number(productoActual.precio).toLocaleString('es-CO')}`;
+      document.getElementById('stockProducto').textContent = productoActual.stock > 0 ? `${productoActual.stock} unidades` : 'Agotado';
+      document.getElementById('marcaProducto').textContent = productoActual.marca || 'N/A';
+      document.getElementById('codigoProducto').textContent = productoActual.codigo || 'N/A';
+      document.getElementById('productoId').value = productoActual.id;
+      
+      document.getElementById('modalProducto').style.display = 'flex';
+      document.getElementById('mensajeProducto').style.display = 'none';
+    }
+
+    function cerrarModalProducto() {
+      document.getElementById('modalProducto').style.display = 'none';
+    }
+
+    // Enviar solicitud de producto
+    document.getElementById('formProducto')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const datos = {
+        producto_id: document.getElementById('productoId').value,
+        producto_nombre: productoActual.nombre,
+        nombre: document.getElementById('nombreProductoSol').value,
+        telefono: document.getElementById('telefonoProductoSol').value,
+        correo: document.getElementById('correoProductoSol').value,
+        cantidad: document.getElementById('cantidadProducto').value,
+        notas: document.getElementById('notasProducto').value
+      };
+      
+      try {
+        const response = await fetch('../admin/api/solicitar_producto.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('formProducto').reset();
+          document.getElementById('mensajeProducto').style.display = 'block';
+          
+          // Enviar mensaje por WhatsApp al almacén
+          const numeroAlmacen = configSitio.general?.telefonoWhatsappAlmacen || '573505351782';
+          const mensaje = `Nueva solicitud de producto:\n\nProducto: ${productoActual.nombre}\nCantidad: ${datos.cantidad}\n\nCliente: ${datos.nombre}\nTeléfono: ${datos.telefono}\nCorreo: ${datos.correo}\nNotas: ${datos.notas}`;
+          const numeroLimpio = numeroAlmacen.replace(/[^0-9]/g, '');
+          
+          setTimeout(() => {
+            window.open(`https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`, '_blank');
+          }, 1000);
+          
+          setTimeout(() => {
+            document.getElementById('mensajeProducto').style.display = 'none';
+          }, 5000);
+        } else {
+          alert('Error al enviar solicitud: ' + (result.message || 'Intenta nuevamente'));
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar la solicitud');
+      }
+    });
+
+    // Funciones de servicios (existentes)
     function filtrarCategoria(categoria) {
       const cards = document.querySelectorAll('.servicio-card');
       const buttons = document.querySelectorAll('.tab-btn');
@@ -282,16 +571,11 @@ foreach ($servicios as $servicio) {
       servicioActual = servicios.find(s => s.id == id);
       if (!servicioActual) return;
       
-      const imgElement = document.getElementById('imagenServicio');
-      imgElement.src = servicioActual.imagen || 'https://via.placeholder.com/800x400?text=Sin+Imagen';
-      imgElement.onerror = function() {
-        this.src = 'https://via.placeholder.com/800x400?text=Sin+Imagen';
-      };
-      
+      document.getElementById('imagenServicio').src = servicioActual.imagen || 'https://via.placeholder.com/800x400?text=Sin+Imagen';
       document.getElementById('nombreServicio').textContent = servicioActual.nombre;
       document.getElementById('categoriaServicio').textContent = servicioActual.categoria || 'Servicio';
       document.getElementById('descripcionCompleta').textContent = servicioActual.descripcion || 'Sin descripción';
-      document.getElementById('precioServicio').textContent = `${Number(servicioActual.precio).toLocaleString('es-CO')}`;
+      document.getElementById('precioServicio').textContent = `$${Number(servicioActual.precio).toLocaleString('es-CO')}`;
       
       const duracionContainer = document.getElementById('duracionContainer');
       if (servicioActual.duracion) {
@@ -301,7 +585,6 @@ foreach ($servicios as $servicio) {
         duracionContainer.style.display = 'none';
       }
       
-      // Características
       const caracteristicasDiv = document.getElementById('caracteristicasServicio');
       if (servicioActual.caracteristicas && servicioActual.caracteristicas.length > 0) {
         caracteristicasDiv.innerHTML = '<h4>Incluye:</h4><ul>' + 
@@ -325,8 +608,16 @@ foreach ($servicios as $servicio) {
       abrirPagoPSE();
     };
 
+    // Enviar cita con sucursal seleccionada
     document.getElementById('formCita').onsubmit = async (e) => {
       e.preventDefault();
+      
+      const sucursalSeleccionada = document.getElementById('sucursalServicio').value;
+      
+      if (!sucursalSeleccionada) {
+        alert('Por favor selecciona una sucursal');
+        return;
+      }
       
       const datos = {
         servicio_id: document.getElementById('servicioId').value,
@@ -336,26 +627,32 @@ foreach ($servicios as $servicio) {
         correo: document.getElementById('correoCita').value,
         fecha: document.getElementById('fechaCita').value,
         hora: document.getElementById('horaCita').value,
-        notas: document.getElementById('notasCita').value
+        notas: document.getElementById('notasCita').value,
+        sucursal: sucursalSeleccionada
       };
-      
-      console.log('Enviando cita:', datos);
       
       try {
         const response = await fetch('../admin/api/solicitar_cita.php', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(datos)
         });
         
         const result = await response.json();
-        console.log('Respuesta:', result);
         
         if (result.success) {
           document.getElementById('formCita').reset();
           document.getElementById('mensajeCita').style.display = 'block';
+          
+          // Obtener WhatsApp de la sucursal seleccionada
+          const numeroSucursal = configSitio.sucursales?.[sucursalSeleccionada]?.whatsapp || configSitio.general?.telefonoWhatsappServicios || '573505351781';
+          const mensaje = `Nueva cita solicitada:\n\nServicio: ${servicioActual.nombre}\nFecha: ${datos.fecha}\nHora: ${datos.hora}\n\nCliente: ${datos.nombre}\nTeléfono: ${datos.telefono}\nCorreo: ${datos.correo}\nNotas: ${datos.notas}`;
+          const numeroLimpio = numeroSucursal.replace(/[^0-9]/g, '');
+          
+          setTimeout(() => {
+            window.open(`https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`, '_blank');
+          }, 1000);
+          
           setTimeout(() => {
             document.getElementById('mensajeCita').style.display = 'none';
           }, 5000);
@@ -364,20 +661,19 @@ foreach ($servicios as $servicio) {
         }
       } catch (error) {
         console.error('Error:', error);
-        alert('Error al enviar la solicitud: ' + error.message);
+        alert('Error al enviar la solicitud');
       }
     };
 
-    // Cerrar modal al hacer clic fuera
+    // Cerrar modales al hacer clic fuera
     window.onclick = (e) => {
-      const modal = document.getElementById('modalServicio');
-      if (e.target === modal) {
-        modal.style.display = 'none';
+      if (e.target.id === 'modalServicio') {
+        document.getElementById('modalServicio').style.display = 'none';
+      }
+      if (e.target.id === 'modalProducto') {
+        document.getElementById('modalProducto').style.display = 'none';
       }
     };
   </script>
-
-  <?php include '../footer.php'; ?>
-
 </body>
 </html>

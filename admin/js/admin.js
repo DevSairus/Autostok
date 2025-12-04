@@ -1,23 +1,61 @@
 // Navegación entre secciones
 function mostrarSeccion(seccionId) {
-  // Ocultar todas las secciones
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   
-  // Mostrar la sección seleccionada
   document.getElementById(seccionId).classList.add('active');
   event.target.closest('.nav-item').classList.add('active');
   
-  // Actualizar título
   const titulos = {
     'dashboard': 'Dashboard',
     'vehiculos': 'Gestión de Vehículos',
     'servicios': 'Gestión de Servicios',
+    'productos': 'Gestión de Productos',
     'citas': 'Gestión de Citas',
     'solicitudes': 'Gestión de Solicitudes',
+    'logs': 'Registro de Actividad',
+    'sucursales': 'Gestión de Sucursales',
     'configuracion': 'Configuración'
   };
   document.getElementById('sectionTitle').textContent = titulos[seccionId];
+  
+  // Cargar logs si es esa sección
+  if (seccionId === 'logs') {
+    setTimeout(cargarLogs, 100);
+  }
+}
+
+// ===== LOGS =====
+async function cargarLogs() {
+  const tipo = document.getElementById('filtroTipoLog').value;
+  const tbody = document.getElementById('logsTable');
+  
+  try {
+    const url = tipo ? `api/logs.php?tipo=${tipo}&limite=100` : 'api/logs.php?limite=100';
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result.success && result.logs.length > 0) {
+      tbody.innerHTML = result.logs.map(log => {
+        const detalles = JSON.stringify(log.datos).substring(0, 80);
+        return `
+          <tr>
+            <td>${log.fecha}</td>
+            <td><span class="tipo-badge">${log.tipo}</span></td>
+            <td><span class="accion-badge">${log.accion}</span></td>
+            <td>${log.usuario}</td>
+            <td title="${JSON.stringify(log.datos, null, 2)}">${detalles}...</td>
+            <td>${log.ip}</td>
+          </tr>
+        `;
+      }).join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay logs disponibles</td></tr>';
+    }
+  } catch (error) {
+    console.error('Error cargando logs:', error);
+    tbody.innerHTML = '<tr><td colspan="6" class="error">Error al cargar logs</td></tr>';
+  }
 }
 
 // ===== VEHÍCULOS =====
@@ -28,53 +66,7 @@ function abrirFormularioVehiculo() {
   document.getElementById('formVehiculo').reset();
   document.getElementById('vehiculoId').value = '';
   imagenesVehiculoSubidas = [];
-  document.getElementById('previewVehiculo').innerHTML = '';
   document.getElementById('modalVehiculo').classList.add('active');
-}
-
-// Manejar carga de imágenes para vehículos
-document.getElementById('fileInputVehiculo')?.addEventListener('change', async (e) => {
-  const files = e.target.files;
-  const previewDiv = document.getElementById('previewVehiculo');
-  
-  for (let file of files) {
-    const formData = new FormData();
-    formData.append('imagen', file);
-    
-    try {
-      const response = await fetch('api/upload_imagen.php', {
-        method: 'POST',
-        body: formData
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        imagenesVehiculoSubidas.push(result.url);
-        
-        // Mostrar preview
-        const imgPreview = document.createElement('div');
-        imgPreview.className = 'preview-item';
-        imgPreview.innerHTML = `
-          <img src="../${result.url}" alt="Preview">
-          <button type="button" class="btn-remove-img" onclick="eliminarImagenVehiculo('${result.url}')">✕</button>
-        `;
-        previewDiv.appendChild(imgPreview);
-      } else {
-        alert('Error al subir imagen: ' + result.message);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al subir la imagen');
-    }
-  }
-  
-  e.target.value = '';
-});
-
-function eliminarImagenVehiculo(url) {
-  imagenesVehiculoSubidas = imagenesVehiculoSubidas.filter(img => img !== url);
-  document.getElementById('previewVehiculo').querySelector(`img[src="../${url}"]`)?.parentElement.remove();
 }
 
 function cerrarModalVehiculo() {
@@ -94,21 +86,7 @@ function editarVehiculo(vehiculo) {
   document.getElementById('combustible').value = vehiculo.combustible || 'Gasolina';
   document.getElementById('color').value = vehiculo.color || '';
   document.getElementById('descripcion').value = vehiculo.descripcion || '';
-  
-  // Cargar imágenes existentes
-  imagenesVehiculoSubidas = vehiculo.imagenes || [];
-  const previewDiv = document.getElementById('previewVehiculo');
-  previewDiv.innerHTML = '';
-  
-  imagenesVehiculoSubidas.forEach(url => {
-    const imgPreview = document.createElement('div');
-    imgPreview.className = 'preview-item';
-    imgPreview.innerHTML = `
-      <img src="../${url}" alt="Preview">
-      <button type="button" class="btn-remove-img" onclick="eliminarImagenVehiculo('${url}')">✕</button>
-    `;
-    previewDiv.appendChild(imgPreview);
-  });
+  document.getElementById('imagenes').value = (vehiculo.imagenes || []).join('\n');
   
   document.getElementById('modalVehiculo').classList.add('active');
 }
@@ -136,11 +114,12 @@ async function eliminarVehiculo(id) {
   }
 }
 
-// Enviar formulario de vehículo
 document.getElementById('formVehiculo')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const formData = new FormData(e.target);
+  const imagenesTexto = formData.get('imagenes');
+  const imagenes = imagenesTexto ? imagenesTexto.split('\n').filter(img => img.trim()) : [];
   
   const datos = {
     id: formData.get('id') || Date.now(),
@@ -154,7 +133,7 @@ document.getElementById('formVehiculo')?.addEventListener('submit', async (e) =>
     combustible: formData.get('combustible'),
     color: formData.get('color'),
     descripcion: formData.get('descripcion'),
-    imagenes: imagenesVehiculoSubidas
+    imagenes: imagenes
   };
   
   try {
@@ -179,58 +158,11 @@ document.getElementById('formVehiculo')?.addEventListener('submit', async (e) =>
 });
 
 // ===== SERVICIOS =====
-let imagenServicioSubida = '';
-
 function abrirFormularioServicio() {
   document.getElementById('tituloModalServicio').textContent = 'Nuevo Servicio';
   document.getElementById('formServicio').reset();
   document.getElementById('servicioId').value = '';
-  imagenServicioSubida = '';
-  document.getElementById('previewServicio').innerHTML = '';
   document.getElementById('modalServicio').classList.add('active');
-}
-
-// Manejar carga de imagen para servicios
-document.getElementById('fileInputServicio')?.addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  
-  const formData = new FormData();
-  formData.append('imagen', file);
-  
-  try {
-    const response = await fetch('api/upload_imagen.php', {
-      method: 'POST',
-      body: formData
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      imagenServicioSubida = result.url;
-      
-      // Mostrar preview
-      const previewDiv = document.getElementById('previewServicio');
-      previewDiv.innerHTML = `
-        <div class="preview-item">
-          <img src="../${result.url}" alt="Preview">
-          <button type="button" class="btn-remove-img" onclick="eliminarImagenServicio()">✕</button>
-        </div>
-      `;
-    } else {
-      alert('Error al subir imagen: ' + result.message);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error al subir la imagen');
-  }
-  
-  e.target.value = '';
-});
-
-function eliminarImagenServicio() {
-  imagenServicioSubida = '';
-  document.getElementById('previewServicio').innerHTML = '';
 }
 
 function cerrarModalServicio() {
@@ -247,18 +179,7 @@ function editarServicio(servicio) {
   document.getElementById('descripcionCorta').value = servicio.descripcion_corta || '';
   document.getElementById('descripcionServicio').value = servicio.descripcion || '';
   document.getElementById('caracteristicas').value = (servicio.caracteristicas || []).join('\n');
-  
-  // Cargar imagen existente
-  imagenServicioSubida = servicio.imagen || '';
-  const previewDiv = document.getElementById('previewServicio');
-  if (imagenServicioSubida) {
-    previewDiv.innerHTML = `
-      <div class="preview-item">
-        <img src="../${imagenServicioSubida}" alt="Preview">
-        <button type="button" class="btn-remove-img" onclick="eliminarImagenServicio()">✕</button>
-      </div>
-    `;
-  }
+  document.getElementById('imagenServicio').value = servicio.imagen || '';
   
   document.getElementById('modalServicio').classList.add('active');
 }
@@ -286,7 +207,6 @@ async function eliminarServicio(id) {
   }
 }
 
-// Enviar formulario de servicio
 document.getElementById('formServicio')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -303,7 +223,7 @@ document.getElementById('formServicio')?.addEventListener('submit', async (e) =>
     descripcion_corta: formData.get('descripcion_corta'),
     descripcion: formData.get('descripcion'),
     caracteristicas: caracteristicas,
-    imagen: imagenServicioSubida
+    imagen: formData.get('imagen') || document.getElementById('imagenServicio').value
   };
   
   try {
@@ -326,6 +246,174 @@ document.getElementById('formServicio')?.addEventListener('submit', async (e) =>
     alert('Error al guardar el servicio');
   }
 });
+
+// ===== PRODUCTOS =====
+function abrirFormularioProducto() {
+  document.getElementById('tituloModalProducto').textContent = 'Nuevo Producto';
+  document.getElementById('formProducto').reset();
+  document.getElementById('productoId').value = '';
+  document.getElementById('modalProducto').classList.add('active');
+}
+
+function cerrarModalProducto() {
+  document.getElementById('modalProducto').classList.remove('active');
+}
+
+function editarProducto(producto) {
+  document.getElementById('tituloModalProducto').textContent = 'Editar Producto';
+  document.getElementById('productoId').value = producto.id;
+  document.getElementById('nombreProducto').value = producto.nombre;
+  document.getElementById('categoriaProducto').value = producto.categoria || '';
+  document.getElementById('precioProducto').value = producto.precio;
+  document.getElementById('stockProducto').value = producto.stock || 0;
+  document.getElementById('marcaProducto').value = producto.marca || '';
+  document.getElementById('codigoProducto').value = producto.codigo || '';
+  document.getElementById('descripcionProducto').value = producto.descripcion || '';
+  document.getElementById('imagenProducto').value = producto.imagen || '';
+  
+  document.getElementById('modalProducto').classList.add('active');
+}
+
+async function eliminarProducto(id) {
+  if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+  
+  try {
+    const response = await fetch('api/productos.php', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert('Producto eliminado exitosamente');
+      location.reload();
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo eliminar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al eliminar el producto');
+  }
+}
+
+document.getElementById('formProducto')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  
+  const datos = {
+    id: formData.get('id') || Date.now(),
+    nombre: formData.get('nombre'),
+    categoria: formData.get('categoria'),
+    precio: parseFloat(formData.get('precio')),
+    stock: parseInt(formData.get('stock')) || 0,
+    marca: formData.get('marca'),
+    codigo: formData.get('codigo'),
+    descripcion: formData.get('descripcion'),
+    imagen: formData.get('imagen') || document.getElementById('imagenProducto').value
+  };
+  
+  try {
+    const method = formData.get('id') ? 'PUT' : 'POST';
+    const response = await fetch('api/productos.php', {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert(formData.get('id') ? 'Producto actualizado' : 'Producto creado');
+      location.reload();
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo guardar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al guardar el producto');
+  }
+});
+
+// ===== CITAS =====
+function filtrarCitas() {
+  const filtro = document.getElementById('filtroCitas').value;
+  const filas = document.querySelectorAll('#citasTable tr');
+  
+  filas.forEach(fila => {
+    const estado = fila.dataset.estado;
+    if (filtro === 'todas' || estado === filtro) {
+      fila.style.display = '';
+    } else {
+      fila.style.display = 'none';
+    }
+  });
+}
+
+async function cambiarEstadoCita(id, nuevoEstado) {
+  try {
+    const response = await fetch('api/citas.php', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, estado: nuevoEstado })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      const fila = event.target.closest('tr');
+      fila.dataset.estado = nuevoEstado;
+      alert('Estado actualizado exitosamente');
+    } else {
+      alert('Error al actualizar el estado: ' + (result.message || ''));
+      location.reload();
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al actualizar el estado');
+  }
+}
+
+function verDetalleCita(cita) {
+  const mensaje = `
+DETALLE DE CITA #${cita.id}
+
+Cliente: ${cita.nombre}
+Teléfono: ${cita.telefono}
+Correo: ${cita.correo}
+
+Servicio: ${cita.servicio_nombre}
+Fecha: ${new Date(cita.fecha).toLocaleDateString()}
+Hora: ${cita.hora}
+
+Estado: ${cita.estado || 'Pendiente'}
+
+Notas: ${cita.notas || 'Sin notas'}
+  `;
+  alert(mensaje);
+}
+
+async function eliminarCita(id) {
+  if (!confirm('¿Estás seguro de eliminar esta cita?')) return;
+  
+  try {
+    const response = await fetch('api/citas.php', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert('Cita eliminada exitosamente');
+      location.reload();
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo eliminar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al eliminar la cita');
+  }
+}
 
 // ===== SOLICITUDES =====
 function filtrarSolicitudes() {
@@ -356,7 +444,7 @@ async function cambiarEstadoSolicitud(id, nuevoEstado) {
       fila.dataset.estado = nuevoEstado;
       alert('Estado actualizado exitosamente');
     } else {
-      alert('Error: ' + (result.message || 'No se pudo actualizar'));
+      alert('Error al actualizar el estado: ' + (result.message || ''));
       location.reload();
     }
   } catch (error) {
@@ -367,18 +455,18 @@ async function cambiarEstadoSolicitud(id, nuevoEstado) {
 
 function verDetalleSolicitud(solicitud) {
   const mensaje = `
-    DETALLE DE SOLICITUD #${solicitud.id}
-    
-    Tipo: ${solicitud.tipo || 'General'}
-    Cliente: ${solicitud.nombre}
-    Teléfono: ${solicitud.telefono}
-    Correo: ${solicitud.correo}
-    
-    ${solicitud.vehiculo_nombre ? 'Vehículo: ' + solicitud.vehiculo_nombre : ''}
-    ${solicitud.mensaje ? 'Mensaje: ' + solicitud.mensaje : ''}
-    
-    Estado: ${solicitud.estado || 'Pendiente'}
-    Fecha: ${new Date(solicitud.fecha_solicitud).toLocaleString()}
+DETALLE DE SOLICITUD #${solicitud.id}
+
+Tipo: ${solicitud.tipo || 'General'}
+Cliente: ${solicitud.nombre}
+Teléfono: ${solicitud.telefono}
+Correo: ${solicitud.correo}
+
+${solicitud.vehiculo_nombre ? 'Vehículo: ' + solicitud.vehiculo_nombre : ''}
+${solicitud.mensaje ? 'Mensaje: ' + solicitud.mensaje : ''}
+
+Estado: ${solicitud.estado || 'Pendiente'}
+Fecha: ${new Date(solicitud.fecha_solicitud).toLocaleString()}
   `;
   alert(mensaje);
 }
@@ -406,87 +494,6 @@ async function eliminarSolicitud(id) {
   }
 }
 
-// ===== CITAS =====
-function filtrarCitas() {
-  const filtro = document.getElementById('filtroCitas').value;
-  const filas = document.querySelectorAll('#citasTable tr');
-  
-  filas.forEach(fila => {
-    const estado = fila.dataset.estado;
-    if (filtro === 'todas' || estado === filtro) {
-      fila.style.display = '';
-    } else {
-      fila.style.display = 'none';
-    }
-  });
-}
-
-async function cambiarEstadoCita(id, nuevoEstado) {
-  try {
-    const response = await fetch('api/citas.php', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, estado: nuevoEstado })
-    });
-    
-    const result = await response.json();
-    if (result.success) {
-      // Actualizar el estado en la fila
-      const fila = event.target.closest('tr');
-      fila.dataset.estado = nuevoEstado;
-      alert('Estado actualizado exitosamente');
-    } else {
-      alert('Error: ' + (result.message || 'No se pudo actualizar'));
-      location.reload();
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error al actualizar el estado');
-  }
-}
-
-function verDetalleCita(cita) {
-  const mensaje = `
-    DETALLE DE CITA #${cita.id}
-    
-    Cliente: ${cita.nombre}
-    Teléfono: ${cita.telefono}
-    Correo: ${cita.correo}
-    
-    Servicio: ${cita.servicio_nombre}
-    Fecha: ${new Date(cita.fecha).toLocaleDateString()}
-    Hora: ${cita.hora}
-    
-    Estado: ${cita.estado || 'Pendiente'}
-    
-    Notas: ${cita.notas || 'Sin notas'}
-  `;
-  alert(mensaje);
-}
-
-async function eliminarCita(id) {
-  if (!confirm('¿Estás seguro de eliminar esta cita?')) return;
-  
-  try {
-    const response = await fetch('api/citas.php', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id })
-    });
-    
-    const result = await response.json();
-    if (result.success) {
-      alert('Cita eliminada exitosamente');
-      location.reload();
-    } else {
-      alert('Error: ' + (result.message || 'No se pudo eliminar'));
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error al eliminar la cita');
-  }
-}
-
 // ===== CONFIGURACIÓN =====
 document.getElementById('formConfigGeneral')?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -495,11 +502,10 @@ document.getElementById('formConfigGeneral')?.addEventListener('submit', async (
     nombreNegocio: document.getElementById('nombreNegocio').value,
     telefonoWhatsappVehiculos: document.getElementById('telefonoWhatsappVehiculos').value,
     telefonoWhatsappServicios: document.getElementById('telefonoWhatsappServicios').value,
+    telefonoWhatsappAlmacen: document.getElementById('telefonoWhatsappAlmacen').value,
     correoNegocio: document.getElementById('correoNegocio').value,
-    direccion: document.getElementById('direccion').value
+    correoCallCenter: document.getElementById('correoCallCenter').value
   };
-  
-  console.log('Enviando configuración:', config);
   
   try {
     const response = await fetch('api/configuracion.php', {
@@ -509,8 +515,6 @@ document.getElementById('formConfigGeneral')?.addEventListener('submit', async (
     });
     
     const result = await response.json();
-    console.log('Respuesta:', result);
-    
     if (result.success) {
       alert('Configuración guardada exitosamente');
     } else {
@@ -518,7 +522,7 @@ document.getElementById('formConfigGeneral')?.addEventListener('submit', async (
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('Error al guardar la configuración: ' + error.message);
+    alert('Error al guardar la configuración');
   }
 });
 
@@ -548,30 +552,157 @@ document.getElementById('formConfigPagos')?.addEventListener('submit', async (e)
   }
 });
 
-document.getElementById('formHorarios')?.addEventListener('submit', async (e) => {
+document.getElementById('formConfigNosotros')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const config = {
-    horarioSemana: document.getElementById('horarioSemana').value,
-    horarioSabado: document.getElementById('horarioSabado').value
+    descripcionNosotros: document.getElementById('descripcionNosotros').value,
+    anosExperiencia: document.getElementById('anosExperiencia').value,
+    clientesSatisfechos: document.getElementById('clientesSatisfechos').value,
+    vehiculosVendidos: document.getElementById('vehiculosVendidos').value
   };
   
   try {
     const response = await fetch('api/configuracion.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: 'horarios', datos: config })
+      body: JSON.stringify({ tipo: 'nosotros', datos: config })
     });
     
     const result = await response.json();
     if (result.success) {
-      alert('Horarios guardados exitosamente');
+      alert('Información guardada exitosamente');
     } else {
       alert('Error: ' + (result.message || 'No se pudo guardar'));
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('Error al guardar los horarios');
+    alert('Error al guardar');
+  }
+});
+
+// ===== SUCURSALES =====
+document.getElementById('formSucursal1')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const sucursal1Data = {
+    nombre: document.getElementById('nombreSucursal1').value,
+    direccion: document.getElementById('direccionSucursal1').value,
+    telefono: document.getElementById('telefonoSucursal1').value,
+    whatsapp: document.getElementById('whatsappSucursal1').value,
+    correo: document.getElementById('correoSucursal1').value,
+    horarioSemana: document.getElementById('horarioSemanaSucursal1').value,
+    horarioSabado: document.getElementById('horarioSabadoSucursal1').value,
+    mapa: document.getElementById('mapaSucursal1').value
+  };
+  
+  try {
+    const response = await fetch('api/configuracion.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: 'sucursal1', datos: sucursal1Data })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert('Sucursal Norte guardada exitosamente');
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo guardar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al guardar la sucursal');
+  }
+});
+
+document.getElementById('formSucursal2')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const sucursal2Data = {
+    nombre: document.getElementById('nombreSucursal2').value,
+    direccion: document.getElementById('direccionSucursal2').value,
+    telefono: document.getElementById('telefonoSucursal2').value,
+    whatsapp: document.getElementById('whatsappSucursal2').value,
+    correo: document.getElementById('correoSucursal2').value,
+    horarioSemana: document.getElementById('horarioSemanaSucursal2').value,
+    horarioSabado: document.getElementById('horarioSabadoSucursal2').value,
+    mapa: document.getElementById('mapaSucursal2').value
+  };
+  
+  try {
+    const response = await fetch('api/configuracion.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: 'sucursal2', datos: sucursal2Data })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert('Sucursal Sur guardada exitosamente');
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo guardar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al guardar la sucursal');
+  }
+});
+
+// Cargar configuración al inicio
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch('api/configuracion.php');
+    const config = await response.json();
+    
+    // Configuración general
+    if (config.general) {
+      document.getElementById('nombreNegocio').value = config.general.nombreNegocio || '';
+      document.getElementById('telefonoWhatsappVehiculos').value = config.general.telefonoWhatsappVehiculos || '';
+      document.getElementById('telefonoWhatsappServicios').value = config.general.telefonoWhatsappServicios || '';
+      document.getElementById('telefonoWhatsappAlmacen').value = config.general.telefonoWhatsappAlmacen || '';
+      document.getElementById('correoNegocio').value = config.general.correoNegocio || '';
+      document.getElementById('correoCallCenter').value = config.general.correoCallCenter || '';
+    }
+    
+    // Pagos
+    if (config.pagos) {
+      document.getElementById('urlPagos').value = config.pagos.urlPagos || '';
+    }
+    
+    // Nosotros
+    if (config.nosotros) {
+      document.getElementById('descripcionNosotros').value = config.nosotros.descripcionNosotros || '';
+      document.getElementById('anosExperiencia').value = config.nosotros.anosExperiencia || '';
+      document.getElementById('clientesSatisfechos').value = config.nosotros.clientesSatisfechos || '';
+      document.getElementById('vehiculosVendidos').value = config.nosotros.vehiculosVendidos || '';
+    }
+    
+    // Sucursales
+    if (config.sucursales?.sucursal1) {
+      const s1 = config.sucursales.sucursal1;
+      document.getElementById('nombreSucursal1').value = s1.nombre || '';
+      document.getElementById('direccionSucursal1').value = s1.direccion || '';
+      document.getElementById('telefonoSucursal1').value = s1.telefono || '';
+      document.getElementById('whatsappSucursal1').value = s1.whatsapp || '';
+      document.getElementById('correoSucursal1').value = s1.correo || '';
+      document.getElementById('horarioSemanaSucursal1').value = s1.horarioSemana || '';
+      document.getElementById('horarioSabadoSucursal1').value = s1.horarioSabado || '';
+      document.getElementById('mapaSucursal1').value = s1.mapa || '';
+    }
+    
+    if (config.sucursales?.sucursal2) {
+      const s2 = config.sucursales.sucursal2;
+      document.getElementById('nombreSucursal2').value = s2.nombre || '';
+      document.getElementById('direccionSucursal2').value = s2.direccion || '';
+      document.getElementById('telefonoSucursal2').value = s2.telefono || '';
+      document.getElementById('whatsappSucursal2').value = s2.whatsapp || '';
+      document.getElementById('correoSucursal2').value = s2.correo || '';
+      document.getElementById('horarioSemanaSucursal2').value = s2.horarioSemana || '';
+      document.getElementById('horarioSabadoSucursal2').value = s2.horarioSabado || '';
+      document.getElementById('mapaSucursal2').value = s2.mapa || '';
+    }
+  } catch (error) {
+    console.error('Error al cargar configuración:', error);
   }
 });
 
@@ -581,30 +712,3 @@ window.onclick = (e) => {
     e.target.classList.remove('active');
   }
 };
-
-// Cargar configuración al inicio
-window.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const response = await fetch('api/configuracion.php');
-    const config = await response.json();
-    
-    if (config.general) {
-      document.getElementById('nombreNegocio').value = config.general.nombreNegocio || 'AutoMarket';
-      document.getElementById('telefonoWhatsappVehiculos').value = config.general.telefonoWhatsappVehiculos || '';
-      document.getElementById('telefonoWhatsappServicios').value = config.general.telefonoWhatsappServicios || '';
-      document.getElementById('correoNegocio').value = config.general.correoNegocio || '';
-      document.getElementById('direccion').value = config.general.direccion || '';
-    }
-    
-    if (config.pagos) {
-      document.getElementById('urlPagos').value = config.pagos.urlPagos || '';
-    }
-    
-    if (config.horarios) {
-      document.getElementById('horarioSemana').value = config.horarios.horarioSemana || '';
-      document.getElementById('horarioSabado').value = config.horarios.horarioSabado || '';
-    }
-  } catch (error) {
-    console.error('Error al cargar configuración:', error);
-  }
-});
