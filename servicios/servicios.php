@@ -5,6 +5,12 @@ $serviciosData = file_exists('../data/servicios.json')
   : ['servicios' => []];
 $servicios = $serviciosData['servicios'] ?? [];
 
+// Cargar productos desde JSON
+$productosData = file_exists('../data/productos.json') 
+  ? json_decode(file_get_contents('../data/productos.json'), true) 
+  : ['productos' => []];
+$productos = $productosData['productos'] ?? [];
+
 // Agrupar por categorías
 $categorias = [];
 foreach ($servicios as $servicio) {
@@ -20,9 +26,8 @@ foreach ($servicios as $servicio) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servicios - Autostok</title>
-  <link rel="stylesheet" href="css/servicios.css">
-  <link rel=icon href="../favicon.ico" type="image/x-icon">
+  <title>Servicios y Repuestos - Autostok</title>
+  <link rel="stylesheet" href="../css/servicios.css">
 </head>
 <body>
 
@@ -38,6 +43,15 @@ foreach ($servicios as $servicio) {
   </header>
 
   <main>
+    <!-- Selector de Vista -->
+    <div class="vista-selector">
+      <button class="vista-btn active" onclick="cambiarVista('servicios')">
+        🔧 Servicios de Taller
+      </button>
+      <button class="vista-btn" onclick="cambiarVista('repuestos')">
+        🛒 Tienda de Repuestos
+      </button>
+    </div>
     <div class="hero-section">
       <h1 class="titulo-principal">Nuestros Servicios</h1>
       <p class="subtitulo-principal">Calidad y profesionalismo en cada detalle</p>
@@ -78,6 +92,26 @@ foreach ($servicios as $servicio) {
           </div>
         </div>
       <?php endforeach; ?>
+    </section>
+
+    <!-- SECCIÓN DE REPUESTOS -->
+    <section id="repuestosView" style="display:none;">
+      <div class="hero-section">
+        <h1 class="titulo-principal">Tienda de Repuestos</h1>
+        <p class="subtitulo-principal">Encuentra los mejores repuestos para tu vehículo</p>
+      </div>
+
+      <section class="filtros-container">
+        <div class="filtros">
+          <input type="text" id="buscarProducto" placeholder="🔍 Buscar repuesto...">
+          <select id="categoriaProducto">
+            <option value="">Todas las categorías</option>
+          </select>
+          <button id="limpiarFiltrosProductos" class="btn-limpiar">Limpiar</button>
+        </div>
+      </section>
+
+      <section class="productos-grid" id="productosContainer"></section>
     </section>
   </main>
 
@@ -136,6 +170,60 @@ foreach ($servicios as $servicio) {
           </form>
           <div id="mensajeCita" class="mensaje-exito" style="display:none;">
             ✓ Cita solicitada con éxito. Recibirás confirmación por correo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Producto -->
+  <div id="modalProducto" class="modal">
+    <div class="modal-content">
+      <button class="btn-cerrar-modal" onclick="cerrarModalProducto()">✕</button>
+      
+      <div class="modal-header">
+        <img id="imagenProducto" src="" alt="Producto">
+        <div class="header-info">
+          <h2 id="nombreProducto"></h2>
+          <p class="categoria-badge" id="categoriaProductoBadge"></p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="descripcion-completa" id="descripcionProducto"></div>
+
+        <div class="detalles-servicio">
+          <div class="detalle-item">
+            <span class="label">Precio</span>
+            <span class="valor precio-valor" id="precioProducto"></span>
+          </div>
+          <div class="detalle-item">
+            <span class="label">Stock</span>
+            <span class="valor" id="stockProducto"></span>
+          </div>
+          <div class="detalle-item">
+            <span class="label">Marca</span>
+            <span class="valor" id="marcaProducto"></span>
+          </div>
+          <div class="detalle-item">
+            <span class="label">Código</span>
+            <span class="valor" id="codigoProducto"></span>
+          </div>
+        </div>
+
+        <div class="contacto-section">
+          <h3>Solicitar Producto</h3>
+          <form id="formProducto">
+            <input type="hidden" id="productoId">
+            <input type="text" id="nombreProductoSol" placeholder="Nombre completo" required>
+            <input type="tel" id="telefonoProductoSol" placeholder="Teléfono" required>
+            <input type="email" id="correoProductoSol" placeholder="Correo electrónico" required>
+            <input type="number" id="cantidadProducto" placeholder="Cantidad" min="1" required>
+            <textarea id="notasProducto" placeholder="Notas adicionales (opcional)" rows="3"></textarea>
+            <button type="submit" class="btn-solicitar">Solicitar Cotización</button>
+          </form>
+          <div id="mensajeProducto" class="mensaje-exito" style="display:none;">
+            ✓ Solicitud enviada. Te contactaremos pronto.
           </div>
         </div>
       </div>

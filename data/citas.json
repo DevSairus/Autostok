@@ -12,6 +12,19 @@
             "notas": "",
             "estado": "completada",
             "fecha_solicitud": "2025-11-19 09:48:43"
+        },
+        {
+            "id": 1764610592,
+            "servicio_id": "1",
+            "servicio_nombre": "Cambio de Aceite Premium",
+            "nombre": "Yenny Sastre",
+            "telefono": "311258653",
+            "correo": "agiorer75@hso.com",
+            "fecha": "2025-12-02",
+            "hora": "15:00",
+            "notas": "",
+            "estado": "completada",
+            "fecha_solicitud": "2025-12-01 18:36:32"
         }
     ]
 }
