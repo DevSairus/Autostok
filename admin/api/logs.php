@@ -1,7 +1,10 @@
 <?php
 // Función para guardar logs
 function guardarLog($tipo, $accion, $datos, $usuario) {
-    $logFile = __DIR__ . '/../../data/logs.json';
+    // Detectar la ruta correcta según desde dónde se llame
+    $logFile = file_exists(__DIR__ . '/../../data/logs.json') 
+        ? __DIR__ . '/../../data/logs.json' 
+        : (file_exists('../../data/logs.json') ? '../../data/logs.json' : '../data/logs.json');
     
     // Crear directorio si no existe
     if (!file_exists(__DIR__ . '/../../data')) {

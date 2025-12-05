@@ -360,8 +360,14 @@ async function cambiarEstadoCita(id, nuevoEstado) {
     
     const result = await response.json();
     if (result.success) {
-      const fila = event.target.closest('tr');
-      fila.dataset.estado = nuevoEstado;
+      // Actualizar visualmente sin recargar
+      const selectElement = document.querySelector(`select[onchange*="cambiarEstadoCita(${id}"]`);
+      if (selectElement) {
+        const fila = selectElement.closest('tr');
+        if (fila) {
+          fila.dataset.estado = nuevoEstado;
+        }
+      }
       alert('Estado actualizado exitosamente');
     } else {
       alert('Error al actualizar el estado: ' + (result.message || ''));
@@ -370,6 +376,7 @@ async function cambiarEstadoCita(id, nuevoEstado) {
   } catch (error) {
     console.error('Error:', error);
     alert('Error al actualizar el estado');
+    location.reload();
   }
 }
 
@@ -382,6 +389,7 @@ Teléfono: ${cita.telefono}
 Correo: ${cita.correo}
 
 Servicio: ${cita.servicio_nombre}
+Sucursal: ${cita.sucursal ? (cita.sucursal === 'sucursal1' ? 'Norte' : 'Sur') : 'N/A'}
 Fecha: ${new Date(cita.fecha).toLocaleDateString()}
 Hora: ${cita.hora}
 
@@ -440,8 +448,14 @@ async function cambiarEstadoSolicitud(id, nuevoEstado) {
     
     const result = await response.json();
     if (result.success) {
-      const fila = event.target.closest('tr');
-      fila.dataset.estado = nuevoEstado;
+      // Actualizar visualmente sin recargar
+      const selectElement = document.querySelector(`select[onchange*="cambiarEstadoSolicitud(${id}"]`);
+      if (selectElement) {
+        const fila = selectElement.closest('tr');
+        if (fila) {
+          fila.dataset.estado = nuevoEstado;
+        }
+      }
       alert('Estado actualizado exitosamente');
     } else {
       alert('Error al actualizar el estado: ' + (result.message || ''));
@@ -450,6 +464,7 @@ async function cambiarEstadoSolicitud(id, nuevoEstado) {
   } catch (error) {
     console.error('Error:', error);
     alert('Error al actualizar el estado');
+    location.reload();
   }
 }
 

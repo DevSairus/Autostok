@@ -1,0 +1,16 @@
+{
+    "solicitudes": [
+        {
+            "id": 1764903045,
+            "producto_id": "2",
+            "producto_nombre": "Filtro de Aceite Universal",
+            "nombre": "Sergio",
+            "telefono": "35053517802",
+            "correo": "aguirre@gmail.com",
+            "cantidad": 1,
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2025-12-05 03:50:45"
+        }
+    ]
+}

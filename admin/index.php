@@ -361,6 +361,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
                 <th>ID</th>
                 <th>Cliente</th>
                 <th>Servicio</th>
+                <th>Sucursal</th>
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Teléfono</th>
@@ -370,10 +371,21 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
             </thead>
             <tbody id="citasTable">
               <?php foreach ($citas as $cita): ?>
+                <?php 
+                  // Obtener nombre de sucursal
+                  $configData = file_exists('../data/configuracion.json') 
+                      ? json_decode(file_get_contents('../data/configuracion.json'), true) 
+                      : [];
+                  $sucursalNombre = 'N/A';
+                  if (!empty($cita['sucursal']) && isset($configData['sucursales'][$cita['sucursal']])) {
+                      $sucursalNombre = $configData['sucursales'][$cita['sucursal']]['nombre'] ?? 'N/A';
+                  }
+                ?>
                 <tr data-estado="<?php echo $cita['estado'] ?? 'pendiente'; ?>">
                   <td><?php echo $cita['id']; ?></td>
                   <td><?php echo htmlspecialchars($cita['nombre']); ?></td>
                   <td><?php echo htmlspecialchars($cita['servicio_nombre']); ?></td>
+                  <td><?php echo htmlspecialchars($sucursalNombre); ?></td>
                   <td><?php echo date('d/m/Y', strtotime($cita['fecha'])); ?></td>
                   <td><?php echo htmlspecialchars($cita['hora']); ?></td>
                   <td><?php echo htmlspecialchars($cita['telefono']); ?></td>

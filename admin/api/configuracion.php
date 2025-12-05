@@ -13,12 +13,19 @@ if (!file_exists('../../data')) {
 // Cargar datos
 $data = file_exists($dataFile) 
     ? json_decode(file_get_contents($dataFile), true) 
-    : ['general' => [], 'pagos' => [], 'horarios' => []];
+    : ['general' => [], 'pagos' => [], 'horarios' => [], 'sucursales' => [], 'nosotros' => []];
 
 // Asegurar que existan las claves principales
 if (!isset($data['general'])) $data['general'] = [];
 if (!isset($data['pagos'])) $data['pagos'] = [];
 if (!isset($data['horarios'])) $data['horarios'] = [];
+if (!isset($data['nosotros'])) $data['nosotros'] = [];
+if (!isset($data['sucursales'])) {
+    $data['sucursales'] = [
+        'sucursal1' => [],
+        'sucursal2' => []
+    ];
+}
 
 switch ($method) {
     case 'GET':
@@ -42,16 +49,29 @@ switch ($method) {
         $tipo = $input['tipo'];
         $datos = $input['datos'] ?? [];
         
-        if (in_array($tipo, ['general', 'pagos', 'horarios'])) {
-            $data[$tipo] = $datos;
-            
-            if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-                echo json_encode(['success' => true, 'message' => 'Configuración guardada']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Error al guardar']);
+        // Tipos válidos
+        $tiposValidos = ['general', 'pagos', 'horarios', 'nosotros', 'sucursal1', 'sucursal2'];
+        
+        if (!in_array($tipo, $tiposValidos)) {
+            echo json_encode(['success' => false, 'message' => 'Tipo no válido: ' . $tipo]);
+            exit;
+        }
+        
+        // Manejar sucursales dentro del objeto sucursales
+        if ($tipo === 'sucursal1' || $tipo === 'sucursal2') {
+            if (!isset($data['sucursales'])) {
+                $data['sucursales'] = [];
             }
+            $data['sucursales'][$tipo] = $datos;
         } else {
-            echo json_encode(['success' => false, 'message' => 'Tipo no válido']);
+            // Tipos normales
+            $data[$tipo] = $datos;
+        }
+        
+        if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+            echo json_encode(['success' => true, 'message' => 'Configuración guardada correctamente']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Error al guardar en el archivo']);
         }
         break;
         

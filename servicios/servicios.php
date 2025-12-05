@@ -102,6 +102,83 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
       box-shadow: 0 0 15px rgba(255,215,0,0.2);
     }
     
+    /* ESTILOS PARA FILTROS DE PRODUCTOS */
+    .filtros-container {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 20px;
+    }
+    
+    .filtros {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 15px;
+      background: rgba(255,215,0,0.05);
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,215,0,0.2);
+      align-items: center;
+    }
+    
+    .filtros input {
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .filtros input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+    
+    .filtros input:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.2);
+      background: rgba(0,0,0,0.8);
+    }
+    
+    .filtros select {
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filtros select:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.2);
+      background: rgba(0,0,0,0.8);
+    }
+    
+    .btn-limpiar {
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .btn-limpiar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+    }
+    
     .productos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -139,6 +216,114 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
       padding: 60px 20px;
       color: rgba(255,255,255,0.6);
       font-size: 1.2rem;
+    }
+    
+    /* ESTILOS MEJORADOS PARA MODAL DE PRODUCTOS */
+    .contacto-section {
+      background: rgba(255,215,0,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+    
+    .contacto-section h3 {
+      color: #FFD700;
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+    
+    .contacto-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .contacto-section input,
+    .contacto-section select,
+    .contacto-section textarea {
+      padding: 14px 18px;
+      border: 2px solid rgba(255,215,0,0.3);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      width: 100%;
+    }
+    
+    .contacto-section input:focus,
+    .contacto-section select:focus,
+    .contacto-section textarea:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.2);
+      background: rgba(0,0,0,0.8);
+    }
+    
+    .contacto-section input::placeholder,
+    .contacto-section textarea::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+    
+    .contacto-section input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    
+    .contacto-section input[type="number"]::-webkit-outer-spin-button,
+    .contacto-section input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    .btn-solicitar {
+      padding: 16px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    
+    .btn-solicitar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+    }
+    
+    .mensaje-exito {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,255,0,0.1);
+      border: 2px solid rgba(0,255,0,0.3);
+      border-radius: 10px;
+      color: #0f0;
+      text-align: center;
+      font-weight: bold;
+      animation: slideDown 0.5s ease;
+      line-height: 1.6;
+    }
+    
+    .mensaje-exito small {
+      display: block;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      opacity: 0.8;
+      font-weight: normal;
+    }
+    
+    @media (max-width: 768px) {
+      .filtros {
+        grid-template-columns: 1fr;
+      }
+      
+      .productos-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
   <link rel=icon href="../favicon.ico" type="image/x-icon">
@@ -526,18 +711,11 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
         if (result.success) {
           document.getElementById('formProducto').reset();
           document.getElementById('mensajeProducto').style.display = 'block';
-          
-          // Enviar mensaje por WhatsApp al almacén
-          const numeroAlmacen = configSitio.general?.telefonoWhatsappAlmacen || '573505351782';
-          const mensaje = `Nueva solicitud de producto:\n\nProducto: ${productoActual.nombre}\nCantidad: ${datos.cantidad}\n\nCliente: ${datos.nombre}\nTeléfono: ${datos.telefono}\nCorreo: ${datos.correo}\nNotas: ${datos.notas}`;
-          const numeroLimpio = numeroAlmacen.replace(/[^0-9]/g, '');
-          
-          setTimeout(() => {
-            window.open(`https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`, '_blank');
-          }, 1000);
+          document.getElementById('mensajeProducto').innerHTML = '✓ Solicitud enviada. Te contactaremos pronto.<br><small>Tu solicitud ha sido recibida y enviada al almacén.</small>';
           
           setTimeout(() => {
             document.getElementById('mensajeProducto').style.display = 'none';
+            document.getElementById('modalProducto').style.display = 'none';
           }, 5000);
         } else {
           alert('Error al enviar solicitud: ' + (result.message || 'Intenta nuevamente'));
@@ -643,18 +821,11 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
         if (result.success) {
           document.getElementById('formCita').reset();
           document.getElementById('mensajeCita').style.display = 'block';
-          
-          // Obtener WhatsApp de la sucursal seleccionada
-          const numeroSucursal = configSitio.sucursales?.[sucursalSeleccionada]?.whatsapp || configSitio.general?.telefonoWhatsappServicios || '573505351781';
-          const mensaje = `Nueva cita solicitada:\n\nServicio: ${servicioActual.nombre}\nFecha: ${datos.fecha}\nHora: ${datos.hora}\n\nCliente: ${datos.nombre}\nTeléfono: ${datos.telefono}\nCorreo: ${datos.correo}\nNotas: ${datos.notas}`;
-          const numeroLimpio = numeroSucursal.replace(/[^0-9]/g, '');
-          
-          setTimeout(() => {
-            window.open(`https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`, '_blank');
-          }, 1000);
+          document.getElementById('mensajeCita').innerHTML = '✓ Cita solicitada con éxito. Recibirás confirmación por correo.<br><small>La cita ha sido registrada y notificada a la sucursal.</small>';
           
           setTimeout(() => {
             document.getElementById('mensajeCita').style.display = 'none';
+            document.getElementById('modalServicio').style.display = 'none';
           }, 5000);
         } else {
           alert('Error al solicitar la cita: ' + (result.message || 'Intenta nuevamente'));
@@ -664,6 +835,51 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
         alert('Error al enviar la solicitud');
       }
     };
+    
+    // Cargar horarios ocupados cuando se selecciona fecha y sucursal
+    async function cargarHorariosDisponibles() {
+      const fecha = document.getElementById('fechaCita').value;
+      const sucursal = document.getElementById('sucursalServicio').value;
+      
+      if (!fecha || !sucursal) return;
+      
+      try {
+        // Cargar todas las citas
+        const response = await fetch('../data/citas.json');
+        const data = await response.json();
+        const citas = data.citas || [];
+        
+        // Filtrar citas confirmadas de esa fecha y sucursal
+        const citasOcupadas = citas.filter(c => 
+          c.fecha === fecha && 
+          c.sucursal === sucursal && 
+          (c.estado === 'confirmada' || c.estado === 'pendiente')
+        );
+        
+        // Obtener horas ocupadas
+        const horasOcupadas = citasOcupadas.map(c => c.hora);
+        
+        // Actualizar el select de horas
+        const selectHora = document.getElementById('horaCita');
+        const opciones = selectHora.querySelectorAll('option');
+        
+        opciones.forEach(opcion => {
+          if (opcion.value && horasOcupadas.includes(opcion.value)) {
+            opcion.disabled = true;
+            opcion.textContent = opcion.textContent.split(' -')[0] + ' - No disponible';
+          } else if (opcion.value) {
+            opcion.disabled = false;
+            opcion.textContent = opcion.textContent.split(' -')[0];
+          }
+        });
+      } catch (error) {
+        console.error('Error cargando horarios:', error);
+      }
+    }
+    
+    // Agregar listeners para actualizar horarios
+    document.getElementById('fechaCita')?.addEventListener('change', cargarHorariosDisponibles);
+    document.getElementById('sucursalServicio')?.addEventListener('change', cargarHorariosDisponibles);
 
     // Cerrar modales al hacer clic fuera
     window.onclick = (e) => {

@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 
 // Incluir sistema de logs
-require_once 'logs.php';
+require_once __DIR__ . '/logs.php';
 
 // Verificar autenticación para métodos protegidos
 $method = $_SERVER['REQUEST_METHOD'];

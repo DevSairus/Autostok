@@ -10,24 +10,24 @@
     },
     "sucursales": {
         "sucursal1": {
-            "nombre": "Autostok Norte",
+            "nombre": "Autostok",
             "direccion": "Calle 123 #45-67, Bogotá",
             "telefono": "+573501234567",
             "whatsapp": "+573501234567",
             "correo": "norte@autostok.com",
             "horarioSemana": "8:00 AM - 6:00 PM",
             "horarioSabado": "9:00 AM - 2:00 PM",
-            "mapa": ""
+            "mapa": "https:\/\/maps.app.goo.gl\/WEEYosd7ss7zjYoF6"
         },
         "sucursal2": {
-            "nombre": "Autostok Sur",
+            "nombre": "Sur",
             "direccion": "Carrera 78 #90-12, Bogotá",
             "telefono": "+573509876543",
             "whatsapp": "+573509876543",
             "correo": "sur@autostok.com",
             "horarioSemana": "8:00 AM - 6:00 PM",
             "horarioSabado": "9:00 AM - 2:00 PM",
-            "mapa": ""
+            "mapa": "https:\/\/maps.app.goo.gl\/EhWWz6Xh25B63djg7"
         }
     },
     "pagos": {
