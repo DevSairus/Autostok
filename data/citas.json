@@ -53,6 +53,20 @@
             "sucursal": "sucursal1",
             "estado": "confirmada",
             "fecha_solicitud": "2025-12-04 20:37:38"
+        },
+        {
+            "id": 1764961228,
+            "servicio_id": "1",
+            "servicio_nombre": "Cambio de Aceite Premium",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2025-12-06",
+            "hora": "14:00",
+            "notas": "",
+            "sucursal": "sucursal1",
+            "estado": "confirmada",
+            "fecha_solicitud": "2025-12-05 20:00:28"
         }
     ]
 }

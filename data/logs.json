@@ -170,6 +170,37 @@
             "usuario": "admin",
             "fecha": "2025-12-05 04:07:05",
             "ip": "::1"
+        },
+        {
+            "id": "1764943778_2949",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1764610306,
+                "cliente": "Yenny Sastre",
+                "tipo": "vehiculo",
+                "referencia": "Toyota Corolla 2023",
+                "estado_anterior": "contactada",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-05 15:09:38",
+            "ip": "::1"
+        },
+        {
+            "id": "1764961250_8407",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1764961228,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-05 20:00:50",
+            "ip": "::1"
         }
     ]
 }
