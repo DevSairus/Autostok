@@ -33,6 +33,11 @@ $solicitudesData = file_exists('../data/solicitudes.json')
     : ['solicitudes' => []];
 $solicitudes = $solicitudesData['solicitudes'] ?? [];
 
+$usuariosData = file_exists('../data/usuarios.json') 
+    ? json_decode(file_get_contents('../data/usuarios.json'), true) 
+    : ['usuarios' => []];
+$usuarios = $usuariosData['usuarios'] ?? [];
+
 // Estadísticas
 $totalVehiculos = count($vehiculos);
 $totalServicios = count($servicios);
@@ -94,6 +99,12 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <span class="icon">📋</span>
           <span>Logs</span>
         </a>
+        <?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
+        <a href="#usuarios" class="nav-item" onclick="mostrarSeccion('usuarios')">
+          <span class="icon">👥</span>
+          <span>Usuarios</span>
+        </a>
+        <?php endif; ?>
         <a href="#sucursales" class="nav-item" onclick="mostrarSeccion('sucursales')">
           <span class="icon">📍</span>
           <span>Sucursales</span>
@@ -475,6 +486,8 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
               <option value="vehiculo">Vehículos</option>
               <option value="servicio">Servicios</option>
               <option value="producto">Productos</option>
+              <option value="usuario">Usuarios</option>
+              <option value="sistema">Sistema</option>
             </select>
             <button class="btn-secondary" onclick="cargarLogs()">🔄 Actualizar</button>
           </div>
@@ -500,6 +513,38 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           </table>
         </div>
       </section>
+
+      <!-- Usuarios Section (Solo Super Admin) -->
+      <?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
+      <section id="usuarios" class="section">
+        <div class="section-header">
+          <h2>Gestión de Usuarios</h2>
+          <button class="btn-primary" onclick="abrirFormularioUsuario()">+ Nuevo Usuario</button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Último Acceso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="usuariosTable">
+              <tr>
+                <td colspan="8" class="loading">Cargando usuarios...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <?php endif; ?>
 
       <!-- Sucursales Section -->
       <section id="sucursales" class="section">
@@ -882,6 +927,62 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       </form>
     </div>
   </div>
+
+  <!-- Modal Formulario Usuario -->
+  <?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
+  <div id="modalUsuario" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="tituloModalUsuario">Nuevo Usuario</h3>
+        <button class="btn-close" onclick="cerrarModalUsuario()">✕</button>
+      </div>
+      <form id="formUsuario">
+        <input type="hidden" id="usuarioId" name="id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nombre de Usuario *</label>
+            <input type="text" id="username" name="username" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Contraseña *</label>
+            <input type="password" id="passwordUsuario" name="password" class="form-control">
+            <p class="helper-text" id="passwordHelper">Mínimo 6 caracteres</p>
+          </div>
+          <div class="form-group">
+            <label>Nombre Completo *</label>
+            <input type="text" id="nombreUsuario" name="nombre" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="emailUsuario" name="email" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Rol *</label>
+            <select id="rolUsuario" name="rol" required class="form-control">
+              <option value="">Seleccionar rol</option>
+              <option value="super_admin">Super Administrador</option>
+              <option value="administrador">Administrador</option>
+              <option value="ventas">Vendedor</option>
+              <option value="taller">Taller</option>
+              <option value="visualizador">Visualizador</option>
+            </select>
+            <p class="helper-text" id="rolDescripcion"></p>
+          </div>
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 10px;">
+              <input type="checkbox" id="activoUsuario" name="activo" checked style="width: auto;">
+              Usuario Activo
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="cerrarModalUsuario()">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <?php endif; ?>
 
   <script src="js/admin.js"></script>
 </body>

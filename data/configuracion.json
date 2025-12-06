@@ -10,7 +10,7 @@
     },
     "sucursales": {
         "sucursal1": {
-            "nombre": "Autostok",
+            "nombre": "Morato",
             "direccion": "Calle 123 #45-67, Bogotá",
             "telefono": "+573501234567",
             "whatsapp": "+573501234567",
@@ -20,7 +20,7 @@
             "mapa": "https:\/\/maps.app.goo.gl\/WEEYosd7ss7zjYoF6"
         },
         "sucursal2": {
-            "nombre": "Sur",
+            "nombre": "Bogotá",
             "direccion": "Carrera 78 #90-12, Bogotá",
             "telefono": "+573509876543",
             "whatsapp": "+573509876543",

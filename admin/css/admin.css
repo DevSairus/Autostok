@@ -678,4 +678,121 @@ body {
   .table-container {
     overflow-x: scroll;
   }
+
+  /* ========================================
+   ESTILOS PARA GESTIÓN DE USUARIOS
+   ======================================== */
+
+/* Badges de roles */
+.rol-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rol-badge.super_admin {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+}
+
+.rol-badge.administrador {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.rol-badge.ventas {
+  background: linear-gradient(135deg, #56ab2f, #a8e063);
+  color: white;
+}
+
+.rol-badge.taller {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+}
+
+.rol-badge.visualizador {
+  background: linear-gradient(135deg, #868f96, #596164);
+  color: white;
+}
+
+/* Badges de estado */
+.status-badge.activo {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.inactivo {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid #f44336;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Helper text */
+.helper-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* Modal de usuarios */
+#modalUsuario .modal-dialog {
+  max-width: 600px;
+}
+
+#modalUsuario input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Botones deshabilitados */
+.btn-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #666;
+}
+
+.btn-delete:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Tabla de usuarios responsive */
+@media (max-width: 768px) {
+  .data-table td:nth-child(5),
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(7),
+  .data-table th:nth-child(7) {
+    display: none;
+  }
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* No data state */
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
 }

@@ -201,6 +201,100 @@
             "usuario": "admin",
             "fecha": "2025-12-05 20:00:50",
             "ip": "::1"
+        },
+        {
+            "id": "1764995793_6044",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 05:36:33",
+            "ip": "::1"
+        },
+        {
+            "id": "1764996948_9514",
+            "tipo": "usuario",
+            "accion": "actualizar",
+            "datos": {
+                "usuario_id": "2",
+                "username": "prueba",
+                "cambios": [
+                    "id",
+                    "username",
+                    "password",
+                    "nombre",
+                    "email",
+                    "rol",
+                    "activo"
+                ]
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 05:55:48",
+            "ip": "::1"
+        },
+        {
+            "id": "1764996955_9219",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "prueba",
+                "rol": "administrador"
+            },
+            "usuario": "prueba",
+            "fecha": "2025-12-06 05:55:55",
+            "ip": "::1"
+        },
+        {
+            "id": "1764996976_9295",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 05:56:16",
+            "ip": "::1"
+        },
+        {
+            "id": "1764997017_1305",
+            "tipo": "usuario",
+            "accion": "crear",
+            "datos": {
+                "usuario_id": 1764997017,
+                "username": "Vendedor",
+                "rol": "ventas"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 05:56:57",
+            "ip": "::1"
+        },
+        {
+            "id": "1764997026_6010",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "Vendedor",
+                "rol": "ventas"
+            },
+            "usuario": "Vendedor",
+            "fecha": "2025-12-06 05:57:06",
+            "ip": "::1"
+        },
+        {
+            "id": "1764997049_2384",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 05:57:29",
+            "ip": "::1"
         }
     ]
 }

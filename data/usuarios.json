@@ -1,0 +1,88 @@
+{
+    "usuarios": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\/.og\/at2.uheWG\/igi",
+            "nombre": "Administrador Principal",
+            "email": "admin@autostok.com",
+            "rol": "super_admin",
+            "activo": true,
+            "fecha_creacion": "2024-01-01 00:00:00",
+            "ultimo_acceso": null
+        },
+        {
+            "id": 2,
+            "username": "prueba",
+            "password": "$2y$10$f5fYUAtsie8vU3pLEjR9zOx6SCY5VPfwHnjMXot6Ivg8ZEY.Ko5wC",
+            "nombre": "Usuario de Prueba",
+            "email": "prueba@autostok.com",
+            "rol": "administrador",
+            "activo": true,
+            "fecha_creacion": "2024-01-01 00:00:00",
+            "ultimo_acceso": null
+        },
+        {
+            "id": 1764997017,
+            "username": "Vendedor",
+            "password": "$2y$10$XmGXf\/tynGUPqPdvVbwcaeeVwye1nRq45iS31bjr1IoX6elb85AyS",
+            "nombre": "Usuario Vendedor",
+            "email": "vendedor@gmail.com",
+            "rol": "ventas",
+            "activo": true,
+            "fecha_creacion": "2025-12-06 05:56:57",
+            "ultimo_acceso": null
+        }
+    ],
+    "roles": {
+        "super_admin": {
+            "nombre": "Super Administrador",
+            "permisos": [
+                "*"
+            ]
+        },
+        "administrador": {
+            "nombre": "Administrador",
+            "permisos": [
+                "vehiculos.*",
+                "servicios.*",
+                "productos.*",
+                "citas.*",
+                "solicitudes.*",
+                "configuracion.*",
+                "logs.ver"
+            ]
+        },
+        "ventas": {
+            "nombre": "Vendedor",
+            "permisos": [
+                "vehiculos.ver",
+                "vehiculos.crear",
+                "vehiculos.editar",
+                "solicitudes.ver",
+                "solicitudes.editar",
+                "citas.ver"
+            ]
+        },
+        "taller": {
+            "nombre": "Taller",
+            "permisos": [
+                "servicios.ver",
+                "servicios.editar",
+                "productos.*",
+                "citas.*"
+            ]
+        },
+        "visualizador": {
+            "nombre": "Visualizador",
+            "permisos": [
+                "vehiculos.ver",
+                "servicios.ver",
+                "productos.ver",
+                "citas.ver",
+                "solicitudes.ver",
+                "logs.ver"
+            ]
+        }
+    }
+}

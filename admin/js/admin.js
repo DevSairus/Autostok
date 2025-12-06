@@ -14,6 +14,7 @@ function mostrarSeccion(seccionId) {
     'citas': 'Gestión de Citas',
     'solicitudes': 'Gestión de Solicitudes',
     'logs': 'Registro de Actividad',
+    'usuarios': 'Gestión de Usuarios',
     'sucursales': 'Gestión de Sucursales',
     'configuracion': 'Configuración'
   };
@@ -22,6 +23,11 @@ function mostrarSeccion(seccionId) {
   // Cargar logs si es esa sección
   if (seccionId === 'logs') {
     setTimeout(cargarLogs, 100);
+  }
+  
+  // Cargar usuarios si es esa sección
+  if (seccionId === 'usuarios') {
+    setTimeout(cargarUsuarios, 100);
   }
 }
 
@@ -727,3 +733,175 @@ window.onclick = (e) => {
     e.target.classList.remove('active');
   }
 };
+
+// ===== USUARIOS =====
+let rolesData = {};
+
+async function cargarUsuarios() {
+  const tbody = document.getElementById('usuariosTable');
+  
+  try {
+    const response = await fetch('api/usuarios.php');
+    const result = await response.json();
+    
+    if (result.success && result.usuarios.length > 0) {
+      rolesData = result.roles || {};
+      
+      tbody.innerHTML = result.usuarios.map(usuario => {
+        const rolNombre = rolesData[usuario.rol]?.nombre || usuario.rol;
+        const estadoBadge = usuario.activo 
+          ? '<span class="status-badge confirmada">Activo</span>' 
+          : '<span class="status-badge cancelada">Inactivo</span>';
+        const ultimoAcceso = usuario.ultimo_acceso 
+          ? new Date(usuario.ultimo_acceso).toLocaleString('es-CO')
+          : 'Nunca';
+        
+        const puedeEditar = usuario.rol !== 'super_admin' || usuario.username === 'admin';
+        
+        return `
+          <tr>
+            <td>${usuario.id}</td>
+            <td><strong>${usuario.username}</strong></td>
+            <td>${usuario.nombre}</td>
+            <td>${usuario.email}</td>
+            <td><span class="tipo-badge">${rolNombre}</span></td>
+            <td>${estadoBadge}</td>
+            <td>${ultimoAcceso}</td>
+            <td>
+              ${puedeEditar ? `<button class="btn-edit" onclick='editarUsuario(${JSON.stringify(usuario)})'>✏️</button>` : ''}
+              ${usuario.rol !== 'super_admin' ? `<button class="btn-delete" onclick="eliminarUsuario(${usuario.id})">🗑️</button>` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="8" class="no-data">No hay usuarios disponibles</td></tr>';
+    }
+  } catch (error) {
+    console.error('Error cargando usuarios:', error);
+    tbody.innerHTML = '<tr><td colspan="8" class="error">Error al cargar usuarios</td></tr>';
+  }
+}
+
+function abrirFormularioUsuario() {
+  document.getElementById('tituloModalUsuario').textContent = 'Nuevo Usuario';
+  document.getElementById('formUsuario').reset();
+  document.getElementById('usuarioId').value = '';
+  document.getElementById('passwordUsuario').required = true;
+  document.getElementById('passwordHelper').textContent = 'Mínimo 6 caracteres';
+  document.getElementById('activoUsuario').checked = true;
+  document.getElementById('modalUsuario').classList.add('active');
+}
+
+function cerrarModalUsuario() {
+  document.getElementById('modalUsuario').classList.remove('active');
+}
+
+function editarUsuario(usuario) {
+  document.getElementById('tituloModalUsuario').textContent = 'Editar Usuario';
+  document.getElementById('usuarioId').value = usuario.id;
+  document.getElementById('username').value = usuario.username;
+  document.getElementById('username').disabled = true; // No permitir cambiar username
+  document.getElementById('passwordUsuario').value = '';
+  document.getElementById('passwordUsuario').required = false;
+  document.getElementById('passwordHelper').textContent = 'Dejar en blanco para mantener la contraseña actual';
+  document.getElementById('nombreUsuario').value = usuario.nombre;
+  document.getElementById('emailUsuario').value = usuario.email;
+  document.getElementById('rolUsuario').value = usuario.rol;
+  document.getElementById('activoUsuario').checked = usuario.activo;
+  
+  // Deshabilitar cambio de rol para super_admin
+  if (usuario.rol === 'super_admin') {
+    document.getElementById('rolUsuario').disabled = true;
+  } else {
+    document.getElementById('rolUsuario').disabled = false;
+  }
+  
+  document.getElementById('modalUsuario').classList.add('active');
+}
+
+async function eliminarUsuario(id) {
+  if (!confirm('¿Estás seguro de eliminar este usuario?')) return;
+  
+  try {
+    const response = await fetch('api/usuarios.php', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert('Usuario eliminado exitosamente');
+      cargarUsuarios();
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo eliminar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al eliminar el usuario');
+  }
+}
+
+document.getElementById('formUsuario')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  const id = formData.get('id');
+  const password = formData.get('password');
+  
+  // Validar contraseña para nuevo usuario
+  if (!id && password.length < 6) {
+    alert('La contraseña debe tener al menos 6 caracteres');
+    return;
+  }
+  
+  const datos = {
+    id: id || undefined,
+    username: formData.get('username'),
+    password: password || undefined,
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    rol: formData.get('rol'),
+    activo: document.getElementById('activoUsuario').checked
+  };
+  
+  // Remover undefined
+  Object.keys(datos).forEach(key => datos[key] === undefined && delete datos[key]);
+  
+  try {
+    const method = id ? 'PUT' : 'POST';
+    const response = await fetch('api/usuarios.php', {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      alert(id ? 'Usuario actualizado' : 'Usuario creado');
+      cerrarModalUsuario();
+      cargarUsuarios();
+      document.getElementById('username').disabled = false;
+    } else {
+      alert('Error: ' + (result.message || 'No se pudo guardar'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al guardar el usuario');
+  }
+});
+
+// Mostrar descripción del rol seleccionado
+document.getElementById('rolUsuario')?.addEventListener('change', (e) => {
+  const descripciones = {
+    'super_admin': 'Acceso total al sistema, incluyendo gestión de usuarios',
+    'administrador': 'Acceso completo excepto gestión de usuarios',
+    'ventas': 'Acceso a vehículos, solicitudes y citas',
+    'taller': 'Acceso a servicios, productos y citas',
+    'visualizador': 'Solo lectura en todas las secciones'
+  };
+  
+  const descripcion = descripciones[e.target.value] || '';
+  document.getElementById('rolDescripcion').textContent = descripcion;
+});
