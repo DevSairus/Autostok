@@ -50,7 +50,7 @@ switch ($method) {
         $datos = $input['datos'] ?? [];
         
         // Tipos válidos
-        $tiposValidos = ['general', 'pagos', 'horarios', 'nosotros', 'sucursal1', 'sucursal2'];
+        $tiposValidos = ['general', 'sucursal1', 'sucursal2'];
         
         if (!in_array($tipo, $tiposValidos)) {
             echo json_encode(['success' => false, 'message' => 'Tipo no válido: ' . $tipo]);

@@ -295,6 +295,702 @@
             "usuario": "admin",
             "fecha": "2025-12-06 05:57:29",
             "ip": "::1"
+        },
+        {
+            "id": "1765026620_5371",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-06 14:10:20",
+            "ip": "::1"
+        },
+        {
+            "id": "1765144990_7541",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765144971,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:03:10",
+            "ip": "::1"
+        },
+        {
+            "id": "1765144992_3299",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765144971,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:03:12",
+            "ip": "::1"
+        },
+        {
+            "id": "1765144996_5227",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765023323,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "cancelada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:03:16",
+            "ip": "::1"
+        },
+        {
+            "id": "1765144998_4032",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765023323,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "cancelada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:03:18",
+            "ip": "::1"
+        },
+        {
+            "id": "1765145093_3993",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765145055,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:04:53",
+            "ip": "::1"
+        },
+        {
+            "id": "1765145096_3195",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765145055,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@hotmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:04:56",
+            "ip": "::1"
+        },
+        {
+            "id": "1765145354_3287",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765145310,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Lavado Completo Detallado",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:09:14",
+            "ip": "::1"
+        },
+        {
+            "id": "1765145356_5265",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765145310,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:09:16",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146228_5544",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1765146222,
+                "cliente": "Cliente de Prueba",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "test@example.com"
+                    },
+                    "sucursal": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@hotmail.com"
+                    },
+                    "callcenter": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "callcenter@autostok.com"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:23:48",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146329_4374",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1763542123,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "sucursal": "N\/A",
+                "fecha": "2025-11-19"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:29",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146333_5593",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1764610592,
+                "cliente": "Yenny Sastre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "N\/A",
+                "fecha": "2025-12-02"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:33",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146336_9202",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1764877054,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-05"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:36",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146339_5228",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1764877058,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-05"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:39",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146344_8910",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1764961228,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-06"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:44",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146347_4905",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765023323,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-06"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:47",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146351_4331",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765144971,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Cambio de Aceite Premium",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-09"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:51",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146354_2423",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765145055,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-09"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146359_8931",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765146288,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-07 23:25:59",
+            "ip": "::1"
+        },
+        {
+            "id": "1765146361_7982",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765146288,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-07 23:26:01",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232615_8219",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1765232615,
+                "servicio": "Alineación y Balanceo",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2025-12-23",
+                "sucursal": "sucursal1"
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:23:35",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232620_3625",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1765232615,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@gmail.com"
+                    },
+                    "sucursal": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@hotmail.com"
+                    },
+                    "callcenter": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "callcenter@autostok.com"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:23:40",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232675_1779",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1765232675,
+                "servicio": "Lavado Completo Detallado",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2025-12-10",
+                "sucursal": "sucursal2"
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:24:35",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232681_2913",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1765232675,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal2",
+                "resultados": {
+                    "cliente": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@gmail.com"
+                    },
+                    "sucursal": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@gmail.com"
+                    },
+                    "callcenter": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "callcenter@autostok.com"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:24:41",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232758_4001",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1765232758,
+                "tipo": "producto",
+                "producto": "Aceite Motor Sintético 5W-30",
+                "cliente": "Sergio",
+                "cantidad": 1
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:25:58",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232764_9801",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1765232758,
+                "cliente": "Sergio",
+                "tipo": "producto",
+                "destino": "almacen",
+                "resultados": {
+                    "cliente": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre@gmail.com"
+                    },
+                    "almacen": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "almacen@autostok.com"
+                    },
+                    "callcenter": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "callcenter@autostok.com"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:26:04",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232808_7163",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1765232808,
+                "tipo": "vehiculo",
+                "vehiculo": "Toyota Corolla 2023",
+                "cliente": "Sergio Aguirre"
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:26:48",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232813_4570",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1765232808,
+                "cliente": "Sergio Aguirre",
+                "tipo": "vehiculo",
+                "destino": "ventas",
+                "resultados": {
+                    "cliente": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "aguirre984@gmail.com"
+                    },
+                    "ventas": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "contacto@autostok.com"
+                    },
+                    "callcenter": {
+                        "success": true,
+                        "message": "Email enviado correctamente",
+                        "destinatario": "callcenter@autostok.com"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:26:53",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232863_3135",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "datos": {
+                "solicitud_id": 1763541907,
+                "cliente": "Sergio Aguirre",
+                "tipo": "vehiculo"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:27:43",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232868_4267",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "datos": {
+                "solicitud_id": 1764610306,
+                "cliente": "Yenny Sastre",
+                "tipo": "vehiculo"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:27:48",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232871_2214",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "datos": {
+                "solicitud_id": 1765232808,
+                "cliente": "Sergio Aguirre",
+                "tipo": "vehiculo"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:27:51",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232874_7851",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1765232758,
+                "cliente": "Sergio",
+                "tipo": "producto",
+                "referencia": "Aceite Motor Sintético 5W-30",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:27:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232876_5264",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1765232758,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:27:56",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232879_5508",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "datos": {
+                "solicitud_id": 1765232758,
+                "cliente": "Sergio",
+                "tipo": "producto"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:27:59",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232881_5995",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765145310,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Lavado Completo Detallado",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-09"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:28:01",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232895_9333",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765146288,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-09"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:28:15",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232898_4033",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765232615,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Alineación y Balanceo",
+                "sucursal": "sucursal1",
+                "fecha": "2025-12-23"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:28:18",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232901_6446",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1765232675,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Lavado Completo Detallado",
+                "sucursal": "sucursal2",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "cancelada"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:28:21",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232903_1641",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1765232675,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "cancelada",
+                "resultado": {
+                    "success": true,
+                    "message": "Email enviado correctamente",
+                    "destinatario": "aguirre984@gmail.com"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2025-12-08 23:28:23",
+            "ip": "::1"
+        },
+        {
+            "id": "1765232917_1330",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1765232675,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Lavado Completo Detallado",
+                "sucursal": "sucursal2",
+                "fecha": "2025-12-10"
+            },
+            "usuario": "admin",
+            "fecha": "2025-12-08 23:28:37",
+            "ip": "::1"
         }
     ]
 }

@@ -25,6 +25,22 @@ if (!isset($data['vehiculos'])) {
     $data['vehiculos'] = [];
 }
 
+// Función para obtener el siguiente ID consecutivo
+function getNextId($items) {
+    if (empty($items)) {
+        return 1;
+    }
+    
+    $maxId = 0;
+    foreach ($items as $item) {
+        if (isset($item['id']) && is_numeric($item['id'])) {
+            $maxId = max($maxId, (int)$item['id']);
+        }
+    }
+    
+    return $maxId + 1;
+}
+
 switch ($method) {
     case 'GET':
         echo json_encode(['success' => true, 'vehiculos' => $data['vehiculos']]);
@@ -38,8 +54,8 @@ switch ($method) {
             exit;
         }
         
-        // Generar ID único
-        $input['id'] = isset($input['id']) ? (int)$input['id'] : time();
+        // Generar ID consecutivo automáticamente (ignorar ID enviado desde frontend)
+        $input['id'] = getNextId($data['vehiculos']);
         
         // Agregar vehículo
         $data['vehiculos'][] = $input;

@@ -2,8 +2,9 @@
 session_start();
 header('Content-Type: application/json');
 
-// Incluir sistema de logs
+// Incluir sistema de logs y mailer
 require_once __DIR__ . '/logs.php';
+require_once __DIR__ . '/mailer.php';
 
 // Verificar autenticación para métodos protegidos
 $method = $_SERVER['REQUEST_METHOD'];
@@ -46,12 +47,13 @@ switch ($method) {
             'id' => time(),
             'servicio_id' => $input['servicio_id'] ?? null,
             'servicio_nombre' => $input['servicio_nombre'] ?? '',
-            'nombre' => $input['nombre'],
-            'telefono' => $input['telefono'] ?? '',
-            'correo' => $input['correo'] ?? '',
+            'nombre' => htmlspecialchars($input['nombre']),
+            'telefono' => htmlspecialchars($input['telefono'] ?? ''),
+            'correo' => htmlspecialchars($input['correo'] ?? ''),
             'fecha' => $input['fecha'],
-            'hora' => $input['hora'] ?? '',
-            'notas' => $input['notas'] ?? '',
+            'hora' => htmlspecialchars($input['hora'] ?? ''),
+            'sucursal' => $input['sucursal'] ?? 'sucursal1', // ← CAMPO AGREGADO
+            'notas' => htmlspecialchars($input['notas'] ?? ''),
             'estado' => 'pendiente',
             'fecha_solicitud' => date('Y-m-d H:i:s')
         ];
@@ -64,10 +66,38 @@ switch ($method) {
                 'cita_id' => $cita['id'],
                 'servicio' => $cita['servicio_nombre'],
                 'cliente' => $cita['nombre'],
-                'fecha' => $cita['fecha']
+                'fecha' => $cita['fecha'],
+                'sucursal' => $cita['sucursal']
             ], 'Sistema');
             
-            echo json_encode(['success' => true, 'message' => 'Cita solicitada', 'id' => $cita['id']]);
+            // ENVIAR CORREOS AUTOMÁTICOS
+            try {
+                $resultadosEmail = enviarEmailNuevaCita($cita);
+                
+                // Generar enlace de WhatsApp para notificación
+                $enlaceWhatsApp = generarNotificacionWhatsApp('cita', $cita);
+                
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Cita solicitada', 
+                    'id' => $cita['id'],
+                    'emails_enviados' => $resultadosEmail,
+                    'whatsapp_link' => $enlaceWhatsApp
+                ]);
+            } catch (Exception $e) {
+                // Si falla el envío de emails, aún así confirmamos la cita
+                guardarLog('email', 'error_envio', [
+                    'cita_id' => $cita['id'],
+                    'error' => $e->getMessage()
+                ], 'Sistema');
+                
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Cita solicitada (emails pendientes)', 
+                    'id' => $cita['id'],
+                    'email_error' => $e->getMessage()
+                ]);
+            }
         } else {
             echo json_encode(['success' => false, 'message' => 'Error al guardar']);
         }
@@ -109,17 +139,36 @@ switch ($method) {
                         'cita_id' => $input['id'],
                         'cliente' => $citaActual['nombre'] ?? 'Desconocido',
                         'servicio' => $citaActual['servicio_nombre'] ?? 'N/A',
+                        'sucursal' => $citaActual['sucursal'] ?? 'N/A',
                         'estado_anterior' => $estadoAnterior,
                         'estado_nuevo' => $input['estado']
                     ], $_SESSION['admin_username'] ?? 'Admin');
+                    
+                    // ENVIAR EMAIL DE CAMBIO DE ESTADO AL CLIENTE
+                    try {
+                        $citaActualizada = array_merge($citaActual, ['estado' => $input['estado']]);
+                        $resultadoEmail = enviarEmailCambioEstado('cita', $citaActualizada, $estadoAnterior, $input['estado']);
+                        
+                        echo json_encode([
+                            'success' => true, 
+                            'message' => 'Cita actualizada',
+                            'email_enviado' => $resultadoEmail
+                        ]);
+                    } catch (Exception $e) {
+                        echo json_encode([
+                            'success' => true, 
+                            'message' => 'Cita actualizada (email pendiente)',
+                            'email_error' => $e->getMessage()
+                        ]);
+                    }
                 } else {
                     guardarLog('cita', 'actualizar', [
                         'cita_id' => $input['id'],
                         'cambios' => array_keys($input)
                     ], $_SESSION['admin_username'] ?? 'Admin');
+                    
+                    echo json_encode(['success' => true, 'message' => 'Cita actualizada']);
                 }
-                
-                echo json_encode(['success' => true, 'message' => 'Cita actualizada']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Error al guardar']);
             }
@@ -158,6 +207,7 @@ switch ($method) {
                     'cita_id' => $input['id'],
                     'cliente' => $citaEliminada['nombre'] ?? 'Desconocido',
                     'servicio' => $citaEliminada['servicio_nombre'] ?? 'N/A',
+                    'sucursal' => $citaEliminada['sucursal'] ?? 'N/A',
                     'fecha' => $citaEliminada['fecha'] ?? 'N/A'
                 ], $_SESSION['admin_username'] ?? 'Admin');
             }

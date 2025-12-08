@@ -1,28 +1,3 @@
 {
-    "solicitudes": [
-        {
-            "id": 1763541907,
-            "tipo": "vehiculo",
-            "vehiculo_id": 2,
-            "vehiculo_nombre": "Mazda CX-5 2022",
-            "nombre": "Sergio Aguirre",
-            "telefono": "3505351780",
-            "correo": "aguirre984@gmail.com",
-            "mensaje": "",
-            "estado": "completada",
-            "fecha_solicitud": "2025-11-19 09:45:07"
-        },
-        {
-            "id": 1764610306,
-            "tipo": "vehiculo",
-            "vehiculo_id": 1,
-            "vehiculo_nombre": "Toyota Corolla 2023",
-            "nombre": "Yenny Sastre",
-            "telefono": "3112582541",
-            "correo": "angelica150291@outlook.com",
-            "mensaje": "",
-            "estado": "completada",
-            "fecha_solicitud": "2025-12-01 18:31:46"
-        }
-    ]
+    "solicitudes": []
 }

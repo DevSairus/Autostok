@@ -1,4 +1,9 @@
 <?php
+/**
+ * Endpoint público para solicitar productos/repuestos desde el frontend
+ * Envía notificaciones al CORREO DEL ALMACÉN
+ */
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
@@ -8,7 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-$dataFile = '../../data/solicitudes_productos.json';
+// Incluir sistema de logs y mailer
+require_once __DIR__ . '/logs.php';
+require_once __DIR__ . '/mailer.php';
+
+$dataFile = '../../data/solicitudes.json';
 
 // Crear directorio si no existe
 if (!file_exists('../../data')) {
@@ -28,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     
     // Validar datos requeridos
-    if (!$input || !isset($input['nombre']) || !isset($input['telefono']) || !isset($input['producto_id'])) {
+    if (!$input || !isset($input['nombre']) || !isset($input['telefono'])) {
         echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
         exit;
     }
@@ -36,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Crear solicitud
     $solicitud = [
         'id' => time(),
-        'producto_id' => $input['producto_id'],
+        'tipo' => 'producto', // ← Tipo correcto: envía al ALMACÉN
+        'producto_id' => $input['producto_id'] ?? null,
         'producto_nombre' => htmlspecialchars($input['producto_nombre'] ?? ''),
         'nombre' => htmlspecialchars($input['nombre']),
         'telefono' => htmlspecialchars($input['telefono']),
@@ -50,11 +60,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data['solicitudes'][] = $solicitud;
     
     if (file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-        echo json_encode([
-            'success' => true, 
-            'message' => 'Solicitud de producto enviada exitosamente',
-            'id' => $solicitud['id']
-        ]);
+        // Guardar log
+        guardarLog('solicitud', 'crear', [
+            'solicitud_id' => $solicitud['id'],
+            'tipo' => 'producto',
+            'producto' => $solicitud['producto_nombre'],
+            'cliente' => $solicitud['nombre'],
+            'cantidad' => $solicitud['cantidad']
+        ], 'Sistema');
+        
+        // ENVIAR CORREOS AUTOMÁTICOS AL ALMACÉN
+        try {
+            $resultadosEmail = enviarEmailNuevaSolicitud($solicitud);
+            
+            // Generar enlace de WhatsApp para almacén
+            $enlaceWhatsApp = generarNotificacionWhatsApp('solicitud', $solicitud);
+            
+            // Verificar si los emails se enviaron exitosamente
+            $emailsEnviados = [];
+            $emailsFallidos = [];
+            
+            foreach ($resultadosEmail as $destino => $resultado) {
+                if ($resultado['success']) {
+                    $emailsEnviados[] = $destino;
+                } else {
+                    $emailsFallidos[] = $destino;
+                }
+            }
+            
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Solicitud enviada al almacén. Te contactaremos pronto.',
+                'id' => $solicitud['id'],
+                'emails_enviados' => $emailsEnviados,
+                'emails_fallidos' => $emailsFallidos,
+                'whatsapp_link' => $enlaceWhatsApp
+            ]);
+        } catch (Exception $e) {
+            // Si falla el envío de emails, aún así confirmamos la solicitud
+            guardarLog('email', 'error_envio', [
+                'solicitud_id' => $solicitud['id'],
+                'error' => $e->getMessage()
+            ], 'Sistema');
+            
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Solicitud registrada. Las notificaciones se enviarán pronto.',
+                'id' => $solicitud['id'],
+                'email_error' => $e->getMessage()
+            ]);
+        }
     } else {
         echo json_encode(['success' => false, 'message' => 'Error al guardar la solicitud']);
     }

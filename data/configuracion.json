@@ -1,46 +1,53 @@
 {
     "general": {
         "nombreNegocio": "Autostok",
-        "telefonoWhatsappVehiculos": "+573505351780",
-        "telefonoWhatsappServicios": "+573505351781",
-        "telefonoWhatsappAlmacen": "+573505351782",
+        "nombre_empresa": "Autostok",
+        "telefonoWhatsappVehiculos": "+573001234567",
+        "telefonoWhatsappServicios": "+573007654321",
+        "telefonoWhatsappAlmacen": "+573005551234",
         "correoNegocio": "contacto@autostok.com",
         "correoCallCenter": "callcenter@autostok.com",
-        "direccion": "Bogotá, Colombia"
+        "correoAlmacen": "almacen@autostok.com",
+        "smtp_host": "smtp.gmail.com",
+        "smtp_port": 587,
+        "smtp_user": "aguirre984@gmail.com",
+        "smtp_password": "slhirvyacshyrbhy",
+        "smtp_secure": "tls",
+        "email_from": "aguirre984@gmail.com",
+        "color_primario": "#FFD700",
+        "telefono": "+573001234567",
+        "email": "contacto@autostok.com",
+        "whatsapp": "+573001234567",
+        "direccion": "Medellín, Colombia"
+    },
+    "nosotros": {
+        "descripcionNosotros": "Somos una empresa líder en venta de vehículos y servicios automotrices",
+        "anosExperiencia": "15",
+        "clientesSatisfechos": "5000",
+        "vehiculosVendidos": "2000"
     },
     "sucursales": {
         "sucursal1": {
-            "nombre": "Morato",
-            "direccion": "Calle 123 #45-67, Bogotá",
-            "telefono": "+573501234567",
-            "whatsapp": "+573501234567",
-            "correo": "norte@autostok.com",
+            "nombre": "Autostok Norte",
+            "direccion": "Calle 123 #45-67, Medellín",
+            "telefono": "+573001234567",
+            "whatsapp": "+573001234567",
+            "correo": "aguirre984@hotmail.com",
             "horarioSemana": "8:00 AM - 6:00 PM",
-            "horarioSabado": "9:00 AM - 2:00 PM",
-            "mapa": "https:\/\/maps.app.goo.gl\/WEEYosd7ss7zjYoF6"
+            "horarioSabado": "9:00 AM - 2:00 ",
+            "mapa": "<iframe src='https:\/\/www.google.com\/maps\/embed?...' width='100%' height='400'><\/iframe>"
         },
         "sucursal2": {
-            "nombre": "Bogotá",
-            "direccion": "Carrera 78 #90-12, Bogotá",
-            "telefono": "+573509876543",
-            "whatsapp": "+573509876543",
-            "correo": "sur@autostok.com",
+            "nombre": "Autostok Sur",
+            "direccion": "Carrera 78 #90-12, Medellín",
+            "telefono": "+573007654321",
+            "whatsapp": "+573007654321",
+            "correo": "aguirre984@gmail.com",
             "horarioSemana": "8:00 AM - 6:00 PM",
             "horarioSabado": "9:00 AM - 2:00 PM",
-            "mapa": "https:\/\/maps.app.goo.gl\/EhWWz6Xh25B63djg7"
+            "mapa": "<iframe src='https:\/\/www.google.com\/maps\/embed?...' width='100%' height='400'><\/iframe>"
         }
     },
-    "pagos": {
-        "urlPagos": ""
-    },
-    "horarios": {
-        "horarioSemana": "9:00 AM - 5:00 PM",
-        "horarioSabado": "9:00 AM - 1:00 PM"
-    },
-    "nosotros": {
-        "descripcionNosotros": "Somos una empresa dedicada a ofrecer los mejores vehículos y servicios automotrices, con más de 10 años de experiencia en el mercado.",
-        "anosExperiencia": "10",
-        "clientesSatisfechos": "500",
-        "vehiculosVendidos": "1000"
-    }
+    "pagos": [],
+    "horarios": []
 }

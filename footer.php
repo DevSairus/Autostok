@@ -100,7 +100,7 @@ $horarios = $configData['horarios'] ?? [];
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($general['nombreNegocio'] ?? 'Autostok'); ?>. Todos los derechos reservados.</p>
+    <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars('CodeGame Studio'); ?>. Todos los derechos reservados.</p>
   </div>
 </footer>
 

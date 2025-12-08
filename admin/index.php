@@ -38,6 +38,11 @@ $usuariosData = file_exists('../data/usuarios.json')
     : ['usuarios' => []];
 $usuarios = $usuariosData['usuarios'] ?? [];
 
+$sucursalesData = file_exists('../data/sucursales.json') 
+    ? json_decode(file_get_contents('../data/sucursales.json'), true) 
+    : ['sucursales' => []];
+$sucursales = $sucursalesData['sucursales'] ?? [];
+
 // Estadísticas
 $totalVehiculos = count($vehiculos);
 $totalServicios = count($servicios);
@@ -105,10 +110,10 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <span>Usuarios</span>
         </a>
         <?php endif; ?>
-        <a href="#sucursales" class="nav-item" onclick="mostrarSeccion('sucursales')">
+        <!-- <a href="#sucursales" class="nav-item" onclick="mostrarSeccion('sucursales')">
           <span class="icon">📍</span>
           <span>Sucursales</span>
-        </a>
+        </a>  -->
         <a href="#configuracion" class="nav-item" onclick="mostrarSeccion('configuracion')">
           <span class="icon">⚙️</span>
           <span>Configuración</span>
@@ -554,39 +559,39 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <!-- Sucursal 1 -->
           <div class="config-card">
             <h3>📍 Sucursal Norte</h3>
-            <form id="formSucursal1">
+            <form id="form1">
               <div class="form-group">
                 <label>Nombre de la Sucursal</label>
-                <input type="text" id="nombreSucursal1" placeholder="Autostok Norte" class="form-control">
+                <input type="text" id="nombre1" placeholder="Autostok Norte" class="form-control">
               </div>
               <div class="form-group">
                 <label>Dirección</label>
-                <input type="text" id="direccionSucursal1" placeholder="Calle 123 #45-67" class="form-control">
+                <input type="text" id="direccion1" placeholder="Calle 123 #45-67" class="form-control">
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
-                <input type="tel" id="telefonoSucursal1" placeholder="+57 300 123 4567" class="form-control">
+                <input type="tel" id="telefono1" placeholder="+57 300 123 4567" class="form-control">
               </div>
               <div class="form-group">
                 <label>WhatsApp</label>
-                <input type="tel" id="whatsappSucursal1" placeholder="+57 300 123 4567" class="form-control">
+                <input type="tel" id="whatsapp1" placeholder="+57 300 123 4567" class="form-control">
                 <p class="helper-text">Número para recibir notificaciones de citas y servicios</p>
               </div>
               <div class="form-group">
                 <label>Correo Electrónico</label>
-                <input type="email" id="correoSucursal1" placeholder="norte@autostok.com" class="form-control">
+                <input type="email" id="correo1" placeholder="norte@autostok.com" class="form-control">
               </div>
               <div class="form-group">
                 <label>Horario Lunes a Viernes</label>
-                <input type="text" id="horarioSemanaSucursal1" placeholder="8:00 AM - 6:00 PM" class="form-control">
+                <input type="text" id="horarioSemana1" placeholder="8:00 AM - 6:00 PM" class="form-control">
               </div>
               <div class="form-group">
                 <label>Horario Sábados</label>
-                <input type="text" id="horarioSabadoSucursal1" placeholder="9:00 AM - 2:00 PM" class="form-control">
+                <input type="text" id="horarioSabado1" placeholder="9:00 AM - 2:00 PM" class="form-control">
               </div>
               <div class="form-group">
                 <label>URL de Google Maps (opcional)</label>
-                <input type="url" id="mapaSucursal1" placeholder="https://maps.google.com/..." class="form-control">
+                <input type="url" id="mapa1" placeholder="https://maps.google.com/..." class="form-control">
                 <p class="helper-text">Link de ubicación en Google Maps</p>
               </div>
               <button type="submit" class="btn-primary">Guardar Sucursal Norte</button>
@@ -596,39 +601,39 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <!-- Sucursal 2 -->
           <div class="config-card">
             <h3>📍 Sucursal Sur</h3>
-            <form id="formSucursal2">
+            <form id="form2">
               <div class="form-group">
                 <label>Nombre de la Sucursal</label>
-                <input type="text" id="nombreSucursal2" placeholder="Autostok Sur" class="form-control">
+                <input type="text" id="nombre2" placeholder="Autostok Sur" class="form-control">
               </div>
               <div class="form-group">
                 <label>Dirección</label>
-                <input type="text" id="direccionSucursal2" placeholder="Carrera 78 #90-12" class="form-control">
+                <input type="text" id="direccion2" placeholder="Carrera 78 #90-12" class="form-control">
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
-                <input type="tel" id="telefonoSucursal2" placeholder="+57 300 765 4321" class="form-control">
+                <input type="tel" id="telefono2" placeholder="+57 300 765 4321" class="form-control">
               </div>
               <div class="form-group">
                 <label>WhatsApp</label>
-                <input type="tel" id="whatsappSucursal2" placeholder="+57 300 765 4321" class="form-control">
+                <input type="tel" id="whatsapp2" placeholder="+57 300 765 4321" class="form-control">
                 <p class="helper-text">Número para recibir notificaciones de citas y servicios</p>
               </div>
               <div class="form-group">
                 <label>Correo Electrónico</label>
-                <input type="email" id="correoSucursal2" placeholder="sur@autostok.com" class="form-control">
+                <input type="email" id="correo2" placeholder="sur@autostok.com" class="form-control">
               </div>
               <div class="form-group">
                 <label>Horario Lunes a Viernes</label>
-                <input type="text" id="horarioSemanaSucursal2" placeholder="8:00 AM - 6:00 PM" class="form-control">
+                <input type="text" id="horarioSemana2" placeholder="8:00 AM - 6:00 PM" class="form-control">
               </div>
               <div class="form-group">
                 <label>Horario Sábados</label>
-                <input type="text" id="horarioSabadoSucursal2" placeholder="9:00 AM - 2:00 PM" class="form-control">
+                <input type="text" id="horarioSabado2" placeholder="9:00 AM - 2:00 PM" class="form-control">
               </div>
               <div class="form-group">
                 <label>URL de Google Maps (opcional)</label>
-                <input type="url" id="mapaSucursal2" placeholder="https://maps.google.com/..." class="form-control">
+                <input type="url" id="mapa2" placeholder="https://maps.google.com/..." class="form-control">
                 <p class="helper-text">Link de ubicación en Google Maps</p>
               </div>
               <button type="submit" class="btn-primary">Guardar Sucursal Sur</button>
@@ -637,296 +642,429 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
         </div>
       </section>
 
-      <!-- Configuración Section -->
+      
+      <!-- Configuración y Sucursales Unificadas -->
       <section id="configuracion" class="section">
         <h2>Configuración del Sistema</h2>
         
-        <div class="config-cards">
+        <div class="config-tabs">
+          <button class="tab-btn active" onclick="cambiarTab('general')">General</button>
+          <!-- <button class="tab-btn" onclick="cambiarTab('nosotros')">Nosotros</button> -->
+          <button class="tab-btn" onclick="cambiarTab('sucursales')">Sucursales</button>
+        </div>
+
+        <!-- TAB: GENERAL -->
+        <div id="tab-general" class="tab-content active">
           <div class="config-card">
-            <h3>Información General</h3>
+            <h3>📞 Información de Contacto</h3>
             <form id="formConfigGeneral">
               <div class="form-group">
                 <label>Nombre del Negocio</label>
-                <input type="text" id="nombreNegocio" value="Autostok" class="form-control">
+                <input type="text" id="nombreNegocio" value="Autostok" class="form-control" required>
               </div>
-              <div class="form-group">
-                <label>WhatsApp para Vehículos</label>
-                <input type="tel" id="telefonoWhatsappVehiculos" placeholder="+57 300 123 4567" class="form-control">
-                <p class="helper-text">Número para consultas sobre vehículos</p>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>WhatsApp Vehículos</label>
+                  <input type="tel" id="telefonoWhatsappVehiculos" placeholder="+57 300 123 4567" class="form-control">
+                  <p class="helper-text">Número para consultas sobre vehículos</p>
+                </div>
+                <div class="form-group">
+                  <label>WhatsApp Servicios/Citas</label>
+                  <input type="tel" id="telefonoWhatsappServicios" placeholder="+57 300 765 4321" class="form-control">
+                  <p class="helper-text">Número para notificaciones de citas y servicios</p>
+                </div>
               </div>
-              <div class="form-group">
-                <label>WhatsApp para Servicios</label>
-                <input type="tel" id="telefonoWhatsappServicios" placeholder="+57 300 765 4321" class="form-control">
-                <p class="helper-text">Número para consultas sobre servicios</p>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>WhatsApp Almacén/Repuestos</label>
+                  <input type="tel" id="telefonoWhatsappAlmacen" placeholder="+57 300 555 1234" class="form-control">
+                  <p class="helper-text">Número para solicitudes de productos</p>
+                </div>
+                <div class="form-group">
+                  <label>Correo Call Center</label>
+                  <input type="email" id="correoCallCenter" placeholder="callcenter@autostok.com" class="form-control">
+                  <p class="helper-text">Recibirá notificaciones de citas y solicitudes</p>
+                </div>
               </div>
-              <div class="form-group">
-                <label>WhatsApp para Almacén</label>
-                <input type="tel" id="telefonoWhatsappAlmacen" placeholder="+57 300 555 1234" class="form-control">
-                <p class="helper-text">Número para solicitudes de productos/repuestos</p>
-              </div>
+
               <div class="form-group">
                 <label>Correo General</label>
                 <input type="email" id="correoNegocio" placeholder="contacto@autostok.com" class="form-control">
               </div>
-              <div class="form-group">
-                <label>Correo Call Center</label>
-                <input type="email" id="correoCallCenter" placeholder="callcenter@autostok.com" class="form-control">
-                <p class="helper-text">Correo que recibirá notificaciones de citas</p>
-              </div>
-              <button type="submit" class="btn-primary">Guardar Configuración</button>
+
+              <button type="submit" class="btn-primary">💾 Guardar Configuración General</button>
             </form>
           </div>
+        </div>
 
+        <!-- TAB: NOSOTROS 
+        <div id="tab-nosotros" class="tab-content">
           <div class="config-card">
-            <h3>Pagos PSE</h3>
-            <form id="formConfigPagos">
-              <div class="form-group">
-                <label>URL de Pagos PSE</label>
-                <input type="url" id="urlPagos" placeholder="https://tu-enlace-pse.com" class="form-control">
-              </div>
-              <button type="submit" class="btn-primary">Guardar URL</button>
-            </form>
-          </div>
-
-          <div class="config-card">
-            <h3>Sección Nosotros</h3>
+            <h3>ℹ️ Sección "Nosotros"</h3>
             <form id="formConfigNosotros">
               <div class="form-group">
-                <label>Descripción</label>
-                <textarea id="descripcionNosotros" rows="4" class="form-control"></textarea>
+                <label>Descripción de la Empresa</label>
+                <textarea id="descripcionNosotros" rows="5" class="form-control" placeholder="Somos una empresa dedicada..."></textarea>
               </div>
-              <div class="form-group">
-                <label>Años de Experiencia</label>
-                <input type="number" id="anosExperiencia" class="form-control">
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Años de Experiencia</label>
+                  <input type="number" id="anosExperiencia" class="form-control" min="0">
+                </div>
+                <div class="form-group">
+                  <label>Clientes Satisfechos</label>
+                  <input type="number" id="clientesSatisfechos" class="form-control" min="0">
+                </div>
+                <div class="form-group">
+                  <label>Vehículos Vendidos</label>
+                  <input type="number" id="vehiculosVendidos" class="form-control" min="0">
+                </div>
               </div>
-              <div class="form-group">
-                <label>Clientes Satisfechos</label>
-                <input type="number" id="clientesSatisfechos" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Vehículos Vendidos</label>
-                <input type="number" id="vehiculosVendidos" class="form-control">
-              </div>
-              <button type="submit" class="btn-primary">Guardar Información</button>
+              
+              <button type="submit" class="btn-primary">💾 Guardar Información</button>
             </form>
+          </div>
+        </div> -->
+
+        <!-- TAB: SUCURSALES -->
+        <div id="tab-sucursales" class="tab-content">
+          <div class="sucursales-grid">
+            <!-- Sucursal 1 (Norte) -->
+            <div class="config-card">
+              <h3>📍 Sucursal Norte</h3>
+              <form id="formSucursal1">
+                <div class="form-group">
+                  <label>Nombre de la Sucursal *</label>
+                  <input type="text" id="nombreSucursal1" placeholder="Autostok Norte" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Dirección *</label>
+                  <input type="text" id="direccionSucursal1" placeholder="Calle 123 #45-67" class="form-control" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Teléfono *</label>
+                    <input type="tel" id="telefonoSucursal1" placeholder="+57 300 123 4567" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>WhatsApp *</label>
+                    <input type="tel" id="whatsappSucursal1" placeholder="+57 300 123 4567" class="form-control" required>
+                    <p class="helper-text">Recibirá notificaciones de citas</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Correo Electrónico *</label>
+                  <input type="email" id="correoSucursal1" placeholder="norte@autostok.com" class="form-control" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Horario Lunes a Viernes</label>
+                    <input type="text" id="horarioSemanaSucursal1" placeholder="8:00 AM - 6:00 PM" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Horario Sábados</label>
+                    <input type="text" id="horarioSabadoSucursal1" placeholder="9:00 AM - 2:00 PM" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>URL de Google Maps (iframe embed)</label>
+                  <textarea id="mapaSucursal1" rows="3" placeholder="<iframe src=&quot;https://www.google.com/maps/embed?...&quot;></iframe>" class="form-control"></textarea>
+                  <p class="helper-text">Pega el código de inserción completo de Google Maps. <a href="https://www.google.com/maps" target="_blank">¿Cómo obtenerlo?</a></p>
+                </div>
+                <button type="submit" class="btn-primary">💾 Guardar Sucursal Norte</button>
+              </form>
+            </div>
+
+            <!-- Sucursal 2 (Sur) -->
+            <div class="config-card">
+              <h3>📍 Sucursal Sur</h3>
+              <form id="formSucursal2">
+                <div class="form-group">
+                  <label>Nombre de la Sucursal *</label>
+                  <input type="text" id="nombreSucursal2" placeholder="Autostok Sur" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Dirección *</label>
+                  <input type="text" id="direccionSucursal2" placeholder="Carrera 78 #90-12" class="form-control" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Teléfono *</label>
+                    <input type="tel" id="telefonoSucursal2" placeholder="+57 300 765 4321" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>WhatsApp *</label>
+                    <input type="tel" id="whatsappSucursal2" placeholder="+57 300 765 4321" class="form-control" required>
+                    <p class="helper-text">Recibirá notificaciones de citas</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Correo Electrónico *</label>
+                  <input type="email" id="correoSucursal2" placeholder="sur@autostok.com" class="form-control" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Horario Lunes a Viernes</label>
+                    <input type="text" id="horarioSemanaSucursal2" placeholder="8:00 AM - 6:00 PM" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Horario Sábados</label>
+                    <input type="text" id="horarioSabadoSucursal2" placeholder="9:00 AM - 2:00 PM" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>URL de Google Maps (iframe embed)</label>
+                  <textarea id="mapaSucursal2" rows="3" placeholder="<iframe src=&quot;https://www.google.com/maps/embed?...&quot;></iframe>" class="form-control"></textarea>
+                  <p class="helper-text">Pega el código de inserción completo de Google Maps. <a href="https://www.google.com/maps" target="_blank">¿Cómo obtenerlo?</a></p>
+                </div>
+                <button type="submit" class="btn-primary">💾 Guardar Sucursal Sur</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- Modal Formulario Vehículo -->
-  <div id="modalVehiculo" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="tituloModalVehiculo">Nuevo Vehículo</h3>
-        <button class="btn-close" onclick="cerrarModalVehiculo()">✕</button>
-      </div>
-      <form id="formVehiculo">
-        <input type="hidden" id="vehiculoId" name="id">
-        <div class="modal-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Marca *</label>
-              <input type="text" id="marca" name="marca" required class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Modelo *</label>
-              <input type="text" id="modelo" name="modelo" required class="form-control">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Año *</label>
-              <input type="number" id="anio" name="anio" required min="1900" max="2030" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Precio *</label>
-              <input type="number" id="precio" name="precio" required class="form-control">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Kilometraje</label>
-              <input type="number" id="kilometraje" name="kilometraje" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Tipo *</label>
-              <select id="tipo" name="tipo" required class="form-control">
-                <option value="">Seleccionar</option>
-                <option value="sedan">Sedán</option>
-                <option value="suv">SUV</option>
-                <option value="pickup">Pickup</option>
-                <option value="deportivo">Deportivo</option>
-                <option value="hatchback">Hatchback</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Transmisión</label>
-              <select id="transmision" name="transmision" class="form-control">
-                <option value="Manual">Manual</option>
-                <option value="Automática">Automática</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Combustible</label>
-              <select id="combustible" name="combustible" class="form-control">
-                <option value="Gasolina">Gasolina</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Eléctrico">Eléctrico</option>
-                <option value="Híbrido">Híbrido</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Color</label>
-            <input type="text" id="color" name="color" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Descripción</label>
-            <textarea id="descripcion" name="descripcion" rows="4" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>URLs de Imágenes (una por línea)</label>
-            <textarea id="imagenes" name="imagenes" rows="3" placeholder="https://ejemplo.com/imagen1.jpg&#10;https://ejemplo.com/imagen2.jpg" class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="cerrarModalVehiculo()">Cancelar</button>
-          <button type="submit" class="btn-primary">Guardar</button>
-        </div>
-      </form>
+<!-- Modal Formulario Vehículo - CON UPLOAD DE IMÁGENES -->
+<div id="modalVehiculo" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="tituloModalVehiculo">Nuevo Vehículo</h3>
+      <button class="btn-close" onclick="cerrarModalVehiculo()">✕</button>
     </div>
+    <form id="formVehiculo">
+      <input type="hidden" id="vehiculoId" name="id">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Marca *</label>
+            <input type="text" id="marca" name="marca" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Modelo *</label>
+            <input type="text" id="modelo" name="modelo" required class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Año *</label>
+            <input type="number" id="anio" name="anio" required min="1900" max="2030" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Precio *</label>
+            <input type="number" id="precio" name="precio" required class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Kilometraje</label>
+            <input type="number" id="kilometraje" name="kilometraje" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Tipo *</label>
+            <select id="tipo" name="tipo" required class="form-control">
+              <option value="">Seleccionar</option>
+              <option value="sedan">Sedán</option>
+              <option value="suv">SUV</option>
+              <option value="pickup">Pickup</option>
+              <option value="deportivo">Deportivo</option>
+              <option value="hatchback">Hatchback</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Transmisión</label>
+            <select id="transmision" name="transmision" class="form-control">
+              <option value="Manual">Manual</option>
+              <option value="Automática">Automática</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Combustible</label>
+            <select id="combustible" name="combustible" class="form-control">
+              <option value="Gasolina">Gasolina</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Eléctrico">Eléctrico</option>
+              <option value="Híbrido">Híbrido</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <input type="text" id="color" name="color" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="4" class="form-control"></textarea>
+        </div>
+        
+        <!-- NUEVO: Input de archivos para imágenes -->
+        <div class="form-group">
+          <label>Imágenes del Vehículo</label>
+          <!-- Contenedor para imágenes actuales (edición) -->
+          <div id="imagenesActualesVehiculo" style="margin-bottom: 15px;"></div>
+          <!-- Input para nuevas imágenes -->
+          <input type="file" id="imagenesVehiculo" accept="image/*" multiple class="form-control">
+          <p class="helper-text">Puedes seleccionar múltiples imágenes nuevas (máx 5MB cada una)</p>
+          <div id="previewImagenesVehiculo" style="margin-top: 10px;"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="cerrarModalVehiculo()">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
   </div>
+</div>
 
-  <!-- Modal Formulario Servicio -->
-  <div id="modalServicio" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="tituloModalServicio">Nuevo Servicio</h3>
-        <button class="btn-close" onclick="cerrarModalServicio()">✕</button>
-      </div>
-      <form id="formServicio">
-        <input type="hidden" id="servicioId" name="id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Nombre del Servicio *</label>
-            <input type="text" id="nombreServicio" name="nombre" required class="form-control">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Categoría *</label>
-              <select id="categoriaServicio" name="categoria" required class="form-control">
-                <option value="">Seleccionar</option>
-                <option value="Mantenimiento">Mantenimiento</option>
-                <option value="Reparación">Reparación</option>
-                <option value="Lavado">Lavado</option>
-                <option value="Accesorios">Accesorios</option>
-                <option value="Diagnóstico">Diagnóstico</option>
-                <option value="Pintura">Pintura</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Precio *</label>
-              <input type="number" id="precioServicio" name="precio" required class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Duración</label>
-            <input type="text" id="duracionServicio" name="duracion" placeholder="Ej: 2 horas" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Descripción Corta</label>
-            <textarea id="descripcionCorta" name="descripcion_corta" rows="2" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Descripción Completa</label>
-            <textarea id="descripcionServicio" name="descripcion" rows="4" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Características (una por línea)</label>
-            <textarea id="caracteristicas" name="caracteristicas" rows="3" placeholder="Característica 1&#10;Característica 2" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>URL de Imagen</label>
-            <input type="url" id="imagenServicio" name="imagen" placeholder="https://ejemplo.com/imagen.jpg" class="form-control">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="cerrarModalServicio()">Cancelar</button>
-          <button type="submit" class="btn-primary">Guardar</button>
-        </div>
-      </form>
+<!-- Modal Formulario Servicio - CON UPLOAD DE IMAGEN -->
+<div id="modalServicio" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="tituloModalServicio">Nuevo Servicio</h3>
+      <button class="btn-close" onclick="cerrarModalServicio()">✕</button>
     </div>
+    <form id="formServicio">
+      <input type="hidden" id="servicioId" name="id">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre del Servicio *</label>
+          <input type="text" id="nombreServicio" name="nombre" required class="form-control">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Categoría *</label>
+            <select id="categoriaServicio" name="categoria" required class="form-control">
+              <option value="">Seleccionar</option>
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Reparación">Reparación</option>
+              <option value="Lavado">Lavado</option>
+              <option value="Accesorios">Accesorios</option>
+              <option value="Diagnóstico">Diagnóstico</option>
+              <option value="Pintura">Pintura</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Precio *</label>
+            <input type="number" id="precioServicio" name="precio" required class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Duración</label>
+          <input type="text" id="duracionServicio" name="duracion" placeholder="Ej: 2 horas" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Descripción Corta</label>
+          <textarea id="descripcionCorta" name="descripcion_corta" rows="2" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Descripción Completa</label>
+          <textarea id="descripcionServicio" name="descripcion" rows="4" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Características (una por línea)</label>
+          <textarea id="caracteristicas" name="caracteristicas" rows="3" placeholder="Característica 1&#10;Característica 2" class="form-control"></textarea>
+        </div>
+        
+        <!-- NUEVO: Input de archivo para imagen -->
+        <div class="form-group">
+          <label>Imagen del Servicio</label>
+          <!-- Contenedor para imagen actual (edición) -->
+          <div id="imagenActualServicio" style="margin-bottom: 15px;"></div>
+          <!-- Input para nueva imagen -->
+          <input type="file" id="imagenServicioFile" accept="image/*" class="form-control">
+          <p class="helper-text">Formato: JPG, PNG, WEBP (máx 5MB)</p>
+          <div style="margin-top: 10px;">
+            <img id="previewImagenServicio" style="max-width: 200px; display: none; border-radius: 5px; border: 2px solid #FFD700;">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="cerrarModalServicio()">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
   </div>
+</div>
 
-  <!-- Modal Formulario Producto -->
-  <div id="modalProducto" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="tituloModalProducto">Nuevo Producto</h3>
-        <button class="btn-close" onclick="cerrarModalProducto()">✕</button>
-      </div>
-      <form id="formProducto">
-        <input type="hidden" id="productoId" name="id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Nombre del Producto *</label>
-            <input type="text" id="nombreProducto" name="nombre" required class="form-control">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Categoría *</label>
-              <select id="categoriaProducto" name="categoria" required class="form-control">
-                <option value="">Seleccionar</option>
-                <option value="Lubricantes">Lubricantes</option>
-                <option value="Filtros">Filtros</option>
-                <option value="Baterías">Baterías</option>
-                <option value="Frenos">Frenos</option>
-                <option value="Suspensión">Suspensión</option>
-                <option value="Eléctricos">Eléctricos</option>
-                <option value="Accesorios">Accesorios</option>
-                <option value="Otros">Otros</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Precio *</label>
-              <input type="number" id="precioProducto" name="precio" required class="form-control">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Stock *</label>
-              <input type="number" id="stockProducto" name="stock" required min="0" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Marca</label>
-              <input type="text" id="marcaProducto" name="marca" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Código del Producto</label>
-            <input type="text" id="codigoProducto" name="codigo" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Descripción</label>
-            <textarea id="descripcionProducto" name="descripcion" rows="4" class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>URL de Imagen</label>
-            <input type="url" id="imagenProducto" name="imagen" placeholder="https://ejemplo.com/imagen.jpg" class="form-control">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="cerrarModalProducto()">Cancelar</button>
-          <button type="submit" class="btn-primary">Guardar</button>
-        </div>
-      </form>
+<!-- Modal Formulario Producto - CON UPLOAD DE IMAGEN -->
+<div id="modalProducto" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="tituloModalProducto">Nuevo Producto</h3>
+      <button class="btn-close" onclick="cerrarModalProducto()">✕</button>
     </div>
+    <form id="formProducto">
+      <input type="hidden" id="productoId" name="id">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre del Producto *</label>
+          <input type="text" id="nombreProducto" name="nombre" required class="form-control">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Categoría *</label>
+            <select id="categoriaProducto" name="categoria" required class="form-control">
+              <option value="">Seleccionar</option>
+              <option value="Lubricantes">Lubricantes</option>
+              <option value="Filtros">Filtros</option>
+              <option value="Baterías">Baterías</option>
+              <option value="Frenos">Frenos</option>
+              <option value="Suspensión">Suspensión</option>
+              <option value="Eléctricos">Eléctricos</option>
+              <option value="Accesorios">Accesorios</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Precio *</label>
+            <input type="number" id="precioProducto" name="precio" required class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Stock *</label>
+            <input type="number" id="stockProducto" name="stock" required min="0" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Marca</label>
+            <input type="text" id="marcaProducto" name="marca" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Código del Producto</label>
+          <input type="text" id="codigoProducto" name="codigo" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea id="descripcionProducto" name="descripcion" rows="4" class="form-control"></textarea>
+        </div>
+        
+        <!-- NUEVO: Input de archivo para imagen -->
+        <div class="form-group">
+          <label>Imagen del Producto</label>
+          <!-- Contenedor para imagen actual (edición) -->
+          <div id="imagenActualProducto" style="margin-bottom: 15px;"></div>
+          <!-- Input para nueva imagen -->
+          <input type="file" id="imagenProductoFile" accept="image/*" class="form-control">
+          <p class="helper-text">Formato: JPG, PNG, WEBP (máx 5MB)</p>
+          <div style="margin-top: 10px;">
+            <img id="previewImagenProducto" style="max-width: 200px; display: none; border-radius: 5px; border: 2px solid #FFD700;">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="cerrarModalProducto()">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
   </div>
+</div>
 
   <!-- Modal Formulario Usuario -->
   <?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
@@ -983,6 +1121,64 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
     </div>
   </div>
   <?php endif; ?>
+
+  <style>
+    .config-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab-btn:hover {
+      color: #FFD700;
+    }
+
+    .tab-btn.active {
+      color: #FFD700;
+      border-bottom-color: #FFD700;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sucursales-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .sucursales-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    </style>
 
   <script src="js/admin.js"></script>
 </body>

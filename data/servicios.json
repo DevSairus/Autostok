@@ -6,32 +6,32 @@
             "categoria": "Mantenimiento",
             "precio": 150000,
             "duracion": "45 minutos",
-            "descripcion_corta": "Cambio de aceite sintético de alta calidad con filtro premium",
-            "descripcion": "Servicio completo de cambio de aceite sintético de la más alta calidad. Incluye inspección de niveles, revisión de frenos y presión de llantas. Utilizamos únicamente aceites certificados y filtros originales.",
+            "descripcion_corta": "Cambio de aceite sint\u00e9tico de alta calidad con filtro premium",
+            "descripcion": "Servicio completo de cambio de aceite sint\u00e9tico de la m\u00e1s alta calidad. Incluye inspecci\u00f3n de niveles, revisi\u00f3n de frenos y presi\u00f3n de llantas. Utilizamos \u00fanicamente aceites certificados y filtros originales.",
             "caracteristicas": [
-                "Aceite sintético premium",
+                "Aceite sint\u00e9tico premium",
                 "Filtro de aceite original",
-                "Inspección de 21 puntos",
-                "Revisión de frenos",
-                "Verificación de presión de llantas",
-                "Lavado exterior básico incluido"
+                "Inspecci\u00f3n de 21 puntos",
+                "Revisi\u00f3n de frenos",
+                "Verificaci\u00f3n de presi\u00f3n de llantas",
+                "Lavado exterior b\u00e1sico incluido"
             ],
             "imagen": "https:\/\/images.unsplash.com\/photo-1487754180451-c456f719a1fc?w=800"
         },
         {
             "id": 2,
-            "nombre": "Alineación y Balanceo",
+            "nombre": "Alineaci\u00f3n y Balanceo",
             "categoria": "Mantenimiento",
             "precio": 80000,
             "duracion": "1 hora",
-            "descripcion_corta": "Alineación computarizada y balanceo de 4 llantas",
-            "descripcion": "Servicio de alineación con tecnología láser de última generación. Garantiza el desgaste uniforme de las llantas y una conducción suave y segura.",
+            "descripcion_corta": "Alineaci\u00f3n computarizada y balanceo de 4 llantas",
+            "descripcion": "Servicio de alineaci\u00f3n con tecnolog\u00eda l\u00e1ser de \u00faltima generaci\u00f3n. Garantiza el desgaste uniforme de las llantas y una conducci\u00f3n suave y segura.",
             "caracteristicas": [
-                "Alineación láser computarizada",
+                "Alineaci\u00f3n l\u00e1ser computarizada",
                 "Balanceo de 4 llantas",
-                "Ajuste de geometría",
-                "Inspección de suspensión",
-                "Reporte impreso de alineación"
+                "Ajuste de geometr\u00eda",
+                "Inspecci\u00f3n de suspensi\u00f3n",
+                "Reporte impreso de alineaci\u00f3n"
             ],
             "imagen": "https:\/\/images.unsplash.com\/photo-1625047509168-a7026f36de04?w=800"
         },
@@ -47,13 +47,24 @@
                 "Lavado exterior con espuma activa",
                 "Encerado y pulido",
                 "Aspirado completo interior",
-                "Limpieza de tapicería",
+                "Limpieza de tapicer\u00eda",
                 "Limpieza de motor",
-                "Brillado de llantas y neumáticos",
+                "Brillado de llantas y neum\u00e1ticos",
                 "Limpieza de vidrios interior\/exterior",
-                "Aromatización"
+                "Aromatizaci\u00f3n"
             ],
             "imagen": "https:\/\/images.unsplash.com\/photo-1601362840469-51e4d8d58785?w=800"
+        },
+        {
+            "id": 1765233391762,
+            "nombre": "Servicio de Prueba",
+            "categoria": "Accesorios",
+            "precio": 100000,
+            "duracion": "2 horas",
+            "descripcion_corta": "Prueba",
+            "descripcion": "prueba",
+            "caracteristicas": [],
+            "imagen": "..\/uploads\/693752efb6c07_1765233391.jpg"
         }
     ]
 }
