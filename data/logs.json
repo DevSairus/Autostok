@@ -991,6 +991,18 @@
             "usuario": "admin",
             "fecha": "2025-12-08 23:28:37",
             "ip": "::1"
+        },
+        {
+            "id": "1765288897_3836",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "superadmin",
+                "rol": "super_admin"
+            },
+            "usuario": "superadmin",
+            "fecha": "2025-12-09 15:01:37",
+            "ip": "::1"
         }
     ]
 }

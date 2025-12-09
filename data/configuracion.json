@@ -1,51 +1,38 @@
 {
     "general": {
         "nombreNegocio": "Autostok",
-        "nombre_empresa": "Autostok",
-        "telefonoWhatsappVehiculos": "+573001234567",
-        "telefonoWhatsappServicios": "+573007654321",
-        "telefonoWhatsappAlmacen": "+573005551234",
-        "correoNegocio": "contacto@autostok.com",
-        "correoCallCenter": "callcenter@autostok.com",
-        "correoAlmacen": "almacen@autostok.com",
-        "smtp_host": "smtp.gmail.com",
-        "smtp_port": 587,
-        "smtp_user": "aguirre984@gmail.com",
-        "smtp_password": "slhirvyacshyrbhy",
-        "smtp_secure": "tls",
-        "email_from": "aguirre984@gmail.com",
-        "color_primario": "#FFD700",
-        "telefono": "+573001234567",
-        "email": "contacto@autostok.com",
-        "whatsapp": "+573001234567",
-        "direccion": "Medellín, Colombia"
+        "telefonoWhatsappVehiculos": "+57 300 123 4567",
+        "telefonoWhatsappServicios": "+57 300 765 4321",
+        "telefonoWhatsappAlmacen": "+57 300 111 2222",
+        "correoNegocio": "info@autostok.com",
+        "correoCallCenter": "callcenter@autostok.com"
     },
     "nosotros": {
-        "descripcionNosotros": "Somos una empresa líder en venta de vehículos y servicios automotrices",
-        "anosExperiencia": "15",
-        "clientesSatisfechos": "5000",
-        "vehiculosVendidos": "2000"
+        "descripcionNosotros": "Somos una empresa líder en el sector automotriz, comprometidos con la excelencia en cada servicio que ofrecemos.",
+        "anosExperiencia": "10",
+        "clientesSatisfechos": "500",
+        "vehiculosVendidos": "1000"
     },
     "sucursales": {
         "sucursal1": {
-            "nombre": "Autostok Norte",
-            "direccion": "Calle 123 #45-67, Medellín",
-            "telefono": "+573001234567",
-            "whatsapp": "+573001234567",
-            "correo": "aguirre984@hotmail.com",
-            "horarioSemana": "8:00 AM - 6:00 PM",
-            "horarioSabado": "9:00 AM - 2:00 ",
-            "mapa": "<iframe src='https:\/\/www.google.com\/maps\/embed?...' width='100%' height='400'><\/iframe>"
-        },
-        "sucursal2": {
-            "nombre": "Autostok Sur",
-            "direccion": "Carrera 78 #90-12, Medellín",
-            "telefono": "+573007654321",
-            "whatsapp": "+573007654321",
-            "correo": "aguirre984@gmail.com",
+            "nombre": "Sucursal Norte",
+            "direccion": "Calle 123 #45-67, Itagüí, Antioquia",
+            "telefono": "+57 300 123 4567",
+            "whatsapp": "+57 300 123 4567",
+            "correo": "norte@autostok.com",
             "horarioSemana": "8:00 AM - 6:00 PM",
             "horarioSabado": "9:00 AM - 2:00 PM",
-            "mapa": "<iframe src='https:\/\/www.google.com\/maps\/embed?...' width='100%' height='400'><\/iframe>"
+            "mapa": "<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3976.442623435144!2d-74.07926362413316!3d4.692893341723369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ad8a1b44b29%3A0xfb0f2733076423e5!2sAutostok%20Morato%20Postventa%20Multimarca!5e0!3m2!1ses!2sco!4v1765288805144!5m2!1ses!2sco\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"><\/iframe>"
+        },
+        "sucursal2": {
+            "nombre": "Sucursal Sur",
+            "direccion": "Carrera 45 #12-34, Itagüí, Antioquia",
+            "telefono": "+57 300 765 4321",
+            "whatsapp": "+57 300 765 4321",
+            "correo": "sur@autostok.com",
+            "horarioSemana": "8:00 AM - 6:00 PM",
+            "horarioSabado": "9:00 AM - 2:00 PM",
+            "mapa": "<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3976.649064260732!2d-74.13745910321043!3d4.656517300000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9c7059fccacb%3A0xd833fdb9c111ce16!2sAutostok%20La%20Felicidad%20Postventa%20Multimarca!5e0!3m2!1ses!2sco!4v1765288983386!5m2!1ses!2sco\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"><\/iframe>"
         }
     },
     "pagos": [],

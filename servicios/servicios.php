@@ -32,6 +32,94 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
   <title>Servicios y Repuestos - Autostok</title>
   <link rel="stylesheet" href="css/servicios.css">
   <style>
+    /* Header Responsive */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 2px solid #FFD700;
+      box-shadow: 0 4px 20px rgba(255,215,0,0.2);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 10px rgba(255,215,0,0.5);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .header nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      transition: width 0.3s ease;
+    }
+
+    .header nav a:hover::after {
+      width: 100%;
+    }
+
+    .header nav a.active {
+      color: #FFD700;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #FFD700;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
     .vista-selector {
       display: flex;
       gap: 20px;
@@ -317,12 +405,65 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
     }
     
     @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(0,0,0,0.98);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+        transition: right 0.4s ease;
+        border-left: 2px solid #FFD700;
+      }
+
+      .header nav.active {
+        right: 0;
+      }
+
+      .header nav a {
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .header nav a::after {
+        bottom: 0;
+      }
+
       .filtros {
         grid-template-columns: 1fr;
       }
       
       .productos-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.2rem;
+      }
+
+      .header {
+        padding: 12px 15px;
+      }
+
+      .header nav {
+        width: 80%;
+        max-width: 250px;
+      }
+
+      .header nav a {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -332,12 +473,19 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
 
   <header class="header">
     <div class="logo">🚗 Autostok</div>
-    <nav>
-      <a href="../index.php">Inicio</a>
-      <a href="../vehiculos/catalogo.php">Vehículos</a>
-      <a href="servicios.php">Servicios</a>
-      <a href="../nosotros.php">Nosotros</a>
-      <a href="../contacto.php">Contacto</a>
+    
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <nav id="navMenu">
+      <a href="../index.php" class="nav-link">Inicio</a>
+      <a href="../vehiculos/catalogo.php" class="nav-link">Vehículos</a>
+      <a href="servicios.php" class="nav-link active">Servicios</a>
+      <a href="../nosotros.php" class="nav-link">Nosotros</a>
+      <a href="../contacto.php" class="nav-link">Contacto</a>
     </nav>
   </header>
 
@@ -890,6 +1038,33 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
         document.getElementById('modalProducto').style.display = 'none';
       }
     };
+  </script>
+
+  <script>
+    // Menú mobile responsive
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header')) {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>

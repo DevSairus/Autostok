@@ -3,34 +3,12 @@
         {
             "id": 1,
             "username": "admin",
-            "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC\/.og\/at2.uheWG\/igi",
-            "nombre": "Administrador Principal",
+            "password": "$2y$10$\/c4BtVIZ48ybvLBz5fvy2eIEHKJ1rs9Iq4fRRkPOGbU9hUngV8Ihu",
+            "nombre": "Super Administrador",
             "email": "admin@autostok.com",
             "rol": "super_admin",
             "activo": true,
-            "fecha_creacion": "2024-01-01 00:00:00",
-            "ultimo_acceso": null
-        },
-        {
-            "id": 2,
-            "username": "prueba",
-            "password": "$2y$10$f5fYUAtsie8vU3pLEjR9zOx6SCY5VPfwHnjMXot6Ivg8ZEY.Ko5wC",
-            "nombre": "Usuario de Prueba",
-            "email": "prueba@autostok.com",
-            "rol": "administrador",
-            "activo": true,
-            "fecha_creacion": "2024-01-01 00:00:00",
-            "ultimo_acceso": null
-        },
-        {
-            "id": 1764997017,
-            "username": "Vendedor",
-            "password": "$2y$10$XmGXf\/tynGUPqPdvVbwcaeeVwye1nRq45iS31bjr1IoX6elb85AyS",
-            "nombre": "Usuario Vendedor",
-            "email": "vendedor@gmail.com",
-            "rol": "ventas",
-            "activo": true,
-            "fecha_creacion": "2025-12-06 05:56:57",
+            "fecha_creacion": "2025-12-09 15:01:24",
             "ultimo_acceso": null
         }
     ],
@@ -38,50 +16,40 @@
         "super_admin": {
             "nombre": "Super Administrador",
             "permisos": [
-                "*"
+                "all"
             ]
         },
         "administrador": {
             "nombre": "Administrador",
             "permisos": [
-                "vehiculos.*",
-                "servicios.*",
-                "productos.*",
-                "citas.*",
-                "solicitudes.*",
-                "configuracion.*",
-                "logs.ver"
+                "vehiculos",
+                "servicios",
+                "productos",
+                "citas",
+                "solicitudes",
+                "configuracion"
             ]
         },
         "ventas": {
             "nombre": "Vendedor",
             "permisos": [
-                "vehiculos.ver",
-                "vehiculos.crear",
-                "vehiculos.editar",
-                "solicitudes.ver",
-                "solicitudes.editar",
-                "citas.ver"
+                "vehiculos",
+                "solicitudes",
+                "citas"
             ]
         },
         "taller": {
             "nombre": "Taller",
             "permisos": [
-                "servicios.ver",
-                "servicios.editar",
-                "productos.*",
-                "citas.*"
+                "servicios",
+                "productos",
+                "citas"
             ]
         },
         "visualizador": {
             "nombre": "Visualizador",
             "permisos": [
-                "vehiculos.ver",
-                "servicios.ver",
-                "productos.ver",
-                "citas.ver",
-                "solicitudes.ver",
-                "logs.ver"
+                "view_only"
             ]
         }
     }

@@ -1178,6 +1178,57 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
         grid-template-columns: 1fr;
       }
     }
+
+    /* Estilos para select de filtros de logs */
+    .filtro-select {
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+      min-width: 180px;
+    }
+
+    .filtro-select:hover {
+      border-color: #FFD700;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .filtro-select:focus {
+      border-color: #FFD700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .filtro-select option {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .filtro-select option:hover {
+      background: rgba(255, 215, 0, 0.2);
+    }
+
+    /* Asegurar que el section-header tenga buen espaciado */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .section-header > div {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
     </style>
 
   <script src="js/admin.js"></script>

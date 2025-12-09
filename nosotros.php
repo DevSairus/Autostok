@@ -34,7 +34,7 @@ $nosotros = $configData['nosotros'] ?? [];
       width: 100%;
       background: rgba(0,0,0,0.95);
       backdrop-filter: blur(10px);
-      padding: 20px 50px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -44,24 +44,27 @@ $nosotros = $configData['nosotros'] ?? [];
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #FFD700;
       text-shadow: 0 0 10px rgba(255,215,0,0.5);
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .header nav {
       display: flex;
-      gap: 30px;
+      gap: 20px;
+      align-items: center;
     }
 
     .header nav a {
       color: #fff;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
       position: relative;
+      white-space: nowrap;
     }
 
     .header nav a::after {
@@ -79,32 +82,65 @@ $nosotros = $configData['nosotros'] ?? [];
       width: 100%;
     }
 
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #FFD700;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
     /* Navegación de secciones */
     .section-nav {
       position: fixed;
-      top: 100px;
+      top: 70px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       background: rgba(0,0,0,0.8);
-      padding: 15px 25px;
-      border-radius: 50px;
+      padding: 12px 15px;
+      border-radius: 30px;
       border: 2px solid rgba(255,215,0,0.3);
       backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 90%;
+      max-height: 100px;
+      overflow-y: auto;
     }
 
     .section-btn {
-      padding: 10px 20px;
+      padding: 8px 16px;
       background: rgba(255,215,0,0.1);
       color: #fff;
       border: 1px solid rgba(255,215,0,0.3);
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .section-btn:hover {
@@ -123,7 +159,7 @@ $nosotros = $configData['nosotros'] ?? [];
     .nosotros-container {
       position: relative;
       min-height: 100vh;
-      padding-top: 100px;
+      padding-top: 160px;
     }
 
     /* Secciones */
@@ -133,7 +169,7 @@ $nosotros = $configData['nosotros'] ?? [];
       left: 0;
       width: 100%;
       min-height: 100vh;
-      padding: 200px 50px 100px;
+      padding: 160px 20px 50px;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -143,6 +179,7 @@ $nosotros = $configData['nosotros'] ?? [];
       opacity: 1;
       visibility: visible;
       position: relative;
+      top: auto;
     }
 
     /* Sección Bienvenida */
@@ -153,39 +190,38 @@ $nosotros = $configData['nosotros'] ?? [];
       justify-content: center;
       text-align: center;
       background: linear-gradient(135deg, rgba(255,215,0,0.1), transparent);
+      padding: 40px 20px;
     }
 
     .welcome-section h1 {
-      font-size: 4rem;
+      font-size: clamp(2rem, 6vw, 4rem);
       color: #FFD700;
       margin-bottom: 20px;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      animation: fadeInDown 1s ease;
+      letter-spacing: 2px;
     }
 
     .welcome-section p {
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
       color: rgba(255,255,255,0.8);
       max-width: 800px;
       margin-bottom: 50px;
       line-height: 1.8;
-      animation: fadeInUp 1s ease 0.3s backwards;
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
       max-width: 900px;
       margin-top: 50px;
-      animation: fadeInUp 1s ease 0.6s backwards;
+      width: 100%;
     }
 
     .stat-card {
       background: rgba(255,215,0,0.05);
-      padding: 30px;
-      border-radius: 20px;
+      padding: 20px;
+      border-radius: 15px;
       border: 2px solid rgba(255,215,0,0.3);
       text-align: center;
       transition: all 0.3s ease;
@@ -198,34 +234,34 @@ $nosotros = $configData['nosotros'] ?? [];
     }
 
     .stat-number {
-      font-size: 3rem;
+      font-size: clamp(2rem, 4vw, 3rem);
       color: #FFD700;
       font-weight: bold;
       margin-bottom: 10px;
     }
 
     .stat-label {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: rgba(255,255,255,0.7);
     }
 
-    /* Sección con Timeline */
+    /* Sección Timeline */
     .timeline-section {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      padding-left: 100px;
+      padding: 40px 20px;
     }
 
     .timeline-section h2 {
-      font-size: 3rem;
+      font-size: clamp(1.8rem, 5vw, 3rem);
       color: #FFD700;
       margin-bottom: 20px;
       text-transform: uppercase;
     }
 
     .timeline-years {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: rgba(255,215,0,0.7);
       margin-bottom: 40px;
     }
@@ -233,7 +269,7 @@ $nosotros = $configData['nosotros'] ?? [];
     /* Timeline vertical */
     .timeline {
       position: relative;
-      padding: 40px 0;
+      padding: 20px 0 20px 30px;
     }
 
     .timeline::before {
@@ -242,62 +278,63 @@ $nosotros = $configData['nosotros'] ?? [];
       left: 0;
       top: 0;
       bottom: 0;
-      width: 4px;
+      width: 3px;
       background: linear-gradient(180deg, #FFD700, rgba(255,215,0,0.2));
     }
 
     .timeline-item {
       position: relative;
-      padding-left: 60px;
-      margin-bottom: 50px;
-      animation: fadeInLeft 0.8s ease;
+      padding-left: 30px;
+      margin-bottom: 40px;
     }
 
     .timeline-dot {
       position: absolute;
-      left: -10px;
+      left: -12px;
       top: 0;
       width: 24px;
       height: 24px;
       background: #FFD700;
       border-radius: 50%;
-      border: 4px solid #000;
+      border: 3px solid #000;
       box-shadow: 0 0 20px rgba(255,215,0,0.5);
       z-index: 2;
     }
 
     .timeline-content {
       background: rgba(255,215,0,0.05);
-      padding: 30px;
-      border-radius: 15px;
-      border-left: 4px solid #FFD700;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 3px solid #FFD700;
     }
 
     .timeline-content h3 {
       color: #FFD700;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      margin-bottom: 12px;
     }
 
     .timeline-content p {
       color: rgba(255,255,255,0.85);
       line-height: 1.8;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       margin-bottom: 15px;
+      text-align: justify;
     }
 
     .timeline-content ul {
       list-style: none;
       padding-left: 0;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .timeline-content li {
       color: rgba(255,255,255,0.85);
-      padding: 10px 0;
-      padding-left: 30px;
+      padding: 8px 0;
+      padding-left: 25px;
       position: relative;
       line-height: 1.6;
+      font-size: 0.95rem;
     }
 
     .timeline-content li::before {
@@ -305,18 +342,19 @@ $nosotros = $configData['nosotros'] ?? [];
       position: absolute;
       left: 0;
       color: #FFD700;
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     /* Sección Actualidad */
     .today-section {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       text-align: center;
+      padding: 40px 20px;
     }
 
     .today-section h2 {
-      font-size: 3.5rem;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
       color: #FFD700;
       margin-bottom: 30px;
       text-transform: uppercase;
@@ -324,71 +362,73 @@ $nosotros = $configData['nosotros'] ?? [];
 
     .today-content {
       background: rgba(255,215,0,0.05);
-      padding: 50px;
-      border-radius: 25px;
+      padding: 30px;
+      border-radius: 15px;
       border: 2px solid rgba(255,215,0,0.3);
-      margin-bottom: 50px;
+      margin-bottom: 40px;
+      text-align: left;
     }
 
     .today-content p {
-      font-size: 1.2rem;
-      line-height: 2;
+      font-size: 1rem;
+      line-height: 1.8;
       color: rgba(255,255,255,0.85);
-      margin-bottom: 30px;
-      text-align: left;
+      margin-bottom: 20px;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
     }
 
     .service-card {
       background: rgba(0,0,0,0.5);
-      padding: 30px;
-      border-radius: 15px;
+      padding: 20px;
+      border-radius: 12px;
       border: 2px solid rgba(255,215,0,0.3);
       transition: all 0.3s ease;
+      text-align: center;
     }
 
     .service-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
       border-color: #FFD700;
-      box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+      box-shadow: 0 10px 25px rgba(255,215,0,0.3);
     }
 
     .service-card h4 {
       color: #FFD700;
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
     }
 
     /* Sección Misión y Visión */
     .mission-vision-section {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
+      padding: 40px 20px;
     }
 
     .mission-vision-section h2 {
-      font-size: 3.5rem;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
       color: #FFD700;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       text-align: center;
       text-transform: uppercase;
     }
 
     .mv-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
 
     .mv-card {
       background: rgba(255,215,0,0.05);
-      padding: 50px;
-      border-radius: 25px;
+      padding: 30px;
+      border-radius: 15px;
       border: 2px solid rgba(255,215,0,0.3);
       transition: all 0.3s ease;
     }
@@ -400,91 +440,178 @@ $nosotros = $configData['nosotros'] ?? [];
     }
 
     .mv-card h3 {
-      font-size: 2.5rem;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
       color: #FFD700;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       text-align: center;
     }
 
     .mv-card p {
-      font-size: 1.15rem;
-      line-height: 2;
+      font-size: 0.95rem;
+      line-height: 1.8;
       color: rgba(255,255,255,0.85);
       text-align: justify;
     }
 
-    /* Animaciones */
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
     /* Responsive */
-    @media (max-width: 968px) {
+    @media (max-width: 768px) {
       .header {
-        padding: 15px 20px;
+        padding: 12px 15px;
+      }
+
+      .logo {
+        font-size: 1.2rem;
+      }
+
+      .header nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(0,0,0,0.95);
+        padding: 20px;
+        gap: 10px;
+        border-bottom: 2px solid #FFD700;
+      }
+
+      .header nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header nav a {
+        font-size: 1rem;
+        padding: 10px 0;
       }
 
       .section-nav {
-        flex-wrap: wrap;
-        max-width: 90%;
+        top: 65px;
+        max-width: 95%;
+        max-height: 80px;
+        padding: 10px 12px;
+        gap: 6px;
+      }
+
+      .section-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+      }
+
+      .nosotros-container {
+        padding-top: 150px;
       }
 
       .section {
-        padding: 180px 20px 50px;
+        padding: 150px 15px 40px;
       }
 
-      .welcome-section h1 {
-        font-size: 2.5rem;
+      .welcome-section {
+        padding: 30px 15px;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+      .timeline {
+        padding: 15px 0 15px 20px;
       }
 
-      .timeline-section {
+      .timeline-item {
+        margin-bottom: 30px;
         padding-left: 20px;
       }
 
-      .timeline-section h2 {
-        font-size: 2rem;
+      .timeline-dot {
+        left: -10px;
+      }
+
+      .timeline::before {
+        left: -3px;
+      }
+
+      .timeline-content {
+        padding: 15px;
+      }
+
+      .today-content {
+        padding: 20px;
+      }
+
+      .today-content p {
+        font-size: 0.95rem;
+        text-align: left;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
       }
 
       .mv-grid {
         grid-template-columns: 1fr;
       }
 
-      .services-grid {
+      .mv-card {
+        padding: 20px;
+      }
+
+      .stats-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1rem;
+      }
+
+      .header {
+        padding: 10px 12px;
+      }
+
+      .section-nav {
+        top: 60px;
+        padding: 8px 10px;
+      }
+
+      .section-btn {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+      }
+
+      .nosotros-container {
+        padding-top: 130px;
+      }
+
+      .section {
+        padding: 130px 12px 30px;
+      }
+
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+
+      .stat-number {
+        font-size: 1.8rem;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+      }
+
+      .timeline-content h3 {
+        font-size: 1.1rem;
+      }
+
+      .timeline-content p {
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -493,12 +620,19 @@ $nosotros = $configData['nosotros'] ?? [];
 
   <header class="header">
     <div class="logo">🚗 AUTO STOK</div>
-    <nav>
-      <a href="index.php">Inicio</a>
-      <a href="vehiculos/catalogo.php">Vehículos</a>
-      <a href="servicios/servicios.php">Servicios</a>
-      <a href="nosotros.php">Nosotros</a>
-      <a href="contacto.php">Contacto</a>
+    
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <nav id="navMenu">
+      <a href="index.php" class="nav-link">Inicio</a>
+      <a href="vehiculos/catalogo.php" class="nav-link">Vehículos</a>
+      <a href="servicios/servicios.php" class="nav-link">Servicios</a>
+      <a href="nosotros.php" class="nav-link active">Nosotros</a>
+      <a href="contacto.php" class="nav-link">Contacto</a>
     </nav>
   </header>
 
@@ -712,9 +846,9 @@ $nosotros = $configData['nosotros'] ?? [];
           </div>
         </div>
 
-        <div class="today-content" style="margin-top: 40px;">
-          <p style="text-align: center; font-size: 1.3rem; color: #FFD700;">
-            <strong>Nuestro propósito sigue siendo el mismo que en 1982:</strong> trabajar con pasión, profesionalismo y transparencia para ofrecer a nuestros clientes una experiencia confiable, eficiente y humana, respaldada por décadas de experiencia.
+        <div class="today-content" style="margin-top: 30px;">
+          <p style="text-align: center; font-size: 1.1rem; color: #FFD700; font-weight: 600;">
+            Nuestro propósito sigue siendo el mismo que en 1982: trabajar con pasión, profesionalismo y transparencia para ofrecer a nuestros clientes una experiencia confiable, eficiente y humana.
           </p>
         </div>
       </div>
@@ -729,13 +863,13 @@ $nosotros = $configData['nosotros'] ?? [];
           <div class="mv-card">
             <h3>🎯 MISIÓN</h3>
             <p>Somos un taller multimarca y un reconocido punto de venta de vehículos usados a nivel nacional. Ofrecemos servicios automotrices de excelencia y soluciones integrales en venta de vehículos usados, brindando servicios de mantenimiento y reparación de vehículos de diversas marcas con excelencia, profesionalismo, honestidad y compromiso.</p>
-            <p>Nos dedicamos a garantizar la satisfacción y confianza de nuestros clientes, el bienestar y desarrollo de nuestro equipo, y el crecimiento sostenible de la empresa, destacándonos por calidad, eficiencia y servicio personalizado.</p>
+            <p>Nos dedicamos a garantizar la satisfacción y confianza de nuestros clientes, el bienestar y desarrollo de nuestro equipo, y el crecimiento sostenible de la empresa.</p>
           </div>
 
           <div class="mv-card">
             <h3>🚀 VISIÓN</h3>
             <p>Ser un taller multimarca y un reconocido punto de venta de vehículos usados en el sector automotriz, con presencia a nivel nacional y proyección internacional. Representar diversas marcas y trabajar siempre con honestidad, respeto y compromiso.</p>
-            <p>Nuestro objetivo es promover el bienestar y la estabilidad de nuestros colaboradores, así como la fidelización de nuestros clientes, destacándonos por el liderazgo en calidad, servicio al cliente, talento humano, rentabilidad y solidez financiera.</p>
+            <p>Nuestro objetivo es promover el bienestar y la estabilidad de nuestros colaboradores, así como la fidelización de nuestros clientes, destacándonos por liderazgo en calidad, servicio al cliente y solidez financiera.</p>
           </div>
         </div>
       </div>
@@ -746,7 +880,24 @@ $nosotros = $configData['nosotros'] ?? [];
   <?php include 'footer.php'; ?>
 
 <script>
-  // Navegación solo por botones — sin scroll ni teclado
+  // Menú mobile
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  // Cerrar menú al hacer clic en un enlace
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+
+  // Navegación de secciones
   let seccionActual = 0;
   let isTransitioning = false;
 
@@ -754,12 +905,10 @@ $nosotros = $configData['nosotros'] ?? [];
   const buttons = Array.from(document.querySelectorAll('.section-btn'));
   const totalSecciones = sections.length;
 
-  // Inicializar seccionActual según la que venga activa en el DOM (si aplica)
   const inicial = sections.findIndex(s => s.classList.contains('active'));
   if (inicial >= 0) seccionActual = inicial;
 
   function cambiarSeccion(index) {
-    // Validar índice y bloqueo por transición
     if (index < 0 || index >= totalSecciones) return;
     if (isTransitioning) return;
 
@@ -767,7 +916,6 @@ $nosotros = $configData['nosotros'] ?? [];
     const nuevaSeccion = document.querySelector(`.section[data-section="${index}"]`) || sections[index];
 
     if (!nuevaSeccion || seccionAnterior === nuevaSeccion) {
-      // Aun así actualizar estado de botones por si se llamó externamente
       actualizarBotones(index);
       seccionActual = index;
       return;
@@ -775,21 +923,17 @@ $nosotros = $configData['nosotros'] ?? [];
 
     isTransitioning = true;
 
-    // Fade out de la sección anterior (el CSS ya controla .active)
     if (seccionAnterior) {
       seccionAnterior.classList.remove('active');
     }
 
-    // Tiempo para que termine el efecto de salida antes de mostrar la nueva
-    const TRANSITION_MS = 350; // ajusta si tus animaciones usan otro tiempo
+    const TRANSITION_MS = 350;
 
     setTimeout(() => {
-      // Mostrar nueva sección (sin hacer scroll)
       nuevaSeccion.classList.add('active');
       seccionActual = index;
       actualizarBotones(index);
 
-      // Pequeña pausa para evitar clics rápidos
       setTimeout(() => {
         isTransitioning = false;
       }, 60);
@@ -799,18 +943,15 @@ $nosotros = $configData['nosotros'] ?? [];
   function actualizarBotones(activeIndex) {
     buttons.forEach((btn, i) => {
       btn.classList.toggle('active', i === activeIndex);
-      // accesibilidad: aria-current en botones
       btn.setAttribute('aria-current', i === activeIndex ? 'true' : 'false');
     });
   }
 
-  // Asegurar que los botones llamen a cambiarSeccion si no lo hacen por inline onclick
   buttons.forEach((btn, i) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       cambiarSeccion(i);
     });
-    // permitir activación por Enter/Space en teclado (pero no flechas)
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -819,25 +960,6 @@ $nosotros = $configData['nosotros'] ?? [];
     });
   });
 
-  // -------- Mantener animación de timeline (no cambia navegación) --------
-  const observerOptions = {
-    threshold: 0.2,
-    rootMargin: '0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'fadeInLeft 0.8s ease forwards';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
-  });
-
-  // (Opcional) Exponer la función globalmente si la llamas desde HTML inline
   window.cambiarSeccion = cambiarSeccion;
 </script>
 
