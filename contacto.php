@@ -400,11 +400,12 @@ $sucursales = $configData['sucursales'] ?? [];
     </div>
     
     <nav id="navMenu">
-      <a href="index.php" class="nav-link">Inicio</a>
-      <a href="../vehiculos/catalogo.php" class="nav-link">Vehículos</a>
-      <a href="../servicios/servicios.php" class="nav-link">Servicios</a>
-      <a href="nosotros.php" class="nav-link">Nosotros</a>
-      <a href="contacto.php" class="nav-link active">Contacto</a>
+      <a href="index.php">Inicio</a>
+      <a href="vehiculos/catalogo.php">Vehículos</a>
+      <a href="servicios/servicios.php">Servicios</a>
+      <a href="nosotros.php">Nosotros</a>
+      <a href="autostok-team.php">Team</a>
+      <a href="contacto.php">Contacto</a>
     </nav>
   </header>
 

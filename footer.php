@@ -94,6 +94,7 @@ $horarios = $configData['horarios'] ?? [];
         <li><a href="/vehiculos/catalogo.php">Vehículos</a></li>
         <li><a href="/servicios/servicios.php">Servicios</a></li>
         <li><a href="/nosotros.php">Nosotros</a></li>
+        <li><a href="/autostok-team.php">Autostok Team</a></li>
         <li><a href="/contacto.php">Contacto</a></li>
       </ul>
     </div>
