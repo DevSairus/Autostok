@@ -1003,6 +1003,18 @@
             "usuario": "superadmin",
             "fecha": "2025-12-09 15:01:37",
             "ip": "::1"
+        },
+        {
+            "id": "1767644162_9416",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-05 21:16:02",
+            "ip": "::1"
         }
     ]
 }

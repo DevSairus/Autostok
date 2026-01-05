@@ -21,7 +21,7 @@ $nosotros = $configData['nosotros'] ?? [];
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Avenir', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;

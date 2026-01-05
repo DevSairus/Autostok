@@ -244,7 +244,7 @@ Edita `/admin/api/email-templates.php`:
 $colorPrimario = $config['general']['color_primario'] ?? '#007bff';
 
 // Cambiar fuente
-font-family: Arial, sans-serif;  // Cambiar a 'Helvetica' o 'Verdana'
+font-family: 'Avenir', sans-serif;
 
 // Cambiar tamaño de título
 font-size: 28px;  // Ajustar según preferencia

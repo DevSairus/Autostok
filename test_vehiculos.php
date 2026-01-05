@@ -96,7 +96,7 @@ if (count($vehiculos) > 0) {
 
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Avenir', sans-serif;
         padding: 20px;
         background: #000;
         color: #fff;

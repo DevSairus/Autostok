@@ -1,3 +1,5 @@
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,10 +12,11 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Avenir', sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Avenir', sans-serif;
       background: #000;
       color: #fff;
       overflow-x: hidden;
@@ -202,33 +205,8 @@
 </head>
 <body>
 
-  <!-- <header class="header">
-    <div class="logo">🚗 Autostok</div>
-    <nav class="nav">
-      <a href="index.php">Inicio</a>
-      <a href="vehiculos/catalogo.php">Vehículos</a>
-      <a href="servicios/servicios.php">Servicios</a>
-      <a href="nosotros.php">Nosotros</a>
-      <a href="contacto.php">Contacto</a>
-    </nav>
-  </header> -->
-
-  <div class="main-container" style="margin-top: 10px;">
-    <a href="vehiculos/catalogo.php" class="section-link">
-      <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200" alt="Catálogo" class="section-image">
-      <div class="section-overlay">
-        <h1 class="section-title">Vehículos</h1>
-        <p class="section-description">Descubre nuestra exclusiva selección de vehículos premium. Calidad, estilo y potencia en cada modelo.</p>
-      </div>
-    </a>
-
-    <a href="servicios/servicios.php" class="section-link">
-      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200" alt="Servicios" class="section-image">
-      <div class="section-overlay">
-        <h1 class="section-title">Servicios</h1>
-        <p class="section-description">Taller especializado, mantenimiento, accesorios y todo lo que tu vehículo necesita.</p>
-      </div>
-    </a>
+  <div class="main-container" style="margin-top: 10px;" id="mainContainer">
+    <!-- Las secciones se cargan aquí con JavaScript -->
   </div>
 
   <!-- Modal de Pagos PSE -->
@@ -263,6 +241,56 @@
   </style>
 
   <script>
+    // Cargar configuración y renderizar imágenes
+    async function cargarImagenes() {
+      try {
+        const response = await fetch('data/configuracion.json');
+        const config = await response.json();
+        const imagenes = config.imagenes || {};
+        const container = document.getElementById('mainContainer');
+        
+        let html = '';
+        
+        // Sección 1: Vehículos
+        const sec1 = imagenes.index_seccion1 || {
+          titulo: 'Vehículos',
+          descripcion: 'Descubre nuestra exclusiva selección de vehículos premium.',
+          imagen: 'uploads/index_vehiculos.jpg',
+          enlace: 'vehiculos/catalogo.php'
+        };
+        
+        // Sección 2: Servicios
+        const sec2 = imagenes.index_seccion2 || {
+          titulo: 'Servicios',
+          descripcion: 'Taller especializado, mantenimiento, accesorios y todo lo que tu vehículo necesita.',
+          imagen: 'uploads/index_servicios.jpg',
+          enlace: 'servicios/servicios.php'
+        };
+        
+        html = `
+          <a href="${sec1.enlace}" class="section-link">
+            <img src="${sec1.imagen}" alt="${sec1.titulo}" class="section-image" onerror="this.src='https://via.placeholder.com/1200x800?text=${sec1.titulo}'">
+            <div class="section-overlay">
+              <h1 class="section-title">${sec1.titulo}</h1>
+              <p class="section-description">${sec1.descripcion}</p>
+            </div>
+          </a>
+
+          <a href="${sec2.enlace}" class="section-link">
+            <img src="${sec2.imagen}" alt="${sec2.titulo}" class="section-image" onerror="this.src='https://via.placeholder.com/1200x800?text=${sec2.titulo}'">
+            <div class="section-overlay">
+              <h1 class="section-title">${sec2.titulo}</h1>
+              <p class="section-description">${sec2.descripcion}</p>
+            </div>
+          </a>
+        `;
+        
+        container.innerHTML = html;
+      } catch (error) {
+        console.error('Error cargando configuración:', error);
+      }
+    }
+
     function abrirModalPago() {
       document.getElementById('modalPago').classList.add('active');
       document.getElementById('loadingPago').style.display = 'flex';
@@ -278,7 +306,12 @@
       document.getElementById('modalPago').classList.remove('active');
       document.getElementById('iframePSE').src = '';
     }
+
+    // Cargar imágenes al iniciar
+    document.addEventListener('DOMContentLoaded', cargarImagenes);
   </script>
 
 </body>
 </html>
+
+<?php

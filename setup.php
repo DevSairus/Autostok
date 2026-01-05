@@ -206,7 +206,7 @@ $permisos['uploads/'] = is_writable('uploads/') ? 'âœ… Escritura permitida' : 'â
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Avenir', sans-serif;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
             color: #fff;
             padding: 30px;

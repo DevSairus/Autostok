@@ -1283,3 +1283,42 @@ document.getElementById('imagenProductoFile')?.addEventListener('change', functi
     previsualizarImagen(e.target.files[0], 'previewImagenProducto');
   }
 });
+
+function previewImagen(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+async function guardarImagen(numero) {
+  const formData = new FormData();
+  const imagenInput = document.getElementById(`imagen${numero}`);
+  formData.append(`titulo${numero}`, document.getElementById(`titulo${numero}`).value);
+  formData.append(`descripcion${numero}`, document.getElementById(`descripcion${numero}`).value);
+  formData.append(`enlace${numero}`, document.getElementById(`enlace${numero}`).value);
+  if (imagenInput.files[0]) {
+    formData.append(`imagen${numero}`, imagenInput.files[0]);
+  }
+
+  try {
+    const response = await fetch('api/guardar-imagenes.php', {
+      method: 'POST',
+      body: formData
+    });
+    const result = await response.json();
+    const msgEl = document.getElementById('mensaje-imagen');
+    msgEl.className = result.success ? 'alert alert-success' : 'alert alert-error';
+    msgEl.textContent = result.message;
+    msgEl.style.display = 'block';
+    setTimeout(() => msgEl.style.display = 'none', 3000);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}

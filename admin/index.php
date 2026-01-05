@@ -74,6 +74,10 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <span class="icon">📊</span>
           <span>Dashboard</span>
         </a>
+        <a href="#imagenes" class="nav-item" onclick="mostrarSeccion('imagenes')">
+          <span class="icon">🖼️</span>
+          <span>Imágenes Home</span>
+        </a>
         <a href="#vehiculos" class="nav-item" onclick="mostrarSeccion('vehiculos')">
           <span class="icon">🚗</span>
           <span>Vehículos</span>
@@ -222,6 +226,92 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
             ?>
           </div>
         </div>
+      </section>
+
+      <!-- NUEVA SECCIÓN: IMÁGENES HOME -->
+      <section id="imagenes" class="section">
+        <div class="section-header">
+          <h2>Editar Imágenes de Inicio</h2>
+          <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Cambia las imágenes principales de la página de inicio</p>
+        </div>
+
+        <div class="imagenes-grid">
+          <!-- Sección 1: Vehículos -->
+          <div class="imagen-card">
+            <h3>🚗 Sección 1: Vehículos</h3>
+            
+            <form id="formImagen1" class="imagen-form">
+              <div class="form-group">
+                <label>Título</label>
+                <input type="text" id="titulo1" value="Vehículos" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea id="descripcion1" rows="2" class="form-control">Descubre nuestra exclusiva selección de vehículos premium. Calidad, estilo y potencia en cada modelo.</textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Imagen</label>
+                <input type="file" id="imagen1" accept="image/*" onchange="previewImagen('imagen1', 'preview1')" class="form-control">
+                <p class="helper-text">Formatos: JPG, PNG, WebP. Máximo 5MB</p>
+              </div>
+
+              <div class="form-group">
+                <label>Vista Previa Actual</label>
+                <div class="preview-container">
+                  <img id="preview1" alt="Preview" style="display: none;">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Enlace de Destino</label>
+                <input type="text" id="enlace1" value="vehiculos/catalogo.php" class="form-control">
+              </div>
+
+              <button type="button" class="btn-primary" onclick="guardarImagen(1)">💾 Guardar Cambios</button>
+            </form>
+          </div>
+
+          <!-- Sección 2: Servicios -->
+          <div class="imagen-card">
+            <h3>🔧 Sección 2: Servicios</h3>
+            
+            <form id="formImagen2" class="imagen-form">
+              <div class="form-group">
+                <label>Título</label>
+                <input type="text" id="titulo2" value="Servicios" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea id="descripcion2" rows="2" class="form-control">Taller especializado, mantenimiento, accesorios y todo lo que tu vehículo necesita.</textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Imagen</label>
+                <input type="file" id="imagen2" accept="image/*" onchange="previewImagen('imagen2', 'preview2')" class="form-control">
+                <p class="helper-text">Formatos: JPG, PNG, WebP. Máximo 5MB</p>
+              </div>
+
+              <div class="form-group">
+                <label>Vista Previa Actual</label>
+                <div class="preview-container">
+                  <img id="preview2" alt="Preview" style="display: none;">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Enlace de Destino</label>
+                <input type="text" id="enlace2" value="servicios/servicios.php" class="form-control">
+              </div>
+
+              <button type="button" class="btn-primary" onclick="guardarImagen(2)">💾 Guardar Cambios</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="mensajeImagenes" class="mensaje" style="display: none;"></div>
       </section>
 
       <!-- Vehículos Section -->
@@ -1123,6 +1213,91 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
   <?php endif; ?>
 
   <style>
+    /* Estilos para la nueva sección de imágenes */
+    .imagenes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .imagen-card {
+      background: rgba(255,215,0,0.05);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 15px;
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .imagen-card:hover {
+      border-color: #FFD700;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.2);
+    }
+
+    .imagen-card h3 {
+      color: #FFD700;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .imagen-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .preview-container {
+      min-height: 200px;
+      background: rgba(0,0,0,0.3);
+      border: 2px dashed rgba(255,215,0,0.3);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-container img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 5px;
+    }
+
+    .mensaje {
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 600;
+      animation: slideIn 0.5s ease;
+    }
+
+    .mensaje.exito {
+      background: rgba(0,255,0,0.1);
+      border: 2px solid rgba(0,255,0,0.5);
+      color: #0f0;
+      display: block;
+    }
+
+    .mensaje.error {
+      background: rgba(255,0,0,0.1);
+      border: 2px solid rgba(255,0,0,0.5);
+      color: #f00;
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Estilos originales de configuración */
     .config-tabs {
       display: flex;
       gap: 10px;
@@ -1174,7 +1349,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
     }
 
     @media (max-width: 768px) {
-      .sucursales-grid {
+      .sucursales-grid, .imagenes-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1229,8 +1404,111 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       gap: 10px;
       align-items: center;
     }
-    </style>
+  </style>
 
   <script src="js/admin.js"></script>
+  <script>
+    // Funciones adicionales para la gestión de imágenes del home
+    function previewImagen(inputId, previewId) {
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    async function guardarImagen(numero) {
+      const formData = new FormData();
+      const imagenInput = document.getElementById(`imagen${numero}`);
+      
+      formData.append(`titulo${numero}`, document.getElementById(`titulo${numero}`).value);
+      formData.append(`descripcion${numero}`, document.getElementById(`descripcion${numero}`).value);
+      formData.append(`enlace${numero}`, document.getElementById(`enlace${numero}`).value);
+      
+      if (imagenInput.files[0]) {
+        formData.append(`imagen${numero}`, imagenInput.files[0]);
+      }
+
+      try {
+        const response = await fetch('api/guardar-imagenes.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        const mensajeEl = document.getElementById('mensajeImagenes');
+        
+        if (result.success) {
+          mensajeEl.className = 'mensaje exito';
+          mensajeEl.textContent = '✓ ' + result.message;
+          mensajeEl.style.display = 'block';
+          setTimeout(() => mensajeEl.style.display = 'none', 3000);
+        } else {
+          mensajeEl.className = 'mensaje error';
+          mensajeEl.textContent = '✗ Error: ' + (result.message || 'No se pudieron guardar los cambios');
+          mensajeEl.style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        const mensajeEl = document.getElementById('mensajeImagenes');
+        mensajeEl.className = 'mensaje error';
+        mensajeEl.textContent = '✗ Error al guardar los cambios';
+        mensajeEl.style.display = 'block';
+      }
+    }
+
+    // Cargar imágenes actuales al iniciar
+    window.addEventListener('load', async () => {
+      try {
+        const response = await fetch('../data/configuracion.json');
+        const config = await response.json();
+        const imagenes = config.imagenes || {};
+
+        // Cargar datos de sección 1
+        if (imagenes.index_seccion1) {
+          if (imagenes.index_seccion1.titulo) {
+            document.getElementById('titulo1').value = imagenes.index_seccion1.titulo;
+          }
+          if (imagenes.index_seccion1.descripcion) {
+            document.getElementById('descripcion1').value = imagenes.index_seccion1.descripcion;
+          }
+          if (imagenes.index_seccion1.enlace) {
+            document.getElementById('enlace1').value = imagenes.index_seccion1.enlace;
+          }
+          if (imagenes.index_seccion1.imagen) {
+            const img1 = document.getElementById('preview1');
+            img1.src = '../' + imagenes.index_seccion1.imagen;
+            img1.style.display = 'block';
+          }
+        }
+
+        // Cargar datos de sección 2
+        if (imagenes.index_seccion2) {
+          if (imagenes.index_seccion2.titulo) {
+            document.getElementById('titulo2').value = imagenes.index_seccion2.titulo;
+          }
+          if (imagenes.index_seccion2.descripcion) {
+            document.getElementById('descripcion2').value = imagenes.index_seccion2.descripcion;
+          }
+          if (imagenes.index_seccion2.enlace) {
+            document.getElementById('enlace2').value = imagenes.index_seccion2.enlace;
+          }
+          if (imagenes.index_seccion2.imagen) {
+            const img2 = document.getElementById('preview2');
+            img2.src = '../' + imagenes.index_seccion2.imagen;
+            img2.style.display = 'block';
+          }
+        }
+      } catch (error) {
+        console.error('Error cargando imágenes:', error);
+      }
+    });
+  </script>
 </body>
 </html>
