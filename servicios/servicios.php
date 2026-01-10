@@ -29,7 +29,7 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servicios y Repuestos - Autostok</title>
+  <title>Servicios y Repuestos - Auto Stok</title>
   <link rel="stylesheet" href="css/servicios.css">
   <style>
     /* Header Responsive */
@@ -472,7 +472,7 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
 <body>
 
   <header class="header">
-    <div class="logo">🚗 Autostok</div>
+    <div class="logo">Auto Stok</div>
     
     <div class="menu-toggle" id="menuToggle">
       <span></span>
@@ -513,8 +513,8 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
         <label for="sucursalServicio">📍 Selecciona tu sucursal:</label>
         <select id="sucursalServicio">
           <option value="">Seleccionar sucursal</option>
-          <option value="sucursal1">Sucursal Norte</option>
-          <option value="sucursal2">Sucursal Sur</option>
+          <option value="sucursal1">Sede Morato</option>
+          <option value="sucursal2">Sede Felicidad</option>
         </select>
       </div>
 

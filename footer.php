@@ -13,7 +13,7 @@ $horarios = $configData['horarios'] ?? [];
   <div class="footer-container">
     <!-- Información General -->
     <div class="footer-col">
-      <h3>🚗 <?php echo htmlspecialchars($general['nombreNegocio'] ?? 'Autostok'); ?></h3>
+      <h3><?php echo htmlspecialchars($general['nombreNegocio'] ?? 'Auto Stok'); ?></h3>
       <p>Tu concesionario de confianza</p>
       <div class="footer-socials">
         <a href="mailto:<?php echo htmlspecialchars($general['correoNegocio'] ?? 'contacto@autostok.com'); ?>" class="social-link">
@@ -24,7 +24,7 @@ $horarios = $configData['horarios'] ?? [];
 
     <!-- Sucursal Norte -->
     <div class="footer-col">
-      <h3>📍 <?php echo htmlspecialchars($sucursales['sucursal1']['nombre'] ?? 'Sucursal Norte'); ?></h3>
+      <h3>📍 <?php echo htmlspecialchars($sucursales['sucursal1']['nombre'] ?? 'Sede Morato'); ?></h3>
       <p>
         <strong>Dirección:</strong><br>
         <?php echo htmlspecialchars($sucursales['sucursal1']['direccion'] ?? 'Por configurar'); ?>
@@ -56,7 +56,7 @@ $horarios = $configData['horarios'] ?? [];
 
     <!-- Sucursal Sur -->
     <div class="footer-col">
-      <h3>📍 <?php echo htmlspecialchars($sucursales['sucursal2']['nombre'] ?? 'Sucursal Sur'); ?></h3>
+      <h3>📍 <?php echo htmlspecialchars($sucursales['sucursal2']['nombre'] ?? 'Sede Felicidad'); ?></h3>
       <p>
         <strong>Dirección:</strong><br>
         <?php echo htmlspecialchars($sucursales['sucursal2']['direccion'] ?? 'Por configurar'); ?>
@@ -94,7 +94,7 @@ $horarios = $configData['horarios'] ?? [];
         <li><a href="/vehiculos/catalogo.php">Vehículos</a></li>
         <li><a href="/servicios/servicios.php">Servicios</a></li>
         <li><a href="/nosotros.php">Nosotros</a></li>
-        <li><a href="/autostok-team.php">Autostok Team</a></li>
+        <li><a href="/autostok-team.php">Auto Stok Team</a></li>
         <li><a href="/contacto.php">Contacto</a></li>
       </ul>
     </div>

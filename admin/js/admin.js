@@ -1,5 +1,5 @@
 // =============================================
-// ADMIN.JS - PANEL DE ADMINISTRACIÓN AUTOSTOK
+// ADMIN.JS - PANEL DE ADMINISTRACIÓN AUTO STOK
 // =============================================
 
 // ===== NAVEGACIÓN Y TABS =====
@@ -872,7 +872,7 @@ document.getElementById('formSucursal1')?.addEventListener('submit', async (e) =
     
     const result = await response.json();
     if (result.success) {
-      mostrarNotificacion('Sucursal Norte guardada exitosamente', 'success');
+      mostrarNotificacion('Sede Morato guardada exitosamente', 'success');
     } else {
       mostrarNotificacion('Error: ' + (result.message || 'No se pudo guardar'), 'error');
     }
@@ -905,7 +905,7 @@ document.getElementById('formSucursal2')?.addEventListener('submit', async (e) =
     
     const result = await response.json();
     if (result.success) {
-      mostrarNotificacion('Sucursal Sur guardada exitosamente', 'success');
+      mostrarNotificacion('Sede Felicidad guardada exitosamente', 'success');
     } else {
       mostrarNotificacion('Error: ' + (result.message || 'No se pudo guardar'), 'error');
     }

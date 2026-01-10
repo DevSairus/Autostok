@@ -33,16 +33,6 @@ $solicitudesData = file_exists('../data/solicitudes.json')
     : ['solicitudes' => []];
 $solicitudes = $solicitudesData['solicitudes'] ?? [];
 
-$usuariosData = file_exists('../data/usuarios.json') 
-    ? json_decode(file_get_contents('../data/usuarios.json'), true) 
-    : ['usuarios' => []];
-$usuarios = $usuariosData['usuarios'] ?? [];
-
-$sucursalesData = file_exists('../data/sucursales.json') 
-    ? json_decode(file_get_contents('../data/sucursales.json'), true) 
-    : ['sucursales' => []];
-$sucursales = $sucursalesData['sucursales'] ?? [];
-
 // Estadísticas
 $totalVehiculos = count($vehiculos);
 $totalServicios = count($servicios);
@@ -114,10 +104,6 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <span>Usuarios</span>
         </a>
         <?php endif; ?>
-        <!-- <a href="#sucursales" class="nav-item" onclick="mostrarSeccion('sucursales')">
-          <span class="icon">📍</span>
-          <span>Sucursales</span>
-        </a>  -->
         <a href="#configuracion" class="nav-item" onclick="mostrarSeccion('configuracion')">
           <span class="icon">⚙️</span>
           <span>Configuración</span>
@@ -140,7 +126,6 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <button class="btn-view-site" onclick="window.open('../index.php', '_blank')">Ver Sitio</button>
         </div>
       </header>
-
       <!-- Dashboard Section -->
       <section id="dashboard" class="section active">
         <div class="stats-grid">
@@ -228,7 +213,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
         </div>
       </section>
 
-      <!-- NUEVA SECCIÓN: IMÁGENES HOME -->
+      <!-- SECCIÓN: IMÁGENES HOME -->
       <section id="imagenes" class="section">
         <div class="section-header">
           <h2>Editar Imágenes de Inicio</h2>
@@ -240,7 +225,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <div class="imagen-card">
             <h3>🚗 Sección 1: Vehículos</h3>
             
-            <form id="formImagen1" class="imagen-form">
+            <form id="formImagen1" class="imagen-form" onsubmit="event.preventDefault();">
               <div class="form-group">
                 <label>Título</label>
                 <input type="text" id="titulo1" value="Vehículos" class="form-control">
@@ -254,7 +239,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
               <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" id="imagen1" accept="image/*" onchange="previewImagen('imagen1', 'preview1')" class="form-control">
-                <p class="helper-text">Formatos: JPG, PNG, WebP. Máximo 5MB</p>
+                <p class="helper-text">Formatos: JPG, PNG, WebP, GIF. Máximo 5MB</p>
               </div>
 
               <div class="form-group">
@@ -277,7 +262,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <div class="imagen-card">
             <h3>🔧 Sección 2: Servicios</h3>
             
-            <form id="formImagen2" class="imagen-form">
+            <form id="formImagen2" class="imagen-form" onsubmit="event.preventDefault();">
               <div class="form-group">
                 <label>Título</label>
                 <input type="text" id="titulo2" value="Servicios" class="form-control">
@@ -291,7 +276,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
               <div class="form-group">
                 <label>Imagen</label>
                 <input type="file" id="imagen2" accept="image/*" onchange="previewImagen('imagen2', 'preview2')" class="form-control">
-                <p class="helper-text">Formatos: JPG, PNG, WebP. Máximo 5MB</p>
+                <p class="helper-text">Formatos: JPG, PNG, WebP, GIF. Máximo 5MB</p>
               </div>
 
               <div class="form-group">
@@ -446,7 +431,6 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           </table>
         </div>
       </section>
-
       <!-- Citas Section -->
       <section id="citas" class="section">
         <div class="section-header">
@@ -641,105 +625,12 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       </section>
       <?php endif; ?>
 
-      <!-- Sucursales Section -->
-      <section id="sucursales" class="section">
-        <h2>Gestión de Sucursales</h2>
-        
-        <div class="config-cards">
-          <!-- Sucursal 1 -->
-          <div class="config-card">
-            <h3>📍 Sucursal Norte</h3>
-            <form id="form1">
-              <div class="form-group">
-                <label>Nombre de la Sucursal</label>
-                <input type="text" id="nombre1" placeholder="Autostok Norte" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Dirección</label>
-                <input type="text" id="direccion1" placeholder="Calle 123 #45-67" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Teléfono</label>
-                <input type="tel" id="telefono1" placeholder="+57 300 123 4567" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>WhatsApp</label>
-                <input type="tel" id="whatsapp1" placeholder="+57 300 123 4567" class="form-control">
-                <p class="helper-text">Número para recibir notificaciones de citas y servicios</p>
-              </div>
-              <div class="form-group">
-                <label>Correo Electrónico</label>
-                <input type="email" id="correo1" placeholder="norte@autostok.com" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Horario Lunes a Viernes</label>
-                <input type="text" id="horarioSemana1" placeholder="8:00 AM - 6:00 PM" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Horario Sábados</label>
-                <input type="text" id="horarioSabado1" placeholder="9:00 AM - 2:00 PM" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>URL de Google Maps (opcional)</label>
-                <input type="url" id="mapa1" placeholder="https://maps.google.com/..." class="form-control">
-                <p class="helper-text">Link de ubicación en Google Maps</p>
-              </div>
-              <button type="submit" class="btn-primary">Guardar Sucursal Norte</button>
-            </form>
-          </div>
-
-          <!-- Sucursal 2 -->
-          <div class="config-card">
-            <h3>📍 Sucursal Sur</h3>
-            <form id="form2">
-              <div class="form-group">
-                <label>Nombre de la Sucursal</label>
-                <input type="text" id="nombre2" placeholder="Autostok Sur" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Dirección</label>
-                <input type="text" id="direccion2" placeholder="Carrera 78 #90-12" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Teléfono</label>
-                <input type="tel" id="telefono2" placeholder="+57 300 765 4321" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>WhatsApp</label>
-                <input type="tel" id="whatsapp2" placeholder="+57 300 765 4321" class="form-control">
-                <p class="helper-text">Número para recibir notificaciones de citas y servicios</p>
-              </div>
-              <div class="form-group">
-                <label>Correo Electrónico</label>
-                <input type="email" id="correo2" placeholder="sur@autostok.com" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Horario Lunes a Viernes</label>
-                <input type="text" id="horarioSemana2" placeholder="8:00 AM - 6:00 PM" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Horario Sábados</label>
-                <input type="text" id="horarioSabado2" placeholder="9:00 AM - 2:00 PM" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>URL de Google Maps (opcional)</label>
-                <input type="url" id="mapa2" placeholder="https://maps.google.com/..." class="form-control">
-                <p class="helper-text">Link de ubicación en Google Maps</p>
-              </div>
-              <button type="submit" class="btn-primary">Guardar Sucursal Sur</button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      
-      <!-- Configuración y Sucursales Unificadas -->
+      <!-- Configuración Section -->
       <section id="configuracion" class="section">
         <h2>Configuración del Sistema</h2>
         
         <div class="config-tabs">
           <button class="tab-btn active" onclick="cambiarTab('general')">General</button>
-          <!-- <button class="tab-btn" onclick="cambiarTab('nosotros')">Nosotros</button> -->
           <button class="tab-btn" onclick="cambiarTab('sucursales')">Sucursales</button>
         </div>
 
@@ -788,36 +679,6 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
             </form>
           </div>
         </div>
-
-        <!-- TAB: NOSOTROS 
-        <div id="tab-nosotros" class="tab-content">
-          <div class="config-card">
-            <h3>ℹ️ Sección "Nosotros"</h3>
-            <form id="formConfigNosotros">
-              <div class="form-group">
-                <label>Descripción de la Empresa</label>
-                <textarea id="descripcionNosotros" rows="5" class="form-control" placeholder="Somos una empresa dedicada..."></textarea>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Años de Experiencia</label>
-                  <input type="number" id="anosExperiencia" class="form-control" min="0">
-                </div>
-                <div class="form-group">
-                  <label>Clientes Satisfechos</label>
-                  <input type="number" id="clientesSatisfechos" class="form-control" min="0">
-                </div>
-                <div class="form-group">
-                  <label>Vehículos Vendidos</label>
-                  <input type="number" id="vehiculosVendidos" class="form-control" min="0">
-                </div>
-              </div>
-              
-              <button type="submit" class="btn-primary">💾 Guardar Información</button>
-            </form>
-          </div>
-        </div> -->
 
         <!-- TAB: SUCURSALES -->
         <div id="tab-sucursales" class="tab-content">
@@ -918,8 +779,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       </section>
     </main>
   </div>
-
-<!-- Modal Formulario Vehículo - CON UPLOAD DE IMÁGENES -->
+  <!-- Modal Formulario Vehículo -->
 <div id="modalVehiculo" class="modal">
   <div class="modal-dialog">
     <div class="modal-header">
@@ -993,12 +853,9 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <textarea id="descripcion" name="descripcion" rows="4" class="form-control"></textarea>
         </div>
         
-        <!-- NUEVO: Input de archivos para imágenes -->
         <div class="form-group">
           <label>Imágenes del Vehículo</label>
-          <!-- Contenedor para imágenes actuales (edición) -->
           <div id="imagenesActualesVehiculo" style="margin-bottom: 15px;"></div>
-          <!-- Input para nuevas imágenes -->
           <input type="file" id="imagenesVehiculo" accept="image/*" multiple class="form-control">
           <p class="helper-text">Puedes seleccionar múltiples imágenes nuevas (máx 5MB cada una)</p>
           <div id="previewImagenesVehiculo" style="margin-top: 10px;"></div>
@@ -1012,7 +869,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
   </div>
 </div>
 
-<!-- Modal Formulario Servicio - CON UPLOAD DE IMAGEN -->
+<!-- Modal Formulario Servicio -->
 <div id="modalServicio" class="modal">
   <div class="modal-dialog">
     <div class="modal-header">
@@ -1061,12 +918,9 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <textarea id="caracteristicas" name="caracteristicas" rows="3" placeholder="Característica 1&#10;Característica 2" class="form-control"></textarea>
         </div>
         
-        <!-- NUEVO: Input de archivo para imagen -->
         <div class="form-group">
           <label>Imagen del Servicio</label>
-          <!-- Contenedor para imagen actual (edición) -->
           <div id="imagenActualServicio" style="margin-bottom: 15px;"></div>
-          <!-- Input para nueva imagen -->
           <input type="file" id="imagenServicioFile" accept="image/*" class="form-control">
           <p class="helper-text">Formato: JPG, PNG, WEBP (máx 5MB)</p>
           <div style="margin-top: 10px;">
@@ -1082,7 +936,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
   </div>
 </div>
 
-<!-- Modal Formulario Producto - CON UPLOAD DE IMAGEN -->
+<!-- Modal Formulario Producto -->
 <div id="modalProducto" class="modal">
   <div class="modal-dialog">
     <div class="modal-header">
@@ -1135,12 +989,9 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
           <textarea id="descripcionProducto" name="descripcion" rows="4" class="form-control"></textarea>
         </div>
         
-        <!-- NUEVO: Input de archivo para imagen -->
         <div class="form-group">
           <label>Imagen del Producto</label>
-          <!-- Contenedor para imagen actual (edición) -->
           <div id="imagenActualProducto" style="margin-bottom: 15px;"></div>
-          <!-- Input para nueva imagen -->
           <input type="file" id="imagenProductoFile" accept="image/*" class="form-control">
           <p class="helper-text">Formato: JPG, PNG, WEBP (máx 5MB)</p>
           <div style="margin-top: 10px;">
@@ -1156,63 +1007,62 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
   </div>
 </div>
 
-  <!-- Modal Formulario Usuario -->
-  <?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
-  <div id="modalUsuario" class="modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="tituloModalUsuario">Nuevo Usuario</h3>
-        <button class="btn-close" onclick="cerrarModalUsuario()">✕</button>
-      </div>
-      <form id="formUsuario">
-        <input type="hidden" id="usuarioId" name="id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Nombre de Usuario *</label>
-            <input type="text" id="username" name="username" required class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Contraseña *</label>
-            <input type="password" id="passwordUsuario" name="password" class="form-control">
-            <p class="helper-text" id="passwordHelper">Mínimo 6 caracteres</p>
-          </div>
-          <div class="form-group">
-            <label>Nombre Completo *</label>
-            <input type="text" id="nombreUsuario" name="nombre" required class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Email *</label>
-            <input type="email" id="emailUsuario" name="email" required class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Rol *</label>
-            <select id="rolUsuario" name="rol" required class="form-control">
-              <option value="">Seleccionar rol</option>
-              <option value="super_admin">Super Administrador</option>
-              <option value="administrador">Administrador</option>
-              <option value="ventas">Vendedor</option>
-              <option value="taller">Taller</option>
-              <option value="visualizador">Visualizador</option>
-            </select>
-            <p class="helper-text" id="rolDescripcion"></p>
-          </div>
-          <div class="form-group">
-            <label style="display: flex; align-items: center; gap: 10px;">
-              <input type="checkbox" id="activoUsuario" name="activo" checked style="width: auto;">
-              Usuario Activo
-            </label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="cerrarModalUsuario()">Cancelar</button>
-          <button type="submit" class="btn-primary">Guardar</button>
-        </div>
-      </form>
+<!-- Modal Formulario Usuario -->
+<?php if ($_SESSION['admin_rol'] === 'super_admin'): ?>
+<div id="modalUsuario" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="tituloModalUsuario">Nuevo Usuario</h3>
+      <button class="btn-close" onclick="cerrarModalUsuario()">✕</button>
     </div>
+    <form id="formUsuario">
+      <input type="hidden" id="usuarioId" name="id">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre de Usuario *</label>
+          <input type="text" id="username" name="username" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Contraseña *</label>
+          <input type="password" id="passwordUsuario" name="password" class="form-control">
+          <p class="helper-text" id="passwordHelper">Mínimo 6 caracteres</p>
+        </div>
+        <div class="form-group">
+          <label>Nombre Completo *</label>
+          <input type="text" id="nombreUsuario" name="nombre" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="emailUsuario" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Rol *</label>
+          <select id="rolUsuario" name="rol" required class="form-control">
+            <option value="">Seleccionar rol</option>
+            <option value="super_admin">Super Administrador</option>
+            <option value="administrador">Administrador</option>
+            <option value="ventas">Vendedor</option>
+            <option value="taller">Taller</option>
+            <option value="visualizador">Visualizador</option>
+          </select>
+          <p class="helper-text" id="rolDescripcion"></p>
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="activoUsuario" name="activo" checked style="width: auto;">
+            Usuario Activo
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="cerrarModalUsuario()">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
   </div>
-  <?php endif; ?>
-
-  <style>
+</div>
+<?php endif; ?>
+<style>
     /* Estilos para la nueva sección de imágenes */
     .imagenes-grid {
       display: grid;
@@ -1354,7 +1204,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       }
     }
 
-    /* Estilos para select de filtros de logs */
+    /* Estilos para select de filtros */
     .filtro-select {
       padding: 10px 15px;
       background: rgba(0, 0, 0, 0.5);
@@ -1389,7 +1239,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
       background: rgba(255, 215, 0, 0.2);
     }
 
-    /* Asegurar que el section-header tenga buen espaciado */
+    /* Section header spacing */
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -1406,109 +1256,8 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
     }
   </style>
 
+  <!-- Incluir archivos JavaScript -->
   <script src="js/admin.js"></script>
-  <script>
-    // Funciones adicionales para la gestión de imágenes del home
-    function previewImagen(inputId, previewId) {
-      const input = document.getElementById(inputId);
-      const preview = document.getElementById(previewId);
-      
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    async function guardarImagen(numero) {
-      const formData = new FormData();
-      const imagenInput = document.getElementById(`imagen${numero}`);
-      
-      formData.append(`titulo${numero}`, document.getElementById(`titulo${numero}`).value);
-      formData.append(`descripcion${numero}`, document.getElementById(`descripcion${numero}`).value);
-      formData.append(`enlace${numero}`, document.getElementById(`enlace${numero}`).value);
-      
-      if (imagenInput.files[0]) {
-        formData.append(`imagen${numero}`, imagenInput.files[0]);
-      }
-
-      try {
-        const response = await fetch('api/guardar-imagenes.php', {
-          method: 'POST',
-          body: formData
-        });
-
-        const result = await response.json();
-        const mensajeEl = document.getElementById('mensajeImagenes');
-        
-        if (result.success) {
-          mensajeEl.className = 'mensaje exito';
-          mensajeEl.textContent = '✓ ' + result.message;
-          mensajeEl.style.display = 'block';
-          setTimeout(() => mensajeEl.style.display = 'none', 3000);
-        } else {
-          mensajeEl.className = 'mensaje error';
-          mensajeEl.textContent = '✗ Error: ' + (result.message || 'No se pudieron guardar los cambios');
-          mensajeEl.style.display = 'block';
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        const mensajeEl = document.getElementById('mensajeImagenes');
-        mensajeEl.className = 'mensaje error';
-        mensajeEl.textContent = '✗ Error al guardar los cambios';
-        mensajeEl.style.display = 'block';
-      }
-    }
-
-    // Cargar imágenes actuales al iniciar
-    window.addEventListener('load', async () => {
-      try {
-        const response = await fetch('../data/configuracion.json');
-        const config = await response.json();
-        const imagenes = config.imagenes || {};
-
-        // Cargar datos de sección 1
-        if (imagenes.index_seccion1) {
-          if (imagenes.index_seccion1.titulo) {
-            document.getElementById('titulo1').value = imagenes.index_seccion1.titulo;
-          }
-          if (imagenes.index_seccion1.descripcion) {
-            document.getElementById('descripcion1').value = imagenes.index_seccion1.descripcion;
-          }
-          if (imagenes.index_seccion1.enlace) {
-            document.getElementById('enlace1').value = imagenes.index_seccion1.enlace;
-          }
-          if (imagenes.index_seccion1.imagen) {
-            const img1 = document.getElementById('preview1');
-            img1.src = '../' + imagenes.index_seccion1.imagen;
-            img1.style.display = 'block';
-          }
-        }
-
-        // Cargar datos de sección 2
-        if (imagenes.index_seccion2) {
-          if (imagenes.index_seccion2.titulo) {
-            document.getElementById('titulo2').value = imagenes.index_seccion2.titulo;
-          }
-          if (imagenes.index_seccion2.descripcion) {
-            document.getElementById('descripcion2').value = imagenes.index_seccion2.descripcion;
-          }
-          if (imagenes.index_seccion2.enlace) {
-            document.getElementById('enlace2').value = imagenes.index_seccion2.enlace;
-          }
-          if (imagenes.index_seccion2.imagen) {
-            const img2 = document.getElementById('preview2');
-            img2.src = '../' + imagenes.index_seccion2.imagen;
-            img2.style.display = 'block';
-          }
-        }
-      } catch (error) {
-        console.error('Error cargando imágenes:', error);
-      }
-    });
-  </script>
+  <script src="js/imagenes-home.js"></script>
 </body>
 </html>

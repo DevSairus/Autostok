@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         
         <div class="footer">
-            <p>&copy; <?php echo date('Y'); ?> AUTO STOK. Todos los derechos reservados.</p>
+            <p>&copy; <?php echo date('Y'); ?> CodeGame Studio. Todos los derechos reservados.</p>
         </div>
     </div>
 </body>

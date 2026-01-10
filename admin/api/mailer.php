@@ -46,7 +46,7 @@ function crearMailer($config) {
         // Remitente
         $mail->setFrom(
             $config['general']['email_from'] ?? $config['general']['smtp_user'],
-            $config['general']['nombre_empresa'] ?? 'Autostok'
+            $config['general']['nombre_empresa'] ?? 'Auto Stok'
         );
         
         return $mail;
@@ -82,7 +82,7 @@ function enviarEmailNuevaCita($cita) {
         $resultado = enviarEmail(
             $config,
             $cita['correo'],
-            'Confirmación de Cita - ' . ($config['general']['nombre_empresa'] ?? 'Autostok'),
+            'Confirmación de Cita - ' . ($config['general']['nombre_empresa'] ?? 'Auto Stok'),
             generarTemplateClienteCita($cita, $config)
         );
         $resultados['cliente'] = $resultado;
@@ -146,7 +146,7 @@ function enviarEmailNuevaSolicitud($solicitud) {
         $resultado = enviarEmail(
             $config,
             $solicitud['correo'],
-            'Confirmación de Solicitud - ' . ($config['general']['nombre_empresa'] ?? 'Autostok'),
+            'Confirmación de Solicitud - ' . ($config['general']['nombre_empresa'] ?? 'Auto Stok'),
             generarTemplateClienteSolicitud($solicitud, $config)
         );
         $resultados['cliente'] = $resultado;

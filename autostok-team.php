@@ -11,7 +11,7 @@ $config = $configData['general'] ?? [];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autostok Team - Automovilismo Competitivo</title>
+  <title>Auto Stok Team - Automovilismo Competitivo</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     * {
@@ -1111,7 +1111,7 @@ $config = $configData['general'] ?? [];
 <body>
 
   <header class="header">
-    <div class="logo">🏎️ AUTOSTOK TEAM</div>
+    <div class="logo">AUTO STOK TEAM</div>
     
     <div class="menu-toggle" id="menuToggle">
       <span></span>
@@ -1147,13 +1147,13 @@ $config = $configData['general'] ?? [];
       <!-- ESPACIO PARA IMAGEN HERO DEL AUTO -->
       <!-- Guardar imagen como: images/team/hero-auto.png o .jpg -->
       <div class="hero-image-container">
-        <img src="images/team/hero-auto.png" alt="Autostok Team Auto" class="hero-image">
+        <img src="images/team/hero-auto.png" alt="Auto Stok Team Auto" class="hero-image">
       </div>
 
-      <h1>Autostok Team</h1>
+      <h1>Auto Stok Team</h1>
       <p>Somos el equipo más grande e importante a nivel nacional y Ecuatoriano. Contamos con una trayectoria de más de 27 años participando en las competencias automovilísticas de Colombia y en nuestro país vecino, Ecuador. Además de esto, también nos caracterizamos por tener la mayor cantidad de triunfos en todos los torneos nacionales; como también, el equipo con mayor consistencia dentro de nuestro deporte automotor.</p>
       
-      <p>AutoStok Team es un equipo predominante en el automovilismo, que siempre está y estará presente dentro de los campeonatos más importantes de Colombia y Ecuador. Nuestra organización nos permite siempre estar luchando por cada victoria que se pueda obtener, contando con los mejores pilotos, preparadores y personal humano, los cuales son insignias en cada una de sus funciones dentro del equipo y dentro del Autódromo de Tocancipá.</p>
+      <p>Auto Stok Team es un equipo predominante en el automovilismo, que siempre está y estará presente dentro de los campeonatos más importantes de Colombia y Ecuador. Nuestra organización nos permite siempre estar luchando por cada victoria que se pueda obtener, contando con los mejores pilotos, preparadores y personal humano, los cuales son insignias en cada una de sus funciones dentro del equipo y dentro del Autódromo de Tocancipá.</p>
       
       <div class="stats-grid">
         <div class="stat-card">
@@ -1450,12 +1450,12 @@ $config = $configData['general'] ?? [];
         <!-- ESPACIO PARA IMAGEN DE REDES SOCIALES -->
         <!-- Guardar como: images/team/redes-sociales.jpg -->
         <div class="hero-image-container" style="margin-bottom: 40px;">
-          <img src="images/team/redes-sociales.png" alt="Redes Sociales Autostok Team" class="hero-image">
+          <img src="images/team/redes-sociales.png" alt="Redes Sociales Auto Stok Team" class="hero-image">
         </div>
 
         <div style="text-align: center; background: linear-gradient(135deg, rgba(255,215,0,0.08) 0%, rgba(0,0,0,0.5) 100%); padding: 50px 30px; border-radius: 15px; border: 2px solid rgba(255,215,0,0.3); margin-bottom: 40px; animation: podiumRise 0.8s ease-out;">
           <p style="font-size: 1.3rem; color: rgba(255,255,255,0.9); line-height: 2; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
-            El equipo <strong style="color: #FFD700;">Autostok Team</strong> es un grupo de apasionados por los deportes de motor que se dedica a llevar la emoción de las carreras a otro nivel. Con una trayectoria destacada en el mundo del automovilismo, nuestro equipo se compromete a ofrecer experiencias inigualables tanto en la pista como fuera de ella. Cada miembro del equipo <strong style="color: #FFD700;">Autostok Team</strong> aporta su talento y dedicación para alcanzar el éxito y superar nuevos retos. ¡Síguenos y descubre el mundo de la velocidad y la adrenalina junto a nosotros!
+            El equipo <strong style="color: #FFD700;">Auto Stok Team</strong> es un grupo de apasionados por los deportes de motor que se dedica a llevar la emoción de las carreras a otro nivel. Con una trayectoria destacada en el mundo del automovilismo, nuestro equipo se compromete a ofrecer experiencias inigualables tanto en la pista como fuera de ella. Cada miembro del equipo <strong style="color: #FFD700;">Auto Stok Team</strong> aporta su talento y dedicación para alcanzar el éxito y superar nuevos retos. ¡Síguenos y descubre el mundo de la velocidad y la adrenalina junto a nosotros!
           </p>
           <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-top: 30px; font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
             ¡Gracias por ser parte de nuestra historia!
@@ -1467,7 +1467,7 @@ $config = $configData['general'] ?? [];
             <h3>📱 Redes Sociales</h3>
             <ul>
               <li>Instagram: @autostotkteam</li>
-              <li>Facebook: Autostok Team</li>
+              <li>Facebook: Auto Stok Team</li>
               <li>Cobertura digital permanente</li>
               <li>Experiencias y vivencias del equipo</li>
             </ul>
