@@ -180,49 +180,31 @@ $config = $configData['general'] ?? [];
       }
     }
 
-    /* Header con efecto de fibra de carbono */
+    /* /* Header uniforme con las demás páginas */
     .header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: 
-        linear-gradient(135deg, rgba(30,30,30,0.98) 0%, rgba(0,0,0,0.98) 100%),
-        repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,215,0,0.03) 2px, rgba(255,215,0,0.03) 4px);
+      background: rgba(0,0,0,0.95);
       backdrop-filter: blur(10px);
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      border-bottom: 3px solid #FFD700;
-      box-shadow: 
-        0 4px 20px rgba(255,215,0,0.3),
-        0 -1px 0 rgba(255,215,0,0.1) inset;
+      border-bottom: 2px solid #FFD700;
+      box-shadow: 0 4px 20px rgba(255,215,0,0.2);
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
       color: #FFD700;
-      text-shadow: 
-        0 0 10px rgba(255,215,0,0.8),
-        0 0 20px rgba(255,215,0,0.6),
-        2px 2px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 0 10px rgba(255,215,0,0.5);
       cursor: pointer;
       white-space: nowrap;
-      animation: championGlow 2s ease-in-out infinite;
-      position: relative;
-    }
-
-    .logo::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -30px;
-      width: 20px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #FFD700);
-      animation: speedStreak 2s ease-in-out infinite;
+      display: flex;
+      align-items: center;
     }
 
     .header nav {
@@ -238,39 +220,26 @@ $config = $configData['general'] ?? [];
       transition: all 0.3s ease;
       position: relative;
       white-space: nowrap;
-      padding: 5px 10px;
-    }
-
-    .header nav a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.5s ease;
-    }
-
-    .header nav a:hover::before {
-      transform: translateX(100%);
     }
 
     .header nav a::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: -5px;
       left: 0;
       width: 0;
       height: 2px;
       background: #FFD700;
       transition: width 0.3s ease;
-      box-shadow: 0 0 10px rgba(255,215,0,0.8);
     }
 
     .header nav a:hover::after {
       width: 100%;
+    }
+
+    .header nav a.active {
+      color: #FFD700;
+      font-weight: 600;
     }
 
     .menu-toggle {
@@ -286,7 +255,6 @@ $config = $configData['general'] ?? [];
       background: #FFD700;
       border-radius: 2px;
       transition: all 0.3s ease;
-      box-shadow: 0 0 5px rgba(255,215,0,0.5);
     }
 
     .menu-toggle.active span:nth-child(1) {
@@ -1111,7 +1079,9 @@ $config = $configData['general'] ?? [];
 <body>
 
   <header class="header">
-    <div class="logo">AUTO STOK TEAM</div>
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="Auto Stok Logo" style="height: 70px; width: auto; vertical-align: middle; margin-right: 8px; filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);">
+    </div>
     
     <div class="menu-toggle" id="menuToggle">
       <span></span>

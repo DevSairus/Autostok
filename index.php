@@ -51,23 +51,23 @@
       filter: brightness(0.8);
     }
 
-    .section-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.3));
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.5s ease;
-    }
+  .section-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); /* SIN amarillo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
 
-    .section-link:hover .section-overlay {
-      background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(255,215,0,0.5));
-    }
+      .section-link:hover .section-overlay {
+        background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.3)); /* SIN amarillo */
+      }
 
     .section-title {
       font-size: 4rem;
@@ -199,10 +199,66 @@
         font-size: 0.9rem;
       }
     }
+    /* Logo en esquina superior derecha - CON BORDE BLANCO */
+    .logo-esquina {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      transition: all 0.3s ease;
+    }
+
+    .logo-esquina:hover {
+      transform: scale(1.1);
+    }
+
+    .logo-esquina img {
+      height: 80px;
+      width: auto;
+      display: block;
+      filter: 
+        drop-shadow(0 0 0 white)
+        drop-shadow(1px 1px 0 white)
+        drop-shadow(-1px -1px 0 white)
+        drop-shadow(1px -1px 0 white)
+        drop-shadow(-1px 1px 0 white)
+        drop-shadow(2px 2px 0 white)
+        drop-shadow(-2px -2px 0 white)
+        drop-shadow(2px -2px 0 white)
+        drop-shadow(-2px 2px 0 white)
+        drop-shadow(0 3px 10px rgba(0,0,0,0.5));
+    }
+
+    @media (max-width: 768px) {
+      .logo-esquina {
+        top: 15px;
+        right: 15px;
+      }
+      
+      .logo-esquina img {
+        height: 65px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-esquina {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .logo-esquina img {
+        height: 50px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Logo en esquina superior derecha -->
+  <div class="logo-esquina">
+    <img src="assets/images/logo.png" alt="Auto Stok Logo">
+  </div>
 
+  <div class="main-container" style="margin-top: 10px;" id="mainContainer">
   <div class="main-container" style="margin-top: 10px;" id="mainContainer">
     <!-- Las secciones se cargan aquí con JavaScript -->
   </div>

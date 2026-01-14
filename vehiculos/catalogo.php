@@ -168,7 +168,9 @@ error_log("Vehículos cargados: " . count($vehiculos));
 <body>
 
   <header class="header">
-    <div class="logo">Auto Stok</div>
+    <div class="logo">
+      <img src="../assets/images/logo.png" alt="Auto Stok Logo" style="height: 70px; width: auto; vertical-align: middle; margin-right: 8px; filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);">
+    </div>
     
     <div class="menu-toggle" id="menuToggle">
       <span></span>
