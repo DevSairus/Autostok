@@ -1,3 +1,15 @@
 {
-    "productos": []
+    "productos": [
+        {
+            "id": 1,
+            "nombre": "Plumillas  Sandero 2022",
+            "categoria": "Accesorios",
+            "precio": 70000,
+            "stock": 2,
+            "marca": "Renault",
+            "codigo": "",
+            "descripcion": "Plumillas",
+            "imagen": "..\/uploads\/696faf5598430_1768927061.jfif"
+        }
+    ]
 }

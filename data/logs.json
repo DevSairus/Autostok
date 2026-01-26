@@ -1027,6 +1027,903 @@
             "usuario": "admin",
             "fecha": "2026-01-10 15:02:45",
             "ip": "::1"
+        },
+        {
+            "id": "1768059418_1667",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-10 10:36:58",
+            "ip": "181.58.39.200"
+        },
+        {
+            "id": "1768400813_2575",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-14 09:26:53",
+            "ip": "38.188.252.252"
+        },
+        {
+            "id": "1768400957_9654",
+            "tipo": "usuario",
+            "accion": "crear",
+            "datos": {
+                "usuario_id": 1768400957,
+                "username": "SVEGA",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-14 09:29:17",
+            "ip": "38.188.252.252"
+        },
+        {
+            "id": "1768589619_7946",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SVEGA",
+                "rol": "super_admin"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-16 13:53:39",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768589749_8672",
+            "tipo": "usuario",
+            "accion": "crear",
+            "datos": {
+                "usuario_id": 1768589749,
+                "username": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-16 13:55:49",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768589822_4531",
+            "tipo": "usuario",
+            "accion": "crear",
+            "datos": {
+                "usuario_id": 1768589822,
+                "username": "POSVENTA",
+                "rol": "taller"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-16 13:57:02",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768589902_5278",
+            "tipo": "usuario",
+            "accion": "crear",
+            "datos": {
+                "usuario_id": 1768589902,
+                "username": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-16 13:58:22",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768590783_6057",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SVEGA",
+                "rol": "super_admin"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-16 14:13:03",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768592109_1258",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-16 14:35:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925447_2187",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SVEGA",
+                "rol": "super_admin"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-20 11:10:47",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925736_7433",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-20 11:15:36",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1768925758_6536",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1768925758,
+                "tipo": "vehiculo",
+                "vehiculo": "CHEVROLET CAPTIVA 2021",
+                "cliente": "Sebastian Pruebas"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:15:58",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925758_6905",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:15:58",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925758_2208",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:15:58",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925758_5735",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:15:58",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768925758_1485",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1768925758,
+                "cliente": "Sebastian Pruebas",
+                "tipo": "vehiculo",
+                "destino": "ventas",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "ventas": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:15:58",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926016_5843",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-20 11:20:16",
+            "ip": "190.159.194.38"
+        },
+        {
+            "id": "1768926019_9870",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1768925758,
+                "cliente": "Sebastian Pruebas",
+                "tipo": "vehiculo",
+                "referencia": "CHEVROLET CAPTIVA 2021",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-20 11:20:19",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926019_8107",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:20:19",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926019_6717",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1768925758,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:20:19",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926609_8062",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1768926609,
+                "servicio": "Revision Vijera",
+                "cliente": "Sebastian pruebas 2",
+                "fecha": "2026-01-22",
+                "sucursal": "sucursal1"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:30:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926609_6983",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:30:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926609_5860",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:30:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926609_7755",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:30:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926609_7193",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1768926609,
+                "cliente": "Sebastian pruebas 2",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "sucursal": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:30:09",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926818_9572",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1768926609,
+                "cliente": "Sebastian pruebas 2",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-20 11:33:38",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926818_1739",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:33:38",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768926818_3413",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1768926609,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:33:38",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927176_2304",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1768927176,
+                "tipo": "producto",
+                "producto": "Plumillas  Sandero 2022",
+                "cliente": "Sebastian Prueba3",
+                "cantidad": 1
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:39:36",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927176_1467",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:39:36",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927176_7081",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:39:36",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927176_1290",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:39:36",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927176_2311",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1768927176,
+                "cliente": "Sebastian Prueba3",
+                "tipo": "producto",
+                "destino": "almacen",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "almacen": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:39:36",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927243_3226",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1768927176,
+                "cliente": "Sebastian Prueba3",
+                "tipo": "producto",
+                "referencia": "Plumillas  Sandero 2022",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-20 11:40:43",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927243_1410",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:40:43",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927243_1534",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1768927176,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:40:43",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927252_4372",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1768927176,
+                "cliente": "Sebastian Prueba3",
+                "tipo": "producto",
+                "referencia": "Plumillas  Sandero 2022",
+                "estado_anterior": "contactada",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "SVEGA",
+            "fecha": "2026-01-20 11:40:52",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927252_6330",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:40:52",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768927252_7039",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1768927176,
+                "estado_anterior": "contactada",
+                "estado_nuevo": "completada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 11:40:52",
+            "ip": "181.57.168.185"
+        },
+        {
+            "id": "1768932691_5740",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1768932691,
+                "tipo": "vehiculo",
+                "vehiculo": "FIAT 500 SPORT 2013",
+                "cliente": "Carlos lether"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 13:11:31",
+            "ip": "191.156.230.112"
+        },
+        {
+            "id": "1768932691_1130",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 13:11:31",
+            "ip": "191.156.230.112"
+        },
+        {
+            "id": "1768932691_7556",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 13:11:31",
+            "ip": "191.156.230.112"
+        },
+        {
+            "id": "1768932691_4079",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 13:11:31",
+            "ip": "191.156.230.112"
+        },
+        {
+            "id": "1768932691_2424",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1768932691,
+                "cliente": "Carlos lether",
+                "tipo": "vehiculo",
+                "destino": "ventas",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "ventas": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-20 13:11:31",
+            "ip": "191.156.230.112"
+        },
+        {
+            "id": "1768939670_7758",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-20 15:07:50",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1768943461_8253",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-20 16:11:01",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1768943552_4490",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-20 16:12:32",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1768946056_4487",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-20 16:54:16",
+            "ip": "190.159.194.38"
+        },
+        {
+            "id": "1769000305_8494",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-21 07:58:25",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1769020911_2108",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-21 13:41:51",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020918_2709",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1768932691,
+                "cliente": "Carlos lether",
+                "tipo": "vehiculo",
+                "referencia": "FIAT 500 SPORT 2013",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-21 13:41:58",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020918_8098",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-21 13:41:58",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020918_8490",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1768932691,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "contactada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-21 13:41:58",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020936_8625",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "datos": {
+                "solicitud_id": 1768925758,
+                "cliente": "Sebastian Pruebas",
+                "tipo": "vehiculo",
+                "referencia": "CHEVROLET CAPTIVA 2021",
+                "estado_anterior": "contactada",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-21 13:42:16",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020936_3470",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-21 13:42:16",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769020936_7106",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "solicitud",
+                "id": 1768925758,
+                "estado_anterior": "contactada",
+                "estado_nuevo": "completada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-21 13:42:16",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769089517_9670",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-22 08:45:17",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769095358_4210",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-22 10:22:38",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1769103640_7858",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "USADOS",
+                "rol": "ventas"
+            },
+            "usuario": "USADOS",
+            "fecha": "2026-01-22 12:40:40",
+            "ip": "181.57.193.42"
+        },
+        {
+            "id": "1769196840_7582",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "SAC",
+                "rol": "taller"
+            },
+            "usuario": "SAC",
+            "fecha": "2026-01-23 14:34:00",
+            "ip": "186.29.68.250"
+        },
+        {
+            "id": "1769349648_9766",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-25 09:00:48",
+            "ip": "181.58.39.200"
+        },
+        {
+            "id": "1769438436_3130",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-26 15:40:36",
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-26 15:49:36",
+            "tipo": "sistema",
+            "accion": "configurar_smtp",
+            "usuario": "admin",
+            "datos": {
+                "smtp_host": "smtp.office365.com",
+                "smtp_username": "noresponder@autostok.com.co",
+                "enabled": true
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-26 16:15:03",
+            "tipo": "sistema",
+            "accion": "prueba_correo_error",
+            "usuario": "admin",
+            "datos": {
+                "error": "SMTP Error: Could not authenticate."
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-26 16:17:25",
+            "tipo": "sistema",
+            "accion": "configurar_smtp",
+            "usuario": "admin",
+            "datos": {
+                "smtp_host": "smtp.office365.com",
+                "smtp_username": "noresponder@autostok.com.co",
+                "enabled": true
+            },
+            "ip": "::1"
         }
     ]
 }

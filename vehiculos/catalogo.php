@@ -210,6 +210,7 @@ error_log("Vehículos cargados: " . count($vehiculos));
           <option value="pickup">Pickup</option>
           <option value="deportivo">Deportivo</option>
           <option value="hatchback">Hatchback</option>
+          <option value="coupe">Coupé</option>
         </select>
         <input type="number" id="anioMin" placeholder="Año mínimo">
         <input type="number" id="anioMax" placeholder="Año máximo">

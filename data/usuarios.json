@@ -10,6 +10,50 @@
             "activo": true,
             "fecha_creacion": "2025-12-09 15:01:24",
             "ultimo_acceso": null
+        },
+        {
+            "id": 1768400957,
+            "username": "SVEGA",
+            "password": "$2y$10$JddwADUQjNDflscaDLpPReAJli49VY9p6XTSGqosDBVJjpI6dvmz6",
+            "nombre": "John Sebastian Vega",
+            "email": "jefesistemas@autostok.com.co",
+            "rol": "super_admin",
+            "activo": true,
+            "fecha_creacion": "2026-01-14 09:29:17",
+            "ultimo_acceso": null
+        },
+        {
+            "id": 1768589749,
+            "username": "USADOS",
+            "password": "$2y$10$vnbxFxodlF9BeQov0uQty.23tAIZ3MPDdPAZvmWFsemU\/rjgqMbMe",
+            "nombre": "Administracion Comercial Usados",
+            "email": "gerenciausados@autostok.com.co",
+            "rol": "ventas",
+            "activo": true,
+            "fecha_creacion": "2026-01-16 13:55:49",
+            "ultimo_acceso": null
+        },
+        {
+            "id": 1768589822,
+            "username": "POSVENTA",
+            "password": "$2y$10$Nsu9ipCwRPYjh0wNtTCkq.n6xwJwvIaxJ4JEAZkpQIUUSfWOLrAli",
+            "nombre": "Administracion Posventa",
+            "email": "jefeposventa@autostok.com.co",
+            "rol": "taller",
+            "activo": true,
+            "fecha_creacion": "2026-01-16 13:57:02",
+            "ultimo_acceso": null
+        },
+        {
+            "id": 1768589902,
+            "username": "SAC",
+            "password": "$2y$10$lDq2jT2XYkhDzW9DmfJ1..UNipnP8U9a\/JO9FHMpxtIptcXgrt3j6",
+            "nombre": "Administracion SAC",
+            "email": "servicioalcliente@autostok.com.co",
+            "rol": "taller",
+            "activo": true,
+            "fecha_creacion": "2026-01-16 13:58:22",
+            "ultimo_acceso": null
         }
     ],
     "roles": {

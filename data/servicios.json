@@ -1,3 +1,18 @@
 {
-    "servicios": []
+    "servicios": [
+        {
+            "id": 1,
+            "nombre": "Revision Vijera",
+            "categoria": "Mantenimiento",
+            "precio": 180000,
+            "duracion": "1.5 horas",
+            "descripcion_corta": "Revision frenos y nivel de aceite",
+            "descripcion": "Revision frenos y nivel de aceite",
+            "caracteristicas": [
+                "Aceite",
+                "Frenos"
+            ],
+            "imagen": "..\/uploads\/696fac7ee723b_1768926334.png"
+        }
+    ]
 }

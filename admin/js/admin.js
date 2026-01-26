@@ -532,23 +532,23 @@ async function cambiarEstadoSolicitud(id, nuevoEstado) {
     });
     
     const result = await response.json();
+    
     if (result.success) {
-      const selectElement = document.querySelector(`select[onchange*="cambiarEstadoSolicitud(${id}"]`);
-      if (selectElement) {
-        const fila = selectElement.closest('tr');
-        if (fila) {
-          fila.dataset.estado = nuevoEstado;
-        }
+      mostrarMensaje('Estado actualizado correctamente', 'exito');
+      
+      // Si es una solicitud de producto completada, mostrar mensaje especial
+      if (nuevoEstado === 'completada') {
+        mostrarMensaje('✓ Solicitud completada. Stock actualizado automáticamente.', 'exito');
       }
-      mostrarNotificacion('Estado actualizado exitosamente', 'success');
+      
+      // Recargar la página para actualizar los datos
+      setTimeout(() => location.reload(), 1500);
     } else {
-      mostrarNotificacion('Error al actualizar el estado: ' + (result.message || ''), 'error');
-      location.reload();
+      mostrarMensaje('Error: ' + result.message, 'error');
     }
   } catch (error) {
     console.error('Error:', error);
-    mostrarNotificacion('Error al actualizar el estado', 'error');
-    location.reload();
+    mostrarMensaje('Error al actualizar el estado', 'error');
   }
 }
 

@@ -49,7 +49,7 @@ $horarios = $configData['horarios'] ?? [];
       <?php if (!empty($sucursales['sucursal1']['whatsapp'])): ?>
         <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $sucursales['sucursal1']['whatsapp']); ?>" 
            target="_blank" class="btn-whatsapp-footer">
-          💬 WhatsApp Norte
+          💬 WhatsApp Morato
         </a>
       <?php endif; ?>
     </div>
@@ -81,7 +81,7 @@ $horarios = $configData['horarios'] ?? [];
       <?php if (!empty($sucursales['sucursal2']['whatsapp'])): ?>
         <a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $sucursales['sucursal2']['whatsapp']); ?>" 
            target="_blank" class="btn-whatsapp-footer">
-          💬 WhatsApp Sur
+          💬 WhatsApp Felicidad
         </a>
       <?php endif; ?>
     </div>

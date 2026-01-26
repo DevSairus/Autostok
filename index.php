@@ -43,31 +43,31 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s ease;
-      filter: brightness(0.6);
+      filter: brightness(1);
     }
 
     .section-link:hover .section-image {
       transform: scale(1.1);
-      filter: brightness(0.8);
+      filter: brightness(1);
     }
 
   .section-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); /* SIN amarillo */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.5s ease;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
 
-      .section-link:hover .section-overlay {
-        background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.3)); /* SIN amarillo */
-      }
+    .section-link:hover .section-overlay {
+      background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+    }
 
     .section-title {
       font-size: 4rem;
@@ -199,7 +199,7 @@
         font-size: 0.9rem;
       }
     }
-    /* Logo en esquina superior derecha - CON BORDE BLANCO */
+
     .logo-esquina {
       position: fixed;
       top: 20px;
@@ -213,20 +213,32 @@
     }
 
     .logo-esquina img {
-      height: 80px;
+      height: 100px;
       width: auto;
       display: block;
-      filter: 
-        drop-shadow(0 0 0 white)
-        drop-shadow(1px 1px 0 white)
-        drop-shadow(-1px -1px 0 white)
-        drop-shadow(1px -1px 0 white)
-        drop-shadow(-1px 1px 0 white)
-        drop-shadow(2px 2px 0 white)
-        drop-shadow(-2px -2px 0 white)
-        drop-shadow(2px -2px 0 white)
-        drop-shadow(-2px 2px 0 white)
-        drop-shadow(0 3px 10px rgba(0,0,0,0.5));
+      filter: drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white);
+    }
+
+    @media (max-width: 768px) {
+      .logo-esquina {
+        top: 15px;
+        right: 15px;
+      }
+      
+      .logo-esquina img {
+        height: 65px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-esquina {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .logo-esquina img {
+        height: 50px;
+      }
     }
 
     @media (max-width: 768px) {

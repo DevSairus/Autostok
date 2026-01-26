@@ -631,6 +631,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
         
         <div class="config-tabs">
           <button class="tab-btn active" onclick="cambiarTab('general')">General</button>
+          <button class="tab-btn" onclick="cambiarTab('correo')">Correo Electrónico</button>
           <button class="tab-btn" onclick="cambiarTab('sucursales')">Sucursales</button>
         </div>
 
@@ -677,6 +678,95 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
 
               <button type="submit" class="btn-primary">💾 Guardar Configuración General</button>
             </form>
+          </div>
+        </div>
+
+        <!-- TAB: CORREO ELECTRÓNICO -->
+        <div id="tab-correo" class="tab-content">
+          <div class="config-card">
+            <h3>📧 Configuración de Correo Electrónico (SMTP)</h3>
+            <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+              Configura las credenciales SMTP para enviar notificaciones automáticas por correo electrónico.
+            </p>
+            
+            <form id="formConfigCorreo" onsubmit="event.preventDefault();">
+              <div class="form-group">
+                <label>Servidor SMTP *</label>
+                <input type="text" id="smtpHost" placeholder="smtp.gmail.com" class="form-control" required>
+                <p class="helper-text">Ejemplo: smtp.gmail.com, smtp.office365.com, smtp.hostinger.com</p>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Puerto SMTP *</label>
+                  <input type="number" id="smtpPort" placeholder="587" class="form-control" required>
+                  <p class="helper-text">587 (TLS) o 465 (SSL)</p>
+                </div>
+                <div class="form-group">
+                  <label>Cifrado *</label>
+                  <select id="smtpEncryption" class="form-control" required>
+                    <option value="tls">TLS (Puerto 587)</option>
+                    <option value="ssl">SSL (Puerto 465)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Usuario SMTP (Correo) *</label>
+                <input type="email" id="smtpUsername" placeholder="tu-correo@gmail.com" class="form-control" required>
+                <p class="helper-text">Dirección de correo electrónico que enviará las notificaciones</p>
+              </div>
+              
+              <div class="form-group">
+                <label>Contraseña SMTP *</label>
+                <input type="password" id="smtpPassword" placeholder="Ingrese contraseña" class="form-control">
+                <p class="helper-text">
+                  <strong>⚠️ Gmail:</strong> Usa una "Contraseña de aplicación" (no tu contraseña normal)<br>
+                  <a href="https://support.google.com/accounts/answer/185833" target="_blank" style="color: #FFD700; text-decoration: underline;">
+                    ¿Cómo generar una contraseña de aplicación en Gmail?
+                  </a>
+                </p>
+              </div>
+              
+              <div class="form-group">
+                <label>Nombre del remitente</label>
+                <input type="text" id="smtpFromName" placeholder="Auto Stok" class="form-control">
+                <p class="helper-text">Nombre que aparecerá como remitente en los correos</p>
+              </div>
+              
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 10px;">
+                  <input type="checkbox" id="smtpEnabled" style="width: auto;">
+                  Activar envío de correos electrónicos
+                </label>
+                <p class="helper-text">Desactiva si no quieres que se envíen notificaciones por correo</p>
+              </div>
+              
+              <div style="display: flex; gap: 15px;">
+                <button type="submit" class="btn-primary" style="flex: 1;">💾 Guardar Configuración</button>
+                <button type="button" class="btn-secondary" onclick="probarCorreo()" style="flex: 1;">
+                  📨 Enviar Correo de Prueba
+                </button>
+              </div>
+            </form>
+            
+            <div id="mensajeCorreo" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: 600; text-align: center;"></div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255,215,0,0.05); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2);">
+              <h4 style="color: #FFD700; margin-bottom: 15px;">💡 Instrucciones para Gmail</h4>
+              <ol style="color: rgba(255,255,255,0.8); line-height: 1.8; padding-left: 20px;">
+                <li>Inicia sesión en tu cuenta de Gmail</li>
+                <li>Ve a: <a href="https://myaccount.google.com/security" target="_blank" style="color: #FFD700;">Cuenta de Google → Seguridad</a></li>
+                <li>Activa la "Verificación en dos pasos" si no la tienes</li>
+                <li>Busca "Contraseñas de aplicaciones"</li>
+                <li>Selecciona "Correo" y "Otro dispositivo personalizado"</li>
+                <li>Escribe "Auto Stok Panel" y genera la contraseña</li>
+                <li>Copia esa contraseña de 16 caracteres y pégala aquí</li>
+              </ol>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 15px;">
+                <strong>Nota:</strong> Para otros proveedores (Outlook, Hostinger, etc.), consulta su documentación sobre SMTP.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -823,6 +913,7 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
               <option value="pickup">Pickup</option>
               <option value="deportivo">Deportivo</option>
               <option value="hatchback">Hatchback</option>
+              <option value="coupe">Coupé</option>
             </select>
           </div>
         </div>
@@ -1259,5 +1350,187 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
   <!-- Incluir archivos JavaScript -->
   <script src="js/admin.js"></script>
   <script src="js/imagenes-home.js"></script>
+
+<script>
+// ==================== CONFIGURACIÓN SMTP ====================
+
+async function cargarConfigSMTP() {
+  try {
+    const response = await fetch('api/config_smtp.php');
+    const result = await response.json();
+    
+    console.log('Respuesta config SMTP:', result); // Debug
+    
+    if (result.success && result.smtp) {
+      const smtp = result.smtp;
+      document.getElementById('smtpHost').value = smtp.host || '';
+      document.getElementById('smtpPort').value = smtp.port || 587;
+      document.getElementById('smtpEncryption').value = smtp.encryption || 'tls';
+      document.getElementById('smtpUsername').value = smtp.username || '';
+      document.getElementById('smtpFromName').value = smtp.from_name || 'Auto Stok';
+      document.getElementById('smtpEnabled').checked = smtp.enabled || false;
+      
+      if (smtp.has_password) {
+        document.getElementById('smtpPassword').placeholder = '••••••••••••';
+      }
+    }
+  } catch (error) {
+    console.error('Error cargando configuración SMTP:', error);
+  }
+}
+
+document.getElementById('formConfigCorreo')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const password = document.getElementById('smtpPassword').value;
+  const placeholder = document.getElementById('smtpPassword').placeholder;
+  
+  const datos = {
+    host: document.getElementById('smtpHost').value.trim(),
+    port: document.getElementById('smtpPort').value,
+    encryption: document.getElementById('smtpEncryption').value,
+    username: document.getElementById('smtpUsername').value.trim(),
+    from_name: document.getElementById('smtpFromName').value.trim(),
+    enabled: document.getElementById('smtpEnabled').checked
+  };
+  
+  if (password) {
+    datos.password = password;
+  } else if (placeholder === 'Ingrese contraseña') {
+    mostrarMensajeCorreo('✗ Por favor ingrese la contraseña SMTP', 'error');
+    return;
+  }
+  
+  console.log('Enviando datos:', datos); // Debug
+  
+  try {
+    const response = await fetch('api/config_smtp.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    
+    const result = await response.json();
+    console.log('Respuesta guardado:', result); // Debug
+    
+    if (result.success) {
+      mostrarMensajeCorreo('✓ Configuración guardada correctamente', 'exito');
+      document.getElementById('smtpPassword').value = '';
+      document.getElementById('smtpPassword').placeholder = '••••••••••••';
+    } else {
+      mostrarMensajeCorreo('✗ Error: ' + result.message, 'error');
+    }
+  } catch (error) {
+    console.error('Error completo:', error);
+    mostrarMensajeCorreo('✗ Error al guardar: ' + error.message, 'error');
+  }
+});
+
+async function probarCorreo() {
+  const mensajeDiv = document.getElementById('mensajeCorreo');
+  mensajeDiv.style.display = 'block';
+  mensajeDiv.textContent = '📤 Enviando correo de prueba...';
+  mensajeDiv.style.background = 'rgba(255,215,0,0.1)';
+  mensajeDiv.style.border = '2px solid rgba(255,215,0,0.5)';
+  mensajeDiv.style.color = '#FFD700';
+  
+  try {
+    // CAMBIAR de diagnostico_correo.php a probar_correo.php
+    const response = await fetch('api/probar_correo.php', {
+      method: 'POST'
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      mostrarMensajeCorreo('✓ ' + result.message, 'exito');
+    } else {
+      mostrarMensajeCorreo('✗ Error: ' + result.message, 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    mostrarMensajeCorreo('✗ Error al enviar correo de prueba', 'error');
+  }
+}
+
+function mostrarMensajeCorreo(mensaje, tipo) {
+  const mensajeDiv = document.getElementById('mensajeCorreo');
+  mensajeDiv.style.display = 'block';
+  mensajeDiv.textContent = mensaje;
+  
+  if (tipo === 'exito') {
+    mensajeDiv.style.background = 'rgba(0,255,0,0.1)';
+    mensajeDiv.style.border = '2px solid rgba(0,255,0,0.5)';
+    mensajeDiv.style.color = '#0f0';
+  } else {
+    mensajeDiv.style.background = 'rgba(255,0,0,0.1)';
+    mensajeDiv.style.border = '2px solid rgba(255,0,0,0.5)';
+    mensajeDiv.style.color = '#f00';
+  }
+  
+  setTimeout(() => {
+    mensajeDiv.style.display = 'none';
+  }, 8000);
+}
+
+const cambiarTabOriginal = window.cambiarTab;
+window.cambiarTab = function(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  
+  const tabContent = document.getElementById(`tab-${tab}`);
+  if (tabContent) {
+    tabContent.classList.add('active');
+  }
+  
+  if (event && event.target) {
+    event.target.classList.add('active');
+  }
+  
+  if (tab === 'correo') {
+    setTimeout(() => cargarConfigSMTP(), 100);
+  }
+  
+  if (cambiarTabOriginal && typeof cambiarTabOriginal === 'function') {
+    cambiarTabOriginal(tab);
+  }
+};
+
+window.cambiarEstadoSolicitud = async function(id, nuevoEstado) {
+  if (!confirm('¿Confirmar cambio de estado?')) return;
+  
+  try {
+    const response = await fetch('api/solicitudes.php', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, estado: nuevoEstado })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      if (nuevoEstado === 'completada') {
+        alert('✓ Solicitud completada exitosamente.\n\nSi era una solicitud de producto, el stock se ha actualizado automáticamente.');
+      } else {
+        alert('✓ Estado actualizado correctamente');
+      }
+      
+      setTimeout(() => location.reload(), 500);
+    } else {
+      alert('✗ Error: ' + result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('✗ Error al actualizar el estado');
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tabCorreo = document.getElementById('tab-correo');
+  if (tabCorreo && tabCorreo.classList.contains('active')) {
+    cargarConfigSMTP();
+  }
+});
+</script>
 </body>
 </html>

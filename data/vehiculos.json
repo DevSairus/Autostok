@@ -1,3 +1,136 @@
 {
-    "vehiculos": []
+    "vehiculos": [
+        {
+            "id": "1",
+            "marca": "CHEVROLET",
+            "modelo": "CAPTIVA",
+            "anio": 2021,
+            "precio": 78000000,
+            "kilometraje": 54000,
+            "tipo": "suv",
+            "transmision": "Autom\u00e1tica",
+            "combustible": "Gasolina",
+            "color": "ROJA",
+            "descripcion": "Marca : CHEVROLET\nLinea: CAPTIVA\nVersi\u00f3n :PREMIER 7pax\nTrasmisi\u00f3n : Autom\u00e1tica\nKilometraje : 55000\nMotor: 1.5 T\nModelo: 2021\nPlaca: KOY836\nMatricula: DUITAMA\n\nAutoStok - 45 a\u00f1os en el mercado - Recibimos tu veh\u00edculo como parte de pago\nGarant\u00eda tres (3) meses y\/o 5.000 kms\nTaller propio\nPlanes de financiamiento\nRecibimos todas tus tarjetas debito y cr\u00e9dito",
+            "imagenes": [
+                "..\/uploads\/696fa9fddb353_1768925693.webp",
+                "..\/uploads\/696fad707d617_1768926576.jpeg",
+                "..\/uploads\/696fad909fe96_1768926608.jpeg",
+                "..\/uploads\/696fada80e9bd_1768926632.jpeg",
+                "..\/uploads\/696fadbf90404_1768926655.jpeg",
+                "..\/uploads\/696fae3b74b09_1768926779.jpeg",
+                "..\/uploads\/696fae3b9e941_1768926779.jpeg"
+            ]
+        },
+        {
+            "id": "2",
+            "marca": "KIA ",
+            "modelo": "SOLUTO BLACK EDITION",
+            "anio": 2025,
+            "precio": 68000000,
+            "kilometraje": 4750,
+            "tipo": "sedan",
+            "transmision": "Manual",
+            "combustible": "Gasolina",
+            "color": "ROJO",
+            "descripcion": "Marca : KIA\nLinea: SOLUTO\nVersi\u00f3n: BLACK EDITION\nTrasmisi\u00f3n : MECANICO\nKilometraje : 4750\nMotor: 1.4 CC\nModelo: 2025\nPlaca: NZR371\nMatricula: FUNZA\n\nAutoStok - 45 a\u00f1os en el mercado - Recibimos tu veh\u00edculo como parte de pago\nGarant\u00eda tres (3) meses y\/o 5.000 kms\nTaller propio\nPlanes de financiamiento\nRecibimos todas tus tarjetas Debito y Credito",
+            "imagenes": [
+                "..\/uploads\/696fab729a901_1768926066.jpeg",
+                "..\/uploads\/696fab732a7f9_1768926067.jpeg",
+                "..\/uploads\/696fac0a12a48_1768926218.jpeg",
+                "..\/uploads\/696fac494682d_1768926281.jpeg",
+                "..\/uploads\/696fac702aea6_1768926320.jpeg",
+                "..\/uploads\/696fac9c81f64_1768926364.jpeg"
+            ]
+        },
+        {
+            "id": "3",
+            "marca": "FIAT",
+            "modelo": "500 SPORT",
+            "anio": 2013,
+            "precio": 32000000,
+            "kilometraje": 86960,
+            "tipo": "hatchback",
+            "transmision": "Manual",
+            "combustible": "Gasolina",
+            "color": "AZUL",
+            "descripcion": "Marca : FIAT\nLinea: 500\nVersi\u00f3n : SPORT\nTrasmisi\u00f3n : Mecanico\nKilometraje : 86960\nMotor: 1.4\nModelo: 2013\nPlaca: NEQ916\nMatricula: BOGOTA\n\nAutoStok - 45 a\u00f1os en el mercado - Recibimos tu veh\u00edculo como parte de pago\nGarant\u00eda tres (3) meses y\/o 5.000 kms\nTaller propio\nPlanes de financiamiento\nRecibimos todas tus tarjetas Debito y Cr\u00e9dito",
+            "imagenes": [
+                "..\/uploads\/696fb17cae609_1768927612.jpeg",
+                "..\/uploads\/696fb1974c4db_1768927639.jpeg",
+                "..\/uploads\/696fb1ba3051d_1768927674.jpeg",
+                "..\/uploads\/696fb1bad31d5_1768927674.jpeg",
+                "..\/uploads\/696fb1bb6d209_1768927675.jpeg",
+                "..\/uploads\/696fb1d59d681_1768927701.jpeg",
+                "..\/uploads\/696fb1d619b2a_1768927702.jpeg",
+                "..\/uploads\/696fb1d684539_1768927702.jpeg",
+                "..\/uploads\/696fb1f1d0db2_1768927729.jpeg"
+            ]
+        },
+        {
+            "id": "4",
+            "marca": "RENAULT",
+            "modelo": "CAPTUR ",
+            "anio": 2020,
+            "precio": 62000000,
+            "kilometraje": 97000,
+            "tipo": "suv",
+            "transmision": "Autom\u00e1tica",
+            "combustible": "Gasolina",
+            "color": "GRIS ESTRELLA",
+            "descripcion": "Marca : RENAULT\nLinea: CAPTUR\nVersi\u00f3n : INTENS\nTrasmisi\u00f3n : Autom\u00e1tica\nKilometraje : 97000\nMotor: 2.0\nModelo: 2020\nPlaca: GLY454\nMatricula: BOGOTA\n\nAutoStok - 45 a\u00f1os en el mercado - Recibimos tu veh\u00edculo como parte de pago\nGarant\u00eda tres (3) meses y\/o 5.000 kms\nTaller propio\nPlanes de financiamiento\nRecibimos todas tus tarjetas Debito y Cr\u00e9dito",
+            "imagenes": [
+                "..\/uploads\/696fe18532cd4_1768939909.jpeg",
+                "..\/uploads\/696fe1a0ac3bd_1768939936.jpeg",
+                "..\/uploads\/696fe1bc9c5dd_1768939964.jpeg",
+                "..\/uploads\/696fe1bcc59be_1768939964.jpeg",
+                "..\/uploads\/696fe1bcedba2_1768939964.jpeg",
+                "..\/uploads\/696fe1bd22afc_1768939965.jpeg",
+                "..\/uploads\/696fe1d9550fa_1768939993.jpeg",
+                "..\/uploads\/696fe1d990b42_1768939993.jpeg"
+            ]
+        },
+        {
+            "id": "5",
+            "marca": "MERCEDES BENZ",
+            "modelo": "190",
+            "anio": 1961,
+            "precio": 18000000,
+            "kilometraje": 1,
+            "tipo": "sedan",
+            "transmision": "Manual",
+            "combustible": "Gasolina",
+            "color": "AZUL",
+            "descripcion": "VEHICULO PARA PROYECTO DE RESTAURACION\nO DONANTE PARA UN PROYECTO EN PROCESO\nDOCUMENTOS AL DIA\nUNICA DUE\u00d1O DESDE 1961\nPLACA BOGOTA INICIA EN A\n",
+            "imagenes": [
+                "..\/uploads\/6972410ed2a51_1769095438.jpeg",
+                "..\/uploads\/69724121537ee_1769095457.jpeg",
+                "..\/uploads\/69724133485e3_1769095475.jpeg",
+                "..\/uploads\/697241338a10b_1769095475.jpeg",
+                "..\/uploads\/69724133ccb32_1769095475.jpeg"
+            ]
+        },
+        {
+            "id": "6",
+            "marca": "CHEVROLET",
+            "modelo": "SAIL LS",
+            "anio": 2015,
+            "precio": 32000000,
+            "kilometraje": 121000,
+            "tipo": "sedan",
+            "transmision": "Manual",
+            "combustible": "Gasolina",
+            "color": "AZUL",
+            "descripcion": "Marca : CHEVROLET\nLinea: SAIL\nVersi\u00f3n : LS\nTrasmisi\u00f3n : MECANICO\nKilometraje : 121000\nMotor: 1.4\nModelo: 2015\nPlaca: UBW453\nMatricula: BOGOTA\n\nAutoStok - 45 a\u00f1os en el mercado - Recibimos tu veh\u00edculo como parte de pago\nGarant\u00eda tres (3) meses y\/o 5.000 kms\nTaller propio\nPlanes de financiamiento\nRecibimos todas tu tarjeta debito y cr\u00e9dito",
+            "imagenes": [
+                "..\/uploads\/697242ce2332c_1769095886.jpeg",
+                "..\/uploads\/6972432453914_1769095972.jpeg",
+                "..\/uploads\/697243247e122_1769095972.jpeg",
+                "..\/uploads\/69724324a7d42_1769095972.jpeg",
+                "..\/uploads\/69724324d1dfd_1769095972.jpeg",
+                "..\/uploads\/697243250b402_1769095973.jpeg",
+                "..\/uploads\/6972432534820_1769095973.jpeg"
+            ]
+        }
+    ]
 }

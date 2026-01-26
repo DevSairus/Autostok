@@ -1,0 +1,36 @@
+[20-Jan-2026 11:15:58 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 319
+[20-Jan-2026 11:15:58 America/Bogota] PHP Warning:  Undefined array key "whatsapp" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 322
+[20-Jan-2026 11:15:58 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:15:58 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:15:58 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:20:19 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 581
+[20-Jan-2026 11:20:19 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:30:09 America/Bogota] ===== DEBUG CITA =====
+[20-Jan-2026 11:30:09 America/Bogota] Cita completa: {"id":1768926609,"servicio_id":"1","servicio_nombre":"Revision Vijera","nombre":"Sebastian pruebas 2","telefono":"3213213232","correo":"jefesistemas@autostok.com.co","fecha":"2026-01-22","hora":"10:00","sucursal":"sucursal1","notas":"Pruebas","estado":"pendiente","fecha_solicitud":"2026-01-20 11:30:09"}
+[20-Jan-2026 11:30:09 America/Bogota] Sucursal en cita: sucursal1
+[20-Jan-2026 11:30:09 America/Bogota] Config sucursales: {"sucursal1":{"nombre":"Sede Morato","direccion":"Calle 98A No. 69C - 35","telefono":"+573125145462","whatsapp":"+573182391587","correo":"servicioalciente@autostok.com.co","horarioSemana":"7:00 AM - 5:00 PM","horarioSabado":"8:00 AM - 1:00 PM","mapa":"<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3976.442623435144!2d-74.07926362413316!3d4.692893341723369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ad8a1b44b29%3A0xfb0f2733076423e5!2sAutostok%20Morato%20Postventa%20Multimarca!5e0!3m2!1ses!2sco!4v1765288805144!5m2!1ses!2sco\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"><\/iframe>"},"sucursal2":{"nombre":"Sede Felicidad","direccion":"Av. Calle 17 No. 80A - 30","telefono":"+573125145462","whatsapp":"+573114754723","correo":"servicioalciente@autostok.com.co","horarioSemana":"7:00 AM - 5:00 PM","horarioSabado":"8:00 AM - 1:00 PM","mapa":"<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d3976.649064260732!2d-74.13745910321043!3d4.656517300000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9c7059fccacb%3A0xd833fdb9c111ce16!2sAutostok%20La%20Felicidad%20Postventa%20Multimarca!5e0!3m2!1ses!2sco!4v1765288983386!5m2!1ses!2sco\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"><\/iframe>"}}
+[20-Jan-2026 11:30:09 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 129
+[20-Jan-2026 11:30:09 America/Bogota] PHP Warning:  Undefined array key "whatsapp" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 132
+[20-Jan-2026 11:30:09 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:30:09 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:30:09 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:33:38 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 515
+[20-Jan-2026 11:33:38 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:39:36 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 319
+[20-Jan-2026 11:39:36 America/Bogota] PHP Warning:  Undefined array key "whatsapp" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 322
+[20-Jan-2026 11:39:36 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:39:36 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:39:36 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:40:43 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 581
+[20-Jan-2026 11:40:43 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 11:40:52 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 581
+[20-Jan-2026 11:40:52 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 13:11:31 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 319
+[20-Jan-2026 13:11:31 America/Bogota] PHP Warning:  Undefined array key "whatsapp" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 322
+[20-Jan-2026 13:11:31 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 13:11:31 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[20-Jan-2026 13:11:31 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[21-Jan-2026 13:41:58 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 581
+[21-Jan-2026 13:41:58 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48
+[21-Jan-2026 13:42:16 America/Bogota] PHP Warning:  Undefined array key "telefono" in /home/automfp81n1stock/public_html/admin/api/email-templates.php on line 581
+[21-Jan-2026 13:42:16 America/Bogota] PHP Warning:  Undefined array key "smtp_user" in /home/automfp81n1stock/public_html/admin/api/mailer.php on line 48

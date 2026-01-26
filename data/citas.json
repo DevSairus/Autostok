@@ -1,3 +1,18 @@
 {
-    "citas": []
+    "citas": [
+        {
+            "id": 1768926609,
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "nombre": "Sebastian pruebas 2",
+            "telefono": "3213213232",
+            "correo": "jefesistemas@autostok.com.co",
+            "fecha": "2026-01-22",
+            "hora": "10:00",
+            "sucursal": "sucursal1",
+            "notas": "Pruebas",
+            "estado": "confirmada",
+            "fecha_solicitud": "2026-01-20 11:30:09"
+        }
+    ]
 }
