@@ -53,6 +53,20 @@
             "notas": "",
             "estado": "pendiente",
             "fecha_solicitud": "2025-11-19 09:35:08"
+        },
+        {
+            "id": 1763541309,
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "sucursal": "sucursal1",
+            "fecha": "2026-01-30",
+            "hora": "11:00",
+            "comentarios": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-27 20:55:43"
         }
     ]
 }

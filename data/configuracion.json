@@ -58,6 +58,14 @@
         "username": "noresponder@autostok.com.co",
         "password": "P@gina2026*",
         "from_name": "Auto Stok",
+        "enabled": false
+    },
+    "oauth": {
+        "tenant_id": "cbf2f2a0-3897-45a1-aac7-4830d5303736",
+        "client_id": "fb6af37f-be7c-49e8-a3f0-90573eb00773",
+        "client_secret": "YpN8Q~AKcsGlgqHe~h8Hw5U1ipSNgeAjpy6p7bl0",
+        "from_email": "noresponder@autostok.com.co",
+        "from_name": "Auto Stok",
         "enabled": true
     }
 }

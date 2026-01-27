@@ -1924,6 +1924,758 @@
                 "enabled": true
             },
             "ip": "::1"
+        },
+        {
+            "id": "1769522198_6889",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-27 14:56:38",
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:37:23",
+            "tipo": "sistema",
+            "accion": "configurar_smtp",
+            "usuario": "admin",
+            "datos": {
+                "smtp_host": "smtp.office365.com",
+                "smtp_username": "noresponder@autostok.com.co",
+                "enabled": false
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:45:07",
+            "tipo": "sistema",
+            "accion": "configurar_oauth2",
+            "usuario": "admin",
+            "datos": {
+                "from_email": "noresponder@autostok.com.co",
+                "enabled": true
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:45:13",
+            "tipo": "sistema",
+            "accion": "prueba_correo_oauth_exitosa",
+            "usuario": "admin",
+            "datos": {
+                "destinatario": "noresponder@autostok.com.co",
+                "metodo": "Microsoft Graph API OAuth2"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:48:39",
+            "tipo": "sistema",
+            "accion": "prueba_correo_oauth_error",
+            "usuario": "admin",
+            "datos": {
+                "error": "Error al enviar correo. Código: 400 - At least one recipient is not valid., Recipient '' is not resolved. All recipients must be resolved before a message can be submitted."
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:48:57",
+            "tipo": "sistema",
+            "accion": "prueba_correo_oauth_exitosa",
+            "usuario": "admin",
+            "datos": {
+                "destinatario": "noresponder@autostok.com.co",
+                "metodo": "Microsoft Graph API OAuth2"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:49:32",
+            "tipo": "sistema",
+            "accion": "configurar_oauth2",
+            "usuario": "admin",
+            "datos": {
+                "from_email": "noresponder@autostok.com.co",
+                "enabled": true
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:49:37",
+            "tipo": "sistema",
+            "accion": "prueba_correo_oauth_error",
+            "usuario": "admin",
+            "datos": {
+                "error": "Error al obtener token OAuth2. Código: 400"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:49:41",
+            "tipo": "sistema",
+            "accion": "configurar_oauth2",
+            "usuario": "admin",
+            "datos": {
+                "from_email": "noresponder@autostok.com.co",
+                "enabled": true
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 16:49:44",
+            "tipo": "sistema",
+            "accion": "prueba_correo_oauth_exitosa",
+            "usuario": "admin",
+            "datos": {
+                "destinatario": "noresponder@autostok.com.co",
+                "metodo": "Microsoft Graph API OAuth2"
+            },
+            "ip": "::1"
+        },
+        {
+            "id": "1769529090_8200",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1769529090,
+                "servicio": "Revision Vijera",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2026-01-28",
+                "sucursal": "sucursal1"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:30",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529090_5701",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:30",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529090_5469",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:30",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529090_9457",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:30",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529090_9771",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1769529090,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "sucursal": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:30",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529094_8070",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1769529094,
+                "servicio": "Revision Vijera",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2026-01-28",
+                "sucursal": "sucursal1"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529094_8627",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529094_1149",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529094_3901",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769529094_9879",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1769529094,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "sucursal": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 16:51:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532046_2309",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769529090,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-27 17:40:46",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532046_9929",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:40:46",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532046_6403",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769529090,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:40:46",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532054_8724",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769529094,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-27 17:40:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532054_8385",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:40:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532054_4957",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769529094,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:40:54",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532084_5139",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769529090,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "cancelada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-27 17:41:24",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532084_2780",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:41:24",
+            "ip": "::1"
+        },
+        {
+            "id": "1769532084_6636",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769529090,
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "cancelada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 17:41:24",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539162_1455",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1769539162,
+                "tipo": "vehiculo",
+                "vehiculo": "CHEVROLET CAPTIVA 2021",
+                "cliente": "Carlos Jaimes"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:39:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539162_1784",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:39:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539162_9965",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:39:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539162_7461",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:39:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539162_8619",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1769539162,
+                "cliente": "Carlos Jaimes",
+                "tipo": "vehiculo",
+                "destino": "ventas",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "ventas": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:39:22",
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-27 19:39:50",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539162,
+                "nuevo_estado": "contactada"
+            },
+            "ip": "::1"
+        },
+        {
+            "id": "1769539222_3983",
+            "tipo": "solicitud",
+            "accion": "crear",
+            "datos": {
+                "solicitud_id": 1769539222,
+                "tipo": "producto",
+                "producto": "Plumillas  Sandero 2022",
+                "cliente": "Sergio Aguire",
+                "cantidad": 1
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:40:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539222_4717",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:40:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539222_1238",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:40:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539222_7411",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:40:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769539222_5120",
+            "tipo": "email",
+            "accion": "envio_solicitud",
+            "datos": {
+                "solicitud_id": 1769539222,
+                "cliente": "Sergio Aguire",
+                "tipo": "producto",
+                "destino": "almacen",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "almacen": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 19:40:22",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542252_6417",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1769542252,
+                "servicio": "Revision Vijera",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2026-01-29",
+                "sucursal": "sucursal2"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:30:52",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542252_6293",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:30:52",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542252_3836",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:30:52",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542252_2982",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:30:52",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542252_8488",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1769542252,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal2",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "sucursal": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:30:52",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542565_7040",
+            "tipo": "cita",
+            "accion": "crear",
+            "datos": {
+                "cita_id": 1769542565,
+                "servicio": "Revision Vijera",
+                "cliente": "Sergio Aguirre",
+                "fecha": "2026-01-30",
+                "sucursal": "sucursal1"
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:36:05",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542565_6610",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:36:05",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542565_2622",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:36:05",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542565_3634",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:36:05",
+            "ip": "::1"
+        },
+        {
+            "id": "1769542565_6959",
+            "tipo": "email",
+            "accion": "envio_cita",
+            "datos": {
+                "cita_id": 1769542565,
+                "cliente": "Sergio Aguirre",
+                "sucursal": "sucursal1",
+                "resultados": {
+                    "cliente": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "sucursal": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    },
+                    "callcenter": {
+                        "success": false,
+                        "message": "Error al configurar mailer"
+                    }
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:36:05",
+            "ip": "::1"
+        },
+        {
+            "id": "1769543771_8125",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542565,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-27 20:56:11",
+            "ip": "::1"
+        },
+        {
+            "id": "1769543771_9816",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:56:11",
+            "ip": "::1"
+        },
+        {
+            "id": "1769543771_7303",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542565,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-27 20:56:11",
+            "ip": "::1"
         }
     ]
 }

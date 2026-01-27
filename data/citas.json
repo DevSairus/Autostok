@@ -13,6 +13,62 @@
             "notas": "Pruebas",
             "estado": "confirmada",
             "fecha_solicitud": "2026-01-20 11:30:09"
+        },
+        {
+            "id": 1769529090,
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2026-01-28",
+            "hora": "09:00",
+            "sucursal": "sucursal1",
+            "notas": "",
+            "estado": "cancelada",
+            "fecha_solicitud": "2026-01-27 16:51:30"
+        },
+        {
+            "id": 1769529094,
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2026-01-28",
+            "hora": "09:00",
+            "sucursal": "sucursal1",
+            "notas": "",
+            "estado": "confirmada",
+            "fecha_solicitud": "2026-01-27 16:51:34"
+        },
+        {
+            "id": 1769542252,
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2026-01-29",
+            "hora": "16:00",
+            "sucursal": "sucursal2",
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-27 20:30:52"
+        },
+        {
+            "id": 1769542565,
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "fecha": "2026-01-30",
+            "hora": "10:00",
+            "sucursal": "sucursal1",
+            "notas": "",
+            "estado": "confirmada",
+            "fecha_solicitud": "2026-01-27 20:36:05"
         }
     ]
 }

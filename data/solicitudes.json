@@ -36,6 +36,31 @@
             "mensaje": "",
             "estado": "contactada",
             "fecha_solicitud": "2026-01-20 13:11:31"
+        },
+        {
+            "id": 1769539162,
+            "tipo": "vehiculo",
+            "vehiculo_id": "1",
+            "vehiculo_nombre": "CHEVROLET CAPTIVA 2021",
+            "nombre": "Carlos Jaimes",
+            "telefono": "+57 350 5351781",
+            "correo": "aguirre984@gmail.com",
+            "mensaje": "",
+            "estado": "contactada",
+            "fecha_solicitud": "2026-01-27 19:39:22"
+        },
+        {
+            "id": 1769539222,
+            "tipo": "producto",
+            "producto_id": "1",
+            "producto_nombre": "Plumillas  Sandero 2022",
+            "nombre": "Sergio Aguire",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "cantidad": 1,
+            "notas": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-27 19:40:22"
         }
     ]
 }

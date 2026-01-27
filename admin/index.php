@@ -631,7 +631,8 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
         
         <div class="config-tabs">
           <button class="tab-btn active" onclick="cambiarTab('general')">General</button>
-          <button class="tab-btn" onclick="cambiarTab('correo')">Correo Electrónico</button>
+          <button class="tab-btn" onclick="cambiarTab('oauth')">OAuth2</button>
+          <button class="tab-btn" onclick="cambiarTab('correo')">SMTP</button>
           <button class="tab-btn" onclick="cambiarTab('sucursales')">Sucursales</button>
         </div>
 
@@ -680,6 +681,100 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
             </form>
           </div>
         </div>
+
+      <!-- TAB: OAUTH2 (MICROSOFT GRAPH API) -->
+      <div id="tab-oauth" class="tab-content">
+        <div class="config-card">
+          <h3>🔐 Configuración OAuth2 - Microsoft Graph API</h3>
+          <p style="color: rgba(255,255,255,0.6); margin-bottom: 20px;">
+            Configuración moderna y segura para envío de correos con Office365/Microsoft 365 usando OAuth2.
+          </p>
+          
+          <div style="background: rgba(0,255,0,0.1); border: 2px solid rgba(0,255,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 25px;">
+            <p style="margin: 0; color: #0f0; font-weight: 600;">
+              ✅ Este método es el recomendado por Microsoft y no requiere habilitar SMTP básico.
+            </p>
+          </div>
+          
+          <form id="formConfigOAuth" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label>Tenant ID * <span style="color: rgba(255,255,255,0.5); font-weight: normal;">(ID del inquilino de Azure AD)</span></label>
+              <input type="text" id="oauthTenantId" placeholder="cbf2f2a0-3897-45a1-aac7-4830d5303736" class="form-control" required>
+              <p class="helper-text">ID del tenant de tu organización en Azure AD / Microsoft 365</p>
+            </div>
+            
+            <div class="form-group">
+              <label>Client ID * <span style="color: rgba(255,255,255,0.5); font-weight: normal;">(Application ID)</span></label>
+              <input type="text" id="oauthClientId" placeholder="fb6af37f-be7c-49e8-a3f0-90573eb00773" class="form-control" required>
+              <p class="helper-text">ID de la aplicación registrada en Azure AD</p>
+            </div>
+            
+            <div class="form-group">
+              <label>Client Secret * <span style="color: rgba(255,255,255,0.5); font-weight: normal;">(Secreto de cliente)</span></label>
+              <input type="password" id="oauthClientSecret" placeholder="Ingrese el client secret" class="form-control">
+              <p class="helper-text">Secreto de la aplicación (se genera en Azure AD)</p>
+            </div>
+            
+            <div class="form-group">
+              <label>Email del Remitente *</label>
+              <input type="email" id="oauthFromEmail" placeholder="noresponder@autostok.com.co" class="form-control" required>
+              <p class="helper-text">Dirección de correo que enviará las notificaciones</p>
+            </div>
+            
+            <div class="form-group">
+              <label>Nombre del Remitente</label>
+              <input type="text" id="oauthFromName" placeholder="Auto Stok" class="form-control">
+              <p class="helper-text">Nombre que aparecerá como remitente</p>
+            </div>
+            
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="oauthEnabled" style="width: auto;">
+                Activar envío de correos con OAuth2
+              </label>
+              <p class="helper-text">Desactiva si no quieres usar este método</p>
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+              <button type="submit" class="btn-primary" style="flex: 1;">💾 Guardar Configuración OAuth2</button>
+              <button type="button" class="btn-secondary" onclick="probarCorreoOAuth()" style="flex: 1;">
+                📨 Enviar Correo de Prueba
+              </button>
+            </div>
+          </form>
+          
+          <div id="mensajeOAuth" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: 600; text-align: center;"></div>
+          
+          <!-- INSTRUCCIONES -->
+          <div style="margin-top: 40px; padding: 25px; background: rgba(255,215,0,0.05); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2);">
+            <h4 style="color: #FFD700; margin-bottom: 20px;">📚 ¿Cómo obtener las credenciales OAuth2?</h4>
+            
+            <ol style="color: rgba(255,255,255,0.8); line-height: 2;">
+              <li><strong>Ve al Portal de Azure:</strong> <a href="https://portal.azure.com" target="_blank" style="color: #FFD700;">portal.azure.com</a></li>
+              <li><strong>Azure Active Directory</strong> → <strong>App registrations</strong> → <strong>New registration</strong></li>
+              <li>Nombre: <code style="background: #333; padding: 3px 8px; border-radius: 3px;">Auto Stok Mail Sender</code></li>
+              <li>Supported account types: <strong>Accounts in this organizational directory only</strong></li>
+              <li>Haz clic en <strong>Register</strong></li>
+              <li>Copia el <strong>Application (client) ID</strong> → Este es tu <strong>Client ID</strong></li>
+              <li>Copia el <strong>Directory (tenant) ID</strong> → Este es tu <strong>Tenant ID</strong></li>
+              <li>Ve a <strong>Certificates & secrets</strong> → <strong>New client secret</strong></li>
+              <li>Description: <code style="background: #333; padding: 3px 8px; border-radius: 3px;">Auto Stok Secret</code></li>
+              <li>Expires: <strong>24 months</strong> (recomendado)</li>
+              <li>Copia el <strong>Value</strong> → Este es tu <strong>Client Secret</strong> (⚠️ solo se muestra una vez)</li>
+              <li>Ve a <strong>API permissions</strong> → <strong>Add a permission</strong></li>
+              <li>Selecciona <strong>Microsoft Graph</strong> → <strong>Application permissions</strong></li>
+              <li>Busca y agrega: <strong>Mail.Send</strong></li>
+              <li>Haz clic en <strong>Grant admin consent</strong> ✅</li>
+            </ol>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,0,0.1); border-left: 4px solid #0f0; border-radius: 5px;">
+              <p style="margin: 0; color: #0f0; font-weight: 600;">
+                ✅ Una vez configurado, funcionará inmediatamente sin necesidad de habilitar SMTP básico.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
         <!-- TAB: CORREO ELECTRÓNICO -->
         <div id="tab-correo" class="tab-content">
@@ -1531,6 +1626,126 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarConfigSMTP();
   }
 });
+</script>
+
+<script>
+// ==================== CONFIGURACIÓN OAUTH2 ====================
+
+async function cargarConfigOAuth() {
+  try {
+    const response = await fetch('api/config_oauth.php');
+    const result = await response.json();
+    
+    console.log('Config OAuth2 cargada:', result);
+    
+    if (result.success && result.oauth) {
+      const oauth = result.oauth;
+      document.getElementById('oauthTenantId').value = oauth.tenant_id || '';
+      document.getElementById('oauthClientId').value = oauth.client_id || '';
+      document.getElementById('oauthFromEmail').value = oauth.from_email || '';
+      document.getElementById('oauthFromName').value = oauth.from_name || 'Auto Stok';
+      document.getElementById('oauthEnabled').checked = oauth.enabled || false;
+      
+      if (oauth.has_client_secret) {
+        document.getElementById('oauthClientSecret').placeholder = '••••••••••••••••••••';
+      }
+    }
+  } catch (error) {
+    console.error('Error cargando configuración OAuth2:', error);
+  }
+}
+
+document.getElementById('formConfigOAuth')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const clientSecret = document.getElementById('oauthClientSecret').value;
+  const placeholder = document.getElementById('oauthClientSecret').placeholder;
+  
+  const datos = {
+    tenant_id: document.getElementById('oauthTenantId').value.trim(),
+    client_id: document.getElementById('oauthClientId').value.trim(),
+    from_email: document.getElementById('oauthFromEmail').value.trim(),
+    from_name: document.getElementById('oauthFromName').value.trim(),
+    enabled: document.getElementById('oauthEnabled').checked
+  };
+  
+  if (clientSecret) {
+    datos.client_secret = clientSecret;
+  } else if (placeholder === 'Ingrese el client secret') {
+    mostrarMensajeOAuth('✗ Por favor ingrese el Client Secret', 'error');
+    return;
+  }
+  
+  console.log('Guardando OAuth2:', datos);
+  
+  try {
+    const response = await fetch('api/config_oauth.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    
+    const result = await response.json();
+    console.log('Resultado:', result);
+    
+    if (result.success) {
+      mostrarMensajeOAuth('✓ Configuración OAuth2 guardada correctamente', 'exito');
+      document.getElementById('oauthClientSecret').value = '';
+      document.getElementById('oauthClientSecret').placeholder = '••••••••••••••••••••';
+    } else {
+      mostrarMensajeOAuth('✗ Error: ' + result.message, 'error');
+    }
+  } catch (error) {
+    console.error('Error completo:', error);
+    mostrarMensajeOAuth('✗ Error al guardar: ' + error.message, 'error');
+  }
+});
+
+async function probarCorreoOAuth() {
+  const mensajeDiv = document.getElementById('mensajeOAuth');
+  mensajeDiv.style.display = 'block';
+  mensajeDiv.textContent = '📤 Enviando correo de prueba con OAuth2...';
+  mensajeDiv.style.background = 'rgba(255,215,0,0.1)';
+  mensajeDiv.style.border = '2px solid rgba(255,215,0,0.5)';
+  mensajeDiv.style.color = '#FFD700';
+  
+  try {
+    const response = await fetch('api/probar_correo_oauth.php', {
+      method: 'POST'
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      mostrarMensajeOAuth('✓ ' + result.message, 'exito');
+    } else {
+      mostrarMensajeOAuth('✗ Error: ' + result.message, 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    mostrarMensajeOAuth('✗ Error al enviar correo de prueba', 'error');
+  }
+}
+
+function mostrarMensajeOAuth(mensaje, tipo) {
+  const mensajeDiv = document.getElementById('mensajeOAuth');
+  mensajeDiv.style.display = 'block';
+  mensajeDiv.textContent = mensaje;
+  
+  if (tipo === 'exito') {
+    mensajeDiv.style.background = 'rgba(0,255,0,0.1)';
+    mensajeDiv.style.border = '2px solid rgba(0,255,0,0.5)';
+    mensajeDiv.style.color = '#0f0';
+  } else {
+    mensajeDiv.style.background = 'rgba(255,0,0,0.1)';
+    mensajeDiv.style.border = '2px solid rgba(255,0,0,0.5)';
+    mensajeDiv.style.color = '#f00';
+  }
+  
+  setTimeout(() => {
+    mensajeDiv.style.display = 'none';
+  }, 8000);
+}
 </script>
 </body>
 </html>
