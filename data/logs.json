@@ -2676,6 +2676,659 @@
             "usuario": "Sistema",
             "fecha": "2026-01-27 20:56:11",
             "ip": "::1"
+        },
+        {
+            "id": "1769614706_5348",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 16:38:26",
+            "ip": "::1"
+        },
+        {
+            "id": "1769614773_2494",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542252,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal2",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 16:39:33",
+            "ip": "::1"
+        },
+        {
+            "id": "1769614773_3660",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 16:39:33",
+            "ip": "::1"
+        },
+        {
+            "id": "1769614773_4058",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542252,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 16:39:33",
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 17:02:06",
+            "tipo": "producto",
+            "accion": "descuento_stock",
+            "usuario": "admin",
+            "datos": {
+                "producto_id": 1,
+                "producto_nombre": "Plumillas  Sandero 2022",
+                "cantidad_descontada": 1,
+                "stock_anterior": 2,
+                "stock_nuevo": 1,
+                "solicitud_id": 1769539222
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 17:02:06",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539222,
+                "nuevo_estado": "completada"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 17:18:14",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539223,
+                "nuevo_estado": "contactada"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 17:18:24",
+            "tipo": "producto",
+            "accion": "descuento_stock",
+            "usuario": "admin",
+            "datos": {
+                "producto_id": 1,
+                "producto_nombre": "Plumillas  Sandero 2022",
+                "cantidad_descontada": 1,
+                "stock_anterior": 1,
+                "stock_nuevo": 0,
+                "solicitud_id": 1769539223
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 17:18:24",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539223,
+                "nuevo_estado": "completada"
+            },
+            "ip": "::1"
+        },
+        {
+            "id": "1769617345_3571",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542566,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:22:25",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617345_2979",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:22:25",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617345_8403",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542566,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:22:25",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617442_8082",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542567,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:24:02",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617442_9817",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:24:02",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617442_5731",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542567,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:24:02",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617518_4616",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1768926609,
+                "cliente": "Sebastian pruebas 2",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "fecha": "2026-01-22"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:18",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617521_2391",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1769529090,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "fecha": "2026-01-28"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:21",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617524_6002",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1769529094,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "fecha": "2026-01-28"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:24",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617527_5697",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1769542252,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal2",
+                "fecha": "2026-01-29"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:27",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617531_1918",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1769542565,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "fecha": "2026-01-30"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:31",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617534_4739",
+            "tipo": "cita",
+            "accion": "eliminar",
+            "datos": {
+                "cita_id": 1769542566,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "fecha": "2026-01-28"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:34",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617537_9336",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542567,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 17:25:37",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617537_9869",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:25:37",
+            "ip": "::1"
+        },
+        {
+            "id": "1769617537_1529",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542567,
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "completada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 17:25:37",
+            "ip": "::1"
+        },
+        {
+            "id": "1769623448_7799",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542568,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 19:04:08",
+            "ip": "::1"
+        },
+        {
+            "id": "1769623448_3631",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:04:08",
+            "ip": "::1"
+        },
+        {
+            "id": "1769623448_6577",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542568,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:04:08",
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:05:11",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539224,
+                "nuevo_estado": "contactada"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:05:29",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539224,
+                "nuevo_estado": "completada"
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:15",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1768925758
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:19",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1768927176
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:22",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1768932691
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:25",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539162
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:28",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539222
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:31",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539223
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:07:34",
+            "tipo": "solicitud",
+            "accion": "eliminar",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1769539224
+            },
+            "ip": "::1"
+        },
+        {
+            "fecha": "2026-01-28 19:08:08",
+            "tipo": "solicitud",
+            "accion": "cambio_estado",
+            "usuario": "admin",
+            "datos": {
+                "solicitud_id": 1,
+                "nuevo_estado": "contactada"
+            },
+            "ip": "::1"
+        },
+        {
+            "id": "1769623924_8930",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542569,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal2",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 19:12:04",
+            "ip": "::1"
+        },
+        {
+            "id": "1769623924_2853",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:12:04",
+            "ip": "::1"
+        },
+        {
+            "id": "1769623924_5130",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542569,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:12:04",
+            "ip": "::1"
+        },
+        {
+            "id": "1769624625_3370",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542570,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 19:23:45",
+            "ip": "::1"
+        },
+        {
+            "id": "1769624625_9967",
+            "tipo": "email",
+            "accion": "error_configuracion",
+            "datos": {
+                "error": "Invalid address:  (From): "
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:23:45",
+            "ip": "::1"
+        },
+        {
+            "id": "1769624625_2036",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542570,
+                "estado_anterior": "pendiente",
+                "estado_nuevo": "confirmada",
+                "resultado": {
+                    "success": false,
+                    "message": "Error al configurar mailer"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 19:23:45",
+            "ip": "::1"
+        },
+        {
+            "id": "1769635124_2135",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542570,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "completada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 22:18:44",
+            "ip": "::1"
+        },
+        {
+            "id": "1769635126_5548",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542570,
+                "estado_anterior": "confirmada",
+                "estado_nuevo": "completada",
+                "destinatario": "aguirre984@gmail.com",
+                "resultado": {
+                    "success": true,
+                    "message": "Correo enviado"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 22:18:46",
+            "ip": "::1"
+        },
+        {
+            "id": "1769635137_8420",
+            "tipo": "cita",
+            "accion": "cambio_estado",
+            "datos": {
+                "cita_id": 1769542570,
+                "cliente": "Sergio Aguirre",
+                "servicio": "Revision Vijera",
+                "sucursal": "sucursal1",
+                "estado_anterior": "completada",
+                "estado_nuevo": "cancelada"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-28 22:18:57",
+            "ip": "::1"
+        },
+        {
+            "id": "1769635138_1058",
+            "tipo": "email",
+            "accion": "cambio_estado",
+            "datos": {
+                "tipo": "cita",
+                "id": 1769542570,
+                "estado_anterior": "completada",
+                "estado_nuevo": "cancelada",
+                "destinatario": "aguirre984@gmail.com",
+                "resultado": {
+                    "success": true,
+                    "message": "Correo enviado"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-28 22:18:58",
+            "ip": "::1"
         }
     ]
 }

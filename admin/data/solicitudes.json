@@ -83,6 +83,43 @@
             "mensaje": "",
             "estado": "pendiente",
             "fecha_solicitud": "2025-11-19 09:37:35"
+        },
+        {
+            "id": 1763541456,
+            "tipo": "producto",
+            "nombre": "Sergio Aguire",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "producto_id": "1",
+            "producto_nombre": "Plumillas  Sandero 2022",
+            "cantidad": "1",
+            "mensaje": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-28 17:01:48"
+        },
+        {
+            "id": 1763541457,
+            "tipo": "vehiculo",
+            "nombre": "Carlos Jaimes",
+            "telefono": "+57 350 5351781",
+            "correo": "aguirre984@gmail.com",
+            "vehiculo_id": "2",
+            "vehiculo_nombre": "KIA  SOLUTO BLACK EDITION 2025",
+            "mensaje": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-28 17:02:59"
+        },
+        {
+            "id": 1763541458,
+            "tipo": "vehiculo",
+            "nombre": "Carlos Jaimes",
+            "telefono": "+57 350 5351781",
+            "correo": "aguirre984@gmail.com",
+            "vehiculo_id": "1",
+            "vehiculo_nombre": "CHEVROLET CAPTIVA 2021",
+            "mensaje": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-28 17:20:14"
         }
     ]
 }

@@ -1,16 +1,7 @@
 <?php
 /**
- * Sistema de Envío de Correos y Notificaciones
- * Corregido para usar sucursales y configuración correcta
+ * Sistema de Envío de Correos con OAuth2
  */
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-// Importar PHPMailer
-require_once __DIR__ . '/PHPMailer/src/Exception.php';
-require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
-require_once __DIR__ . '/PHPMailer/src/SMTP.php';
 
 require_once __DIR__ . '/logs.php';
 require_once __DIR__ . '/email-templates.php';
@@ -27,196 +18,178 @@ function cargarConfiguracion() {
 }
 
 /**
- * Configurar y crear instancia de PHPMailer
+ * Enviar email usando OAuth2 (Microsoft Graph API)
  */
-function crearMailer($config) {
-    $mail = new PHPMailer(true);
+function enviarEmailOAuth2($oauth, $destinatario, $asunto, $contenidoHTML) {
+    try {
+        // Obtener token
+        $tokenUrl = "https://login.microsoftonline.com/{$oauth['tenant_id']}/oauth2/v2.0/token";
+        
+        $ch = curl_init($tokenUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query([
+                'grant_type' => 'client_credentials',
+                'scope' => 'https://graph.microsoft.com/.default',
+                'client_id' => $oauth['client_id'],
+                'client_secret' => $oauth['client_secret']
+            ]),
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_TIMEOUT => 15
+        ]);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        if ($httpCode !== 200) {
+            return ['success' => false, 'message' => 'Error obteniendo token OAuth2'];
+        }
+        
+        $tokenData = json_decode($response, true);
+        if (!isset($tokenData['access_token'])) {
+            return ['success' => false, 'message' => 'No se obtuvo access token'];
+        }
+        
+        // Enviar correo
+        $emailData = [
+            'message' => [
+                'subject' => $asunto,
+                'body' => [
+                    'contentType' => 'HTML',
+                    'content' => $contenidoHTML
+                ],
+                'toRecipients' => [
+                    ['emailAddress' => ['address' => $destinatario]]
+                ]
+            ],
+            'saveToSentItems' => true
+        ];
+        
+        $sendUrl = "https://graph.microsoft.com/v1.0/users/{$oauth['from_email']}/sendMail";
+        
+        $ch = curl_init($sendUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($emailData),
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $tokenData['access_token'],
+                'Content-Type: application/json'
+            ],
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_TIMEOUT => 15
+        ]);
+        
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        if ($httpCode === 202 || $httpCode === 200) {
+            return ['success' => true, 'message' => 'Correo enviado'];
+        }
+        
+        return ['success' => false, 'message' => "Error HTTP: $httpCode"];
+        
+    } catch (Exception $e) {
+        return ['success' => false, 'message' => $e->getMessage()];
+    }
+}
+
+/**
+ * Función principal de envío (detecta OAuth2 o SMTP)
+ */
+function enviarEmail($config, $destinatario, $asunto, $contenidoHTML) {
+    // Intentar OAuth2 primero
+    if (isset($config['oauth']) && $config['oauth']['enabled']) {
+        return enviarEmailOAuth2($config['oauth'], $destinatario, $asunto, $contenidoHTML);
+    }
+    
+    // Fallback a SMTP si está disponible
+    if (isset($config['smtp']) && $config['smtp']['enabled']) {
+        return enviarEmailSMTP($config['smtp'], $destinatario, $asunto, $contenidoHTML);
+    }
+    
+    return ['success' => false, 'message' => 'No hay método de envío configurado'];
+}
+
+/**
+ * Enviar email usando SMTP (fallback)
+ */
+function enviarEmailSMTP($smtp, $destinatario, $asunto, $contenidoHTML) {
+    $phpmailerPath = __DIR__ . '/PHPMailer/src/PHPMailer.php';
+    
+    if (!file_exists($phpmailerPath)) {
+        return ['success' => false, 'message' => 'PHPMailer no instalado'];
+    }
     
     try {
-        // Configuración del servidor SMTP
+        require_once $phpmailerPath;
+        require_once __DIR__ . '/PHPMailer/src/SMTP.php';
+        require_once __DIR__ . '/PHPMailer/src/Exception.php';
+        
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+        
         $mail->isSMTP();
-        $mail->Host       = $config['general']['smtp_host'] ?? 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $config['general']['smtp_user'] ?? '';
-        $mail->Password   = $config['general']['smtp_password'] ?? '';
-        $mail->SMTPSecure = ($config['general']['smtp_secure'] ?? 'tls') === 'tls' ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = $config['general']['smtp_port'] ?? 587;
-        $mail->CharSet    = 'UTF-8';
+        $mail->Host = $smtp['host'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $smtp['username'];
+        $mail->Password = $smtp['password'];
+        $mail->Port = intval($smtp['port']);
+        $mail->CharSet = 'UTF-8';
         
-        // Remitente
-        $mail->setFrom(
-            $config['general']['email_from'] ?? $config['general']['smtp_user'],
-            $config['general']['nombre_empresa'] ?? 'Auto Stok'
-        );
+        if (($smtp['encryption'] ?? 'tls') === 'ssl') {
+            $mail->SMTPSecure = 'ssl';
+        } else {
+            $mail->SMTPSecure = 'tls';
+        }
         
-        return $mail;
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
+        
+        $mail->setFrom($smtp['username'], $smtp['from_name'] ?? 'Auto Stok');
+        $mail->addAddress($destinatario);
+        
+        $mail->isHTML(true);
+        $mail->Subject = $asunto;
+        $mail->Body = $contenidoHTML;
+        $mail->AltBody = strip_tags($contenidoHTML);
+        
+        $mail->send();
+        return ['success' => true, 'message' => 'Correo enviado'];
+        
     } catch (Exception $e) {
-        guardarLog('email', 'error_configuracion', [
-            'error' => $e->getMessage()
-        ], 'Sistema');
-        return null;
+        return ['success' => false, 'message' => $e->getMessage()];
     }
 }
 
 /**
  * Enviar email de nueva cita
- * Ahora envía a la sucursal correcta según la selección
  */
 function enviarEmailNuevaCita($cita) {
     $config = cargarConfiguracion();
-    if (!$config) {
-        return ['success' => false, 'message' => 'No se pudo cargar la configuración'];
+    if (!$config || empty($cita['correo'])) {
+        return ['success' => false, 'message' => 'Sin configuración o email'];
     }
     
-    // ========== DEBUG: AGREGAR ESTAS LÍNEAS ==========
-    error_log("===== DEBUG CITA =====");
-    error_log("Cita completa: " . json_encode($cita));
-    error_log("Sucursal en cita: " . ($cita['sucursal'] ?? 'NO DEFINIDA'));
-    error_log("Config sucursales: " . json_encode($config['sucursales']));
-    // =================================================
+    $asunto = 'Confirmación de Cita - Auto Stok';
+    $contenido = generarTemplateNuevaCita($cita, $config);
     
-    $resultados = [];
+    $resultado = enviarEmail($config, $cita['correo'], $asunto, $contenido);
     
-    // 1. Email al cliente
-    if (!empty($cita['correo'])) {
-        $resultado = enviarEmail(
-            $config,
-            $cita['correo'],
-            'Confirmación de Cita - ' . ($config['general']['nombre_empresa'] ?? 'Auto Stok'),
-            generarTemplateClienteCita($cita, $config)
-        );
-        $resultados['cliente'] = $resultado;
-    }
-    
-    // 2. Email a la SUCURSAL SELECCIONADA
-    $sucursalId = $cita['sucursal'] ?? 'sucursal1'; // Por defecto sucursal1
-    $emailSucursal = null;
-    
-    if (isset($config['sucursales'][$sucursalId]['correo'])) {
-        $emailSucursal = $config['sucursales'][$sucursalId]['correo'];
-    }
-    
-    if (!empty($emailSucursal)) {
-        $resultado = enviarEmail(
-            $config,
-            $emailSucursal,
-            '🔔 Nueva Cita Agendada - ' . $cita['nombre'],
-            generarTemplateSucursalCita($cita, $config, $sucursalId)
-        );
-        $resultados['sucursal'] = $resultado;
-    }
-    
-    // 3. Email al call center (copia)
-    $emailCallCenter = $config['general']['correoCallCenter'] ?? null;
-    if (!empty($emailCallCenter) && $emailCallCenter !== $emailSucursal) {
-        $resultado = enviarEmail(
-            $config,
-            $emailCallCenter,
-            '📋 Nueva Cita Registrada - ' . $cita['servicio_nombre'],
-            generarTemplateCallCenterCita($cita, $config)
-        );
-        $resultados['callcenter'] = $resultado;
-    }
-    
-    // Guardar log
-    guardarLog('email', 'envio_cita', [
+    guardarLog('email', 'nueva_cita', [
         'cita_id' => $cita['id'],
-        'cliente' => $cita['nombre'],
-        'sucursal' => $sucursalId,
-        'resultados' => $resultados
+        'destinatario' => $cita['correo'],
+        'resultado' => $resultado
     ], 'Sistema');
     
-    return $resultados;
-}
-
-/**
- * Enviar email de nueva solicitud
- * Diferencia entre solicitud de vehículo y producto
- */
-function enviarEmailNuevaSolicitud($solicitud) {
-    $config = cargarConfiguracion();
-    if (!$config) {
-        return ['success' => false, 'message' => 'No se pudo cargar la configuración'];
-    }
-    
-    $resultados = [];
-    
-    // 1. Email al cliente
-    if (!empty($solicitud['correo'])) {
-        $resultado = enviarEmail(
-            $config,
-            $solicitud['correo'],
-            'Confirmación de Solicitud - ' . ($config['general']['nombre_empresa'] ?? 'Auto Stok'),
-            generarTemplateClienteSolicitud($solicitud, $config)
-        );
-        $resultados['cliente'] = $resultado;
-    }
-    
-    // 2. Email al departamento correspondiente según el tipo
-    $emailDestino = null;
-    $tipoNotificacion = '';
-    
-    switch ($solicitud['tipo']) {
-        case 'producto':
-            // Solicitud de productos va al ALMACÉN
-            $emailDestino = $config['general']['correoAlmacen'] ?? $config['general']['correoNegocio'];
-            $tipoNotificacion = 'almacen';
-            break;
-            
-        case 'vehiculo':
-            // Solicitud de vehículos va a VENTAS (correo general)
-            $emailDestino = $config['general']['correoNegocio'];
-            $tipoNotificacion = 'ventas';
-            break;
-            
-        case 'servicio':
-            // Solicitud de servicios va a la sucursal
-            $sucursalId = $solicitud['sucursal'] ?? 'sucursal1';
-            if (isset($config['sucursales'][$sucursalId]['correo'])) {
-                $emailDestino = $config['sucursales'][$sucursalId]['correo'];
-            }
-            $tipoNotificacion = 'sucursal';
-            break;
-            
-        default:
-            // Solicitud general va al correo de negocio
-            $emailDestino = $config['general']['correoNegocio'];
-            $tipoNotificacion = 'general';
-            break;
-    }
-    
-    if (!empty($emailDestino)) {
-        $resultado = enviarEmail(
-            $config,
-            $emailDestino,
-            '🛒 Nueva Solicitud - ' . ucfirst($solicitud['tipo']) . ' - ' . $solicitud['nombre'],
-            generarTemplateAlmacenSolicitud($solicitud, $config)
-        );
-        $resultados[$tipoNotificacion] = $resultado;
-    }
-    
-    // 3. Email al call center (copia) - solo si es diferente
-    $emailCallCenter = $config['general']['correoCallCenter'] ?? null;
-    if (!empty($emailCallCenter) && $emailCallCenter !== $emailDestino) {
-        $resultado = enviarEmail(
-            $config,
-            $emailCallCenter,
-            '📋 Nueva Solicitud Registrada - ' . ($solicitud['tipo'] ?? 'General'),
-            generarTemplateCallCenterSolicitud($solicitud, $config)
-        );
-        $resultados['callcenter'] = $resultado;
-    }
-    
-    // Guardar log
-    guardarLog('email', 'envio_solicitud', [
-        'solicitud_id' => $solicitud['id'],
-        'cliente' => $solicitud['nombre'],
-        'tipo' => $solicitud['tipo'] ?? 'general',
-        'destino' => $tipoNotificacion,
-        'resultados' => $resultados
-    ], 'Sistema');
-    
-    return $resultados;
+    return $resultado;
 }
 
 /**
@@ -232,10 +205,10 @@ function enviarEmailCambioEstado($tipo, $item, $estadoAnterior, $estadoNuevo) {
     $contenido = '';
     
     if ($tipo === 'cita') {
-        $asunto = 'Actualización de su Cita - ' . ucfirst($estadoNuevo);
+        $asunto = 'Actualización de tu Cita - ' . ucfirst($estadoNuevo) . ' - Auto Stok';
         $contenido = generarTemplateEstadoCita($item, $estadoAnterior, $estadoNuevo, $config);
     } else {
-        $asunto = 'Actualización de su Solicitud - ' . ucfirst($estadoNuevo);
+        $asunto = 'Actualización de tu Solicitud - ' . ucfirst($estadoNuevo) . ' - Auto Stok';
         $contenido = generarTemplateEstadoSolicitud($item, $estadoAnterior, $estadoNuevo, $config);
     }
     
@@ -246,6 +219,7 @@ function enviarEmailCambioEstado($tipo, $item, $estadoAnterior, $estadoNuevo) {
         'id' => $item['id'],
         'estado_anterior' => $estadoAnterior,
         'estado_nuevo' => $estadoNuevo,
+        'destinatario' => $item['correo'],
         'resultado' => $resultado
     ], 'Sistema');
     
@@ -253,111 +227,24 @@ function enviarEmailCambioEstado($tipo, $item, $estadoAnterior, $estadoNuevo) {
 }
 
 /**
- * Función base para enviar email
+ * Generar notificación WhatsApp
  */
-function enviarEmail($config, $destinatario, $asunto, $contenidoHTML) {
-    $mail = crearMailer($config);
-    if (!$mail) {
-        return ['success' => false, 'message' => 'Error al configurar mailer'];
-    }
-    
-    try {
-        // Destinatario
-        $mail->addAddress($destinatario);
-        
-        // Contenido
-        $mail->isHTML(true);
-        $mail->Subject = $asunto;
-        $mail->Body    = $contenidoHTML;
-        $mail->AltBody = strip_tags($contenidoHTML);
-        
-        // Enviar
-        $mail->send();
-        
-        return [
-            'success' => true, 
-            'message' => 'Email enviado correctamente',
-            'destinatario' => $destinatario
-        ];
-    } catch (Exception $e) {
-        return [
-            'success' => false, 
-            'message' => 'Error al enviar: ' . $mail->ErrorInfo,
-            'destinatario' => $destinatario,
-            'error_detallado' => $e->getMessage()
-        ];
-    }
-}
-
-/**
- * Generar enlace de WhatsApp según el tipo
- */
-function generarEnlaceWhatsApp($telefono, $mensaje) {
-    $telefonoLimpio = preg_replace('/[^0-9]/', '', $telefono);
-    $mensajeCodificado = urlencode($mensaje);
-    
-    return "https://wa.me/{$telefonoLimpio}?text={$mensajeCodificado}";
-}
-
-/**
- * Generar notificación WhatsApp para admin
- * Retorna el enlace de WhatsApp según el tipo de notificación
- */
-function generarNotificacionWhatsApp($tipo, $datos) {
+function generarNotificacionWhatsApp($tipo, $item) {
     $config = cargarConfiguracion();
-    if (!$config) return null;
+    $telefono = $config['general']['whatsapp_numero'] ?? '';
     
-    $whatsapp = null;
-    $mensaje = '';
-    
-    if ($tipo === 'cita') {
-        // WhatsApp de la sucursal seleccionada
-        $sucursalId = $datos['sucursal'] ?? 'sucursal1';
-        $whatsapp = $config['sucursales'][$sucursalId]['whatsapp'] ?? $config['general']['telefonoWhatsappServicios'];
-        
-        $mensaje = "*🔔 Nueva Cita Agendada*\n\n";
-        $mensaje .= "*Cliente:* {$datos['nombre']}\n";
-        $mensaje .= "*Servicio:* {$datos['servicio_nombre']}\n";
-        $mensaje .= "*Fecha:* {$datos['fecha']}\n";
-        $mensaje .= "*Hora:* {$datos['hora']}\n";
-        $mensaje .= "*Teléfono:* {$datos['telefono']}\n";
-        if (!empty($datos['notas'])) {
-            $mensaje .= "*Notas:* {$datos['notas']}\n";
-        }
-        
-    } else if ($tipo === 'solicitud') {
-        // WhatsApp según el tipo de solicitud
-        switch ($datos['tipo']) {
-            case 'producto':
-                $whatsapp = $config['general']['telefonoWhatsappAlmacen'];
-                break;
-            case 'vehiculo':
-                $whatsapp = $config['general']['telefonoWhatsappVehiculos'];
-                break;
-            case 'servicio':
-                $whatsapp = $config['general']['telefonoWhatsappServicios'];
-                break;
-            default:
-                $whatsapp = $config['general']['whatsapp'];
-                break;
-        }
-        
-        $mensaje = "*🛒 Nueva Solicitud de " . ucfirst($datos['tipo']) . "*\n\n";
-        $mensaje .= "*Cliente:* {$datos['nombre']}\n";
-        if (isset($datos['vehiculo_nombre'])) {
-            $mensaje .= "*Vehículo:* {$datos['vehiculo_nombre']}\n";
-        }
-        if (isset($datos['producto_nombre'])) {
-            $mensaje .= "*Producto:* {$datos['producto_nombre']}\n";
-        }
-        $mensaje .= "*Teléfono:* {$datos['telefono']}\n";
-        if (!empty($datos['mensaje'])) {
-            $mensaje .= "*Mensaje:* {$datos['mensaje']}\n";
-        }
+    if (empty($telefono)) {
+        return null;
     }
     
-    if (!$whatsapp) return null;
+    $mensaje = '';
+    if ($tipo === 'cita') {
+        $mensaje = "Nueva cita:\n";
+        $mensaje .= "Cliente: {$item['nombre']}\n";
+        $mensaje .= "Servicio: {$item['servicio_nombre']}\n";
+        $mensaje .= "Fecha: {$item['fecha']} {$item['hora']}\n";
+        $mensaje .= "Tel: {$item['telefono']}";
+    }
     
-    return generarEnlaceWhatsApp($whatsapp, $mensaje);
+    return "https://wa.me/{$telefono}?text=" . urlencode($mensaje);
 }
-?>

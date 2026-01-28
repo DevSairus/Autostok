@@ -987,46 +987,122 @@ $categoriasProductos = array_unique(array_column($productos, 'categoria'));
       }
     };
     
-    // Cargar horarios ocupados cuando se selecciona fecha y sucursal
+    // ===== CARGAR HORARIOS DISPONIBLES =====
     async function cargarHorariosDisponibles() {
       const fecha = document.getElementById('fechaCita').value;
       const sucursal = document.getElementById('sucursalServicio').value;
       
-      if (!fecha || !sucursal) return;
+      if (!fecha || !sucursal) {
+        return;
+      }
       
       try {
-        // Cargar todas las citas
-        const response = await fetch('../data/citas.json');
-        const data = await response.json();
-        const citas = data.citas || [];
+        // Llamar al API para obtener horarios ocupados
+        const response = await fetch(`../admin/api/horarios_disponibles.php?fecha=${fecha}&sucursal=${sucursal}`);
         
-        // Filtrar citas confirmadas de esa fecha y sucursal
-        const citasOcupadas = citas.filter(c => 
-          c.fecha === fecha && 
-          c.sucursal === sucursal && 
-          (c.estado === 'confirmada' || c.estado === 'pendiente')
-        );
+        if (!response.ok) {
+          throw new Error('Error al cargar horarios');
+        }
         
-        // Obtener horas ocupadas
-        const horasOcupadas = citasOcupadas.map(c => c.hora);
+        const result = await response.json();
         
-        // Actualizar el select de horas
-        const selectHora = document.getElementById('horaCita');
-        const opciones = selectHora.querySelectorAll('option');
-        
-        opciones.forEach(opcion => {
-          if (opcion.value && horasOcupadas.includes(opcion.value)) {
-            opcion.disabled = true;
-            opcion.textContent = opcion.textContent.split(' -')[0] + ' - No disponible';
-          } else if (opcion.value) {
-            opcion.disabled = false;
-            opcion.textContent = opcion.textContent.split(' -')[0];
+        if (result.success) {
+          const horasOcupadas = result.horarios_ocupados || [];
+          
+          console.log('Horarios ocupados:', horasOcupadas);
+          
+          // Actualizar el select de horas
+          const selectHora = document.getElementById('horaCita');
+          const opciones = selectHora.querySelectorAll('option');
+          
+          opciones.forEach(opcion => {
+            if (opcion.value) {
+              if (horasOcupadas.includes(opcion.value)) {
+                opcion.disabled = true;
+                opcion.style.color = '#999';
+                opcion.style.background = '#f0f0f0';
+                // Limpiar texto previo
+                const textoBase = opcion.textContent.split(' -')[0].split(' (')[0].trim();
+                opcion.textContent = textoBase + ' - No disponible';
+              } else {
+                opcion.disabled = false;
+                opcion.style.color = '';
+                opcion.style.background = '';
+                // Limpiar texto previo
+                const textoBase = opcion.textContent.split(' -')[0].split(' (')[0].trim();
+                opcion.textContent = textoBase;
+              }
+            }
+          });
+          
+          // Si la hora seleccionada actualmente está ocupada, limpiar selección
+          if (selectHora.value && horasOcupadas.includes(selectHora.value)) {
+            selectHora.value = '';
+            mostrarNotificacion('La hora seleccionada ya no está disponible', 'warning');
           }
-        });
+          
+        } else {
+          console.error('Error:', result.message);
+        }
       } catch (error) {
         console.error('Error cargando horarios:', error);
       }
     }
+    
+    // Función auxiliar para mostrar notificaciones
+    function mostrarNotificacion(mensaje, tipo = 'info') {
+      // Crear elemento de notificación si no existe
+      let notif = document.getElementById('notificacion-horario');
+      if (!notif) {
+        notif = document.createElement('div');
+        notif.id = 'notificacion-horario';
+        notif.style.cssText = `
+          position: fixed;
+          top: 80px;
+          right: 20px;
+          padding: 15px 20px;
+          border-radius: 8px;
+          color: white;
+          font-weight: 600;
+          z-index: 10000;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: slideIn 0.3s ease;
+        `;
+        document.body.appendChild(notif);
+      }
+      
+      // Colores según tipo
+      const colores = {
+        'success': '#28a745',
+        'error': '#dc3545',
+        'warning': '#ffc107',
+        'info': '#17a2b8'
+      };
+      
+      notif.style.background = colores[tipo] || colores.info;
+      notif.textContent = mensaje;
+      notif.style.display = 'block';
+      
+      // Ocultar después de 3 segundos
+      setTimeout(() => {
+        notif.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Agregar listeners para actualizar horarios cuando cambia fecha o sucursal
+    document.getElementById('fechaCita')?.addEventListener('change', cargarHorariosDisponibles);
+    document.getElementById('sucursalServicio')?.addEventListener('change', cargarHorariosDisponibles);
+    
+    // También cargar cuando se abre el modal de cita
+    const originalAbrirModal = window.abrirModalServicio;
+    window.abrirModalServicio = function(id) {
+      if (originalAbrirModal) originalAbrirModal(id);
+      
+      // Esperar un momento para que el modal se muestre
+      setTimeout(() => {
+        cargarHorariosDisponibles();
+      }, 300);
+    };
     
     // Agregar listeners para actualizar horarios
     document.getElementById('fechaCita')?.addEventListener('change', cargarHorariosDisponibles);

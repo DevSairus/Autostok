@@ -1,66 +1,16 @@
 {
     "solicitudes": [
         {
-            "id": 1768925758,
+            "id": 1,
             "tipo": "vehiculo",
-            "vehiculo_id": 1,
-            "vehiculo_nombre": "CHEVROLET CAPTIVA 2021",
-            "nombre": "Sebastian Pruebas",
-            "telefono": "32132532532",
-            "correo": "jefesistemas@autostok.com.co",
-            "mensaje": "",
-            "estado": "completada",
-            "fecha_solicitud": "2026-01-20 11:15:58"
-        },
-        {
-            "id": 1768927176,
-            "tipo": "producto",
-            "producto_id": "1",
-            "producto_nombre": "Plumillas  Sandero 2022",
-            "nombre": "Sebastian Prueba3",
-            "telefono": "3213213232",
-            "correo": "jefesistemas@autostok.com.co",
-            "cantidad": 1,
-            "notas": "Pruebas ",
-            "estado": "completada",
-            "fecha_solicitud": "2026-01-20 11:39:36"
-        },
-        {
-            "id": 1768932691,
-            "tipo": "vehiculo",
-            "vehiculo_id": "3",
-            "vehiculo_nombre": "FIAT 500 SPORT 2013",
-            "nombre": "Carlos lether",
-            "telefono": "3142582899",
-            "correo": "letherc@gmail.com",
-            "mensaje": "",
-            "estado": "contactada",
-            "fecha_solicitud": "2026-01-20 13:11:31"
-        },
-        {
-            "id": 1769539162,
-            "tipo": "vehiculo",
-            "vehiculo_id": "1",
-            "vehiculo_nombre": "CHEVROLET CAPTIVA 2021",
             "nombre": "Carlos Jaimes",
             "telefono": "+57 350 5351781",
             "correo": "aguirre984@gmail.com",
-            "mensaje": "",
             "estado": "contactada",
-            "fecha_solicitud": "2026-01-27 19:39:22"
-        },
-        {
-            "id": 1769539222,
-            "tipo": "producto",
-            "producto_id": "1",
-            "producto_nombre": "Plumillas  Sandero 2022",
-            "nombre": "Sergio Aguire",
-            "telefono": "3505351780",
-            "correo": "aguirre984@gmail.com",
-            "cantidad": 1,
-            "notas": "",
-            "estado": "pendiente",
-            "fecha_solicitud": "2026-01-27 19:40:22"
+            "fecha_solicitud": "2026-01-28 19:07:53",
+            "vehiculo_id": "2",
+            "vehiculo_nombre": "KIA  SOLUTO BLACK EDITION 2025",
+            "mensaje": ""
         }
     ]
 }
