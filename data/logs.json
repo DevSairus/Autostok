@@ -3329,6 +3329,64 @@
             "usuario": "Sistema",
             "fecha": "2026-01-28 22:18:58",
             "ip": "::1"
+        },
+        {
+            "id": "1769697471_4133",
+            "tipo": "sistema",
+            "accion": "login",
+            "datos": {
+                "usuario": "admin",
+                "rol": "super_admin"
+            },
+            "usuario": "admin",
+            "fecha": "2026-01-29 15:37:51",
+            "ip": "::1"
+        },
+        {
+            "id": "1769697650_3757",
+            "tipo": "email",
+            "accion": "cita_cliente",
+            "datos": {
+                "destinatario": "aguirre984@gmail.com",
+                "resultado": {
+                    "success": true,
+                    "message": "Enviado"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-29 15:40:50",
+            "ip": "::1"
+        },
+        {
+            "id": "1769697651_8276",
+            "tipo": "email",
+            "accion": "cita_admin",
+            "datos": {
+                "destinatario": "aguirre984@gmail.com",
+                "resultado": {
+                    "success": true,
+                    "message": "Enviado"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-29 15:40:51",
+            "ip": "::1"
+        },
+        {
+            "id": "1769698031_5498",
+            "tipo": "email",
+            "accion": "producto_admin",
+            "datos": {
+                "destinatario": "aguirre984@gmail.com",
+                "producto": "Plumillas  Sandero 2022",
+                "resultado": {
+                    "success": true,
+                    "message": "Enviado"
+                }
+            },
+            "usuario": "Sistema",
+            "fecha": "2026-01-29 15:47:11",
+            "ip": "::1"
         }
     ]
 }

@@ -11,6 +11,19 @@
             "vehiculo_id": "2",
             "vehiculo_nombre": "KIA  SOLUTO BLACK EDITION 2025",
             "mensaje": ""
+        },
+        {
+            "id": 2,
+            "tipo": "producto",
+            "nombre": "Sergio Aguire",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "producto_id": "1",
+            "producto_nombre": "Plumillas  Sandero 2022",
+            "cantidad": "1",
+            "mensaje": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-29 15:47:09"
         }
     ]
 }

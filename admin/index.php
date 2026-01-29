@@ -666,9 +666,9 @@ $solicitudesPendientes = count(array_filter($solicitudes, fn($s) => ($s['estado'
                   <p class="helper-text">Número para solicitudes de productos</p>
                 </div>
                 <div class="form-group">
-                  <label>Correo Call Center</label>
+                  <label>Correo Almacen</label>
                   <input type="email" id="correoCallCenter" placeholder="callcenter@autostok.com" class="form-control">
-                  <p class="helper-text">Recibirá notificaciones de citas y solicitudes</p>
+                  <p class="helper-text">Recibirá notificaciones de productos</p>
                 </div>
               </div>
 

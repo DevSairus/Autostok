@@ -7,12 +7,9 @@ ob_start();
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
+// Incluir el sistema de correos
+require_once __DIR__ . '/mailer.php';
 
 function sendJSON($data, $httpCode = 200) {
     while (ob_get_level()) ob_end_clean();
@@ -27,14 +24,9 @@ try {
         sendJSON(['success' => false, 'message' => 'Método no permitido'], 405);
     }
     
-    $rawInput = file_get_contents('php://input');
-    if (empty($rawInput)) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!$data) {
         sendJSON(['success' => false, 'message' => 'No se recibieron datos'], 400);
-    }
-    
-    $data = json_decode($rawInput, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        sendJSON(['success' => false, 'message' => 'JSON inválido'], 400);
     }
     
     // Validar campos
@@ -45,12 +37,7 @@ try {
         }
     }
     
-    // Validar email
-    if (!filter_var($data['correo'], FILTER_VALIDATE_EMAIL)) {
-        sendJSON(['success' => false, 'message' => 'Correo electrónico inválido'], 400);
-    }
-    
-    // Ruta al archivo de solicitudes
+    // Guardar solicitud
     $solicitudesFile = __DIR__ . '/../../data/solicitudes.json';
     $dataDir = dirname($solicitudesFile);
     
@@ -58,30 +45,23 @@ try {
         mkdir($dataDir, 0755, true);
     }
     
-    // Cargar solicitudes existentes
     $solicitudesData = ['solicitudes' => []];
     if (file_exists($solicitudesFile)) {
-        $content = @file_get_contents($solicitudesFile);
-        if ($content !== false) {
-            $decoded = json_decode($content, true);
-            if (json_last_error() === JSON_ERROR_NONE && isset($decoded['solicitudes'])) {
-                $solicitudesData = $decoded;
-            }
+        $content = file_get_contents($solicitudesFile);
+        $decoded = json_decode($content, true);
+        if (json_last_error() === JSON_ERROR_NONE && isset($decoded['solicitudes'])) {
+            $solicitudesData = $decoded;
         }
     }
     
-    // Generar ID
     $maxId = 0;
-    if (!empty($solicitudesData['solicitudes'])) {
-        foreach ($solicitudesData['solicitudes'] as $sol) {
-            if (isset($sol['id']) && $sol['id'] > $maxId) {
-                $maxId = $sol['id'];
-            }
+    foreach ($solicitudesData['solicitudes'] as $sol) {
+        if (isset($sol['id']) && $sol['id'] > $maxId) {
+            $maxId = $sol['id'];
         }
     }
     $nuevoId = $maxId + 1;
     
-    // Crear solicitud
     $nuevaSolicitud = [
         'id' => $nuevoId,
         'tipo' => 'producto',
@@ -96,31 +76,22 @@ try {
         'fecha_solicitud' => date('Y-m-d H:i:s')
     ];
     
-    // Guardar
     $solicitudesData['solicitudes'][] = $nuevaSolicitud;
-    $jsonContent = json_encode($solicitudesData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    $bytesWritten = @file_put_contents($solicitudesFile, $jsonContent);
+    file_put_contents($solicitudesFile, json_encode($solicitudesData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     
-    if ($bytesWritten === false) {
-        sendJSON(['success' => false, 'message' => 'Error al guardar solicitud'], 500);
-    }
-    
-    // Intentar notificación
-    $notificacionEnviada = false;
-    $notificacionError = null;
+    // ENVIAR NOTIFICACIONES (cliente + almacén)
+    $resultadosEmail = [];
     try {
-        $notificacionEnviada = @enviarNotificacionSolicitud($nuevaSolicitud, $notificacionError);
+        $resultadosEmail = enviarEmailNuevaSolicitudProducto($nuevaSolicitud);
     } catch (Exception $e) {
-        $notificacionError = $e->getMessage();
-        @error_log('Error notificación producto: ' . $e->getMessage());
+        error_log('Error notificación: ' . $e->getMessage());
     }
     
     sendJSON([
         'success' => true,
         'message' => 'Solicitud enviada exitosamente',
         'solicitud_id' => $nuevoId,
-        'notificacion_enviada' => $notificacionEnviada,
-        'notificacion_error' => $notificacionError
+        'emails' => $resultadosEmail
     ]);
     
 } catch (Exception $e) {

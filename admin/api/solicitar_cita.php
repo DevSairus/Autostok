@@ -1,165 +1,72 @@
 <?php
-// ===== CONFIGURACIÓN ESTRICTA DE ERRORES =====
 error_reporting(0);
 ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/../data/php_errors.log');
 
-// ===== LIMPIAR COMPLETAMENTE EL BUFFER =====
-while (ob_get_level() > 0) {
-    ob_end_clean();
-}
-
-// ===== INICIAR NUEVO BUFFER =====
+while (ob_get_level()) ob_end_clean();
 ob_start();
 
-// ===== FUNCIÓN PARA RESPUESTA JSON GARANTIZADA =====
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+
+// Incluir el sistema de correos
+require_once __DIR__ . '/mailer.php';
+
 function sendJSON($data, $httpCode = 200) {
-    // Limpiar cualquier salida previa
-    while (ob_get_level() > 0) {
-        ob_end_clean();
-    }
-    
+    while (ob_get_level()) ob_end_clean();
     http_response_code($httpCode);
     header('Content-Type: application/json; charset=utf-8');
-    header('Cache-Control: no-cache, must-revalidate');
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type');
-    
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// ===== MANEJO DE ERRORES FATAL =====
-register_shutdown_function(function() {
-    $error = error_get_last();
-    if ($error !== null && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
-        sendJSON([
-            'success' => false,
-            'message' => 'Error interno del servidor',
-            'debug' => 'Fatal error detected'
-        ], 500);
-    }
-});
-
-// ===== MANEJO DE EXCEPCIONES NO CAPTURADAS =====
-set_exception_handler(function($e) {
-    sendJSON([
-        'success' => false,
-        'message' => $e->getMessage(),
-        'debug' => 'Exception: ' . $e->getFile() . ':' . $e->getLine()
-    ], 500);
-});
-
-// ===== MANEJO DE OPTIONS (CORS) =====
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    sendJSON(['success' => true], 200);
-}
-
-// ===== INICIO DEL SCRIPT =====
 try {
-    // Verificar método
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        sendJSON([
-            'success' => false,
-            'message' => 'Método no permitido'
-        ], 405);
+        sendJSON(['success' => false, 'message' => 'Método no permitido'], 405);
     }
     
-    // Leer datos RAW
     $rawInput = file_get_contents('php://input');
-    
     if (empty($rawInput)) {
-        sendJSON([
-            'success' => false,
-            'message' => 'No se recibieron datos'
-        ], 400);
+        sendJSON(['success' => false, 'message' => 'No se recibieron datos'], 400);
     }
     
-    // Decodificar JSON
     $data = json_decode($rawInput, true);
-    
     if (json_last_error() !== JSON_ERROR_NONE) {
-        sendJSON([
-            'success' => false,
-            'message' => 'JSON inválido: ' . json_last_error_msg()
-        ], 400);
+        sendJSON(['success' => false, 'message' => 'JSON inválido'], 400);
     }
     
-    // Validar campos requeridos
+    // Validar campos
     $required = ['nombre', 'telefono', 'correo', 'servicio_id', 'servicio_nombre', 'fecha', 'hora'];
-    $missing = [];
-    
     foreach ($required as $field) {
-        if (!isset($data[$field]) || trim($data[$field]) === '') {
-            $missing[] = $field;
+        if (empty($data[$field])) {
+            sendJSON(['success' => false, 'message' => "Campo requerido: $field"], 400);
         }
     }
     
-    if (!empty($missing)) {
-        sendJSON([
-            'success' => false,
-            'message' => 'Campos requeridos faltantes: ' . implode(', ', $missing)
-        ], 400);
-    }
-    
-    // Validar email
-    if (!filter_var($data['correo'], FILTER_VALIDATE_EMAIL)) {
-        sendJSON([
-            'success' => false,
-            'message' => 'Correo electrónico inválido'
-        ], 400);
-    }
-    
-    // Ruta del archivo de citas
+    // Guardar cita
     $citasFile = __DIR__ . '/../../data/citas.json';
     $dataDir = dirname($citasFile);
     
-    // Crear directorio si no existe
     if (!is_dir($dataDir)) {
-        if (!mkdir($dataDir, 0755, true)) {
-            sendJSON([
-                'success' => false,
-                'message' => 'No se pudo crear el directorio de datos'
-            ], 500);
-        }
+        mkdir($dataDir, 0755, true);
     }
     
-    // Verificar permisos de escritura
-    if (file_exists($citasFile) && !is_writable($citasFile)) {
-        sendJSON([
-            'success' => false,
-            'message' => 'No se tienen permisos de escritura en el archivo de citas'
-        ], 500);
-    }
-    
-    // Cargar citas existentes
     $citasData = ['citas' => []];
-    
     if (file_exists($citasFile)) {
         $content = file_get_contents($citasFile);
-        if ($content !== false) {
-            $decoded = json_decode($content, true);
-            if (json_last_error() === JSON_ERROR_NONE && isset($decoded['citas'])) {
-                $citasData = $decoded;
-            }
+        $decoded = json_decode($content, true);
+        if (json_last_error() === JSON_ERROR_NONE && isset($decoded['citas'])) {
+            $citasData = $decoded;
         }
     }
     
-    // Generar ID
     $maxId = 0;
-    if (!empty($citasData['citas'])) {
-        foreach ($citasData['citas'] as $cita) {
-            if (isset($cita['id']) && $cita['id'] > $maxId) {
-                $maxId = $cita['id'];
-            }
+    foreach ($citasData['citas'] as $cita) {
+        if (isset($cita['id']) && $cita['id'] > $maxId) {
+            $maxId = $cita['id'];
         }
     }
     $nuevoId = $maxId + 1;
     
-    // Crear nueva cita
     $nuevaCita = [
         'id' => $nuevoId,
         'nombre' => trim($data['nombre']),
@@ -167,63 +74,34 @@ try {
         'correo' => trim($data['correo']),
         'servicio_id' => $data['servicio_id'],
         'servicio_nombre' => trim($data['servicio_nombre']),
-        'sucursal' => isset($data['sucursal']) ? trim($data['sucursal']) : '',
+        'sucursal' => $data['sucursal'] ?? '',
         'fecha' => $data['fecha'],
         'hora' => trim($data['hora']),
-        'comentarios' => isset($data['comentarios']) ? trim($data['comentarios']) : '',
+        'comentarios' => $data['comentarios'] ?? '',
         'estado' => 'pendiente',
         'fecha_solicitud' => date('Y-m-d H:i:s')
     ];
     
-    // Agregar nueva cita
     $citasData['citas'][] = $nuevaCita;
+    file_put_contents($citasFile, json_encode($citasData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     
-    // Guardar en archivo
-    $jsonContent = json_encode($citasData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    
-    if ($jsonContent === false) {
-        sendJSON([
-            'success' => false,
-            'message' => 'Error al codificar JSON'
-        ], 500);
-    }
-    
-    $bytesWritten = file_put_contents($citasFile, $jsonContent);
-    
-    if ($bytesWritten === false) {
-        sendJSON([
-            'success' => false,
-            'message' => 'Error al guardar en el archivo'
-        ], 500);
-    }
-    
-    // Intentar enviar notificación (sin bloquear si falla)
-    $notificacionEnviada = false;
-    $notificacionError = null;
-    
+    // ENVIAR NOTIFICACIONES (cliente + admin)
+    $resultadosEmail = [];
     try {
-        $notificacionEnviada = @enviarNotificacionCita($nuevaCita, $notificacionError);
+        $resultadosEmail = enviarEmailNuevaCita($nuevaCita);
     } catch (Exception $e) {
-        $notificacionError = $e->getMessage();
-        // Log pero no bloquear
-        @error_log('Error notificación cita: ' . $e->getMessage());
+        error_log('Error notificación: ' . $e->getMessage());
     }
     
-    // Respuesta exitosa
     sendJSON([
         'success' => true,
         'message' => 'Cita registrada exitosamente',
         'cita_id' => $nuevoId,
-        'notificacion_enviada' => $notificacionEnviada,
-        'notificacion_error' => $notificacionError
-    ], 200);
+        'emails' => $resultadosEmail
+    ]);
     
 } catch (Exception $e) {
-    sendJSON([
-        'success' => false,
-        'message' => $e->getMessage(),
-        'debug' => 'Line: ' . $e->getLine()
-    ], 500);
+    sendJSON(['success' => false, 'message' => $e->getMessage()], 500);
 }
 
 // ===== FUNCIONES DE ENVÍO DE NOTIFICACIÓN =====

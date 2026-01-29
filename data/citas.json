@@ -55,6 +55,20 @@
             "comentarios": "",
             "estado": "cancelada",
             "fecha_solicitud": "2026-01-28 19:23:04"
+        },
+        {
+            "id": 1769542571,
+            "nombre": "Sergio Aguirre",
+            "telefono": "3505351780",
+            "correo": "aguirre984@gmail.com",
+            "servicio_id": "1",
+            "servicio_nombre": "Revision Vijera",
+            "sucursal": "sucursal1",
+            "fecha": "2026-01-30",
+            "hora": "09:00",
+            "comentarios": "",
+            "estado": "pendiente",
+            "fecha_solicitud": "2026-01-29 15:40:48"
         }
     ]
 }
